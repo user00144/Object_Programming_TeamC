@@ -1,5 +1,8 @@
 package mgr;
 
-public interface Manageable {
+import java.util.Scanner;
 
+public interface Manageable {
+	public void print();
+	public void read(Scanner scan);
 }
