@@ -23,4 +23,6 @@ class Recipe implements Manageable{
 		return false;
 	}
 
+
+
 }

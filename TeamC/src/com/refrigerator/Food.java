@@ -3,7 +3,14 @@ import java.util.Scanner;
 
 import mgr.Manageable;
 class Food implements Manageable{
-
+	
+	String fdname;
+	String type;
+	int exdate;
+	
+	public Food(String name) {
+		fdname = name;
+	}
 	@Override
 	public void print() {
 		// TODO Auto-generated method stub
@@ -21,5 +28,13 @@ class Food implements Manageable{
 		// TODO Auto-generated method stub
 		return false;
 	}
-    
+
+	
+	//유통기한 확인하는 함수(오늘 날짜값 받아서 확인)
+    public boolean chkexdate(int today) {
+    	if(exdate >= today) {
+    		return true;
+    	}
+    	return false;
+    }
 }
