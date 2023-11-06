@@ -1,2 +1,4 @@
-# Object_Programming_TeamC
-Object_Programming_TeamC
+# 객체지향 프로그래밍 팀프로젝트_C
+2023년도 2학기 객체지향 프로그래밍 기말 팀프로젝트</br>
+요리해조</br>
+Swing과 객체지향 프로그래밍 방식(Manager, Manageable)을 이용하여 냉장고 식재료 관리 GUI 프로그램 개발</br>
