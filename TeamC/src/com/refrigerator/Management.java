@@ -42,12 +42,13 @@ public class Management{
 		login();
 		while(true) {
 			System.out.println("로그인 일련번호 : "+rf.refcode);
-			System.out.print("1. 식료품 관리 2. 레시피 관리 : ");
+			System.out.print("1. 식료품 관리 2. 레시피 관리 3. 로그아웃 : ");
 			menu = scan.nextInt();
 			
 			switch(menu) {
 			case 1: foodmenu(); break;
 			case 2: recipemenu(); break;
+			case 3: login(); break;
 			default : return;
 			}
 		}
@@ -60,9 +61,9 @@ public class Management{
 					+ " 4. 식료품 검색 : ");
 			menu = scan.nextInt();
 			switch(menu) {
-			case 1:
-			case 2: rf.print();//출력시 유통기한 확인해서 출력
-			case 3:
+			case 1: rf.addFoods(scan); break;
+			case 2: rf.print(); break; //출력시 유통기한 확인해서 출력
+			case 3: 
 			case 4:
 			default :
 			}

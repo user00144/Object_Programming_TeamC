@@ -67,8 +67,7 @@ public class Manager<T extends Manageable> {
 		return null;
 	}
 	
-	public void delItem(String kwd) {
-		T m = find(kwd);
+	public void delItem(T m) {
 		if(m != null) {
 			mList.remove(m);
 		}

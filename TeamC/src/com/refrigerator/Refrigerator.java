@@ -16,9 +16,8 @@ class Refrigerator implements Manageable{
 	
 	@Override
 	public void print() {
-		time = new Date();
-		simpletime = new SimpleDateFormat("yyyyMMdd");
-		curtime = Integer.parseInt(simpletime.format(time));
+
+		curtime = getCurrentTime();
 		
 		System.out.printf("냉장고 코드번호 : %d\t오늘 날짜 : %d\n"
 				+ "\t\t= 식료품 목록 =\n", refcode,curtime);
@@ -26,10 +25,16 @@ class Refrigerator implements Manageable{
 		for(Food f : foodMgr.mList) {
 			f.print();
 			if(!f.caneat(curtime)) {
-				System.out.print("\t(유통기한 지남!)");
+				System.out.print("\t(경고 : 유통기한 지남)");
 			}
 			System.out.println();
 		}
+	}
+	
+	public int getCurrentTime() {
+		time = new Date();
+		simpletime = new SimpleDateFormat("yyyyMMdd");
+		return (Integer.parseInt(simpletime.format(time)));
 	}
 	
 	@Override
@@ -61,7 +66,16 @@ class Refrigerator implements Manageable{
 	}
  
 	public void addFoods(Scanner scan) {
-		
+		String temp = null;
+		while(true) {
+			temp = scan.next();
+			if(temp.equals("end")) {
+				break;
+			}
+			Food fd = new Food(temp);
+			fd.read(scan);
+			foodMgr.addItem(fd);
+	}
 	}
 	
 	@Override
