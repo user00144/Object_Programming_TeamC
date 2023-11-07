@@ -1,18 +1,25 @@
 package com.refrigerator;
 
 import java.util.Scanner;
+
+import mgr.Factory;
 import mgr.Manager;
 
 public class Management{
 	Scanner scan = new Scanner(System.in);
 	Manager<Refrigerator> rMgr = new Manager<>();
-	
+	Refrigerator rf = null;
+
 	public void run() {
-		
+		rMgr.readAll("ref.txt", new Factory<Refrigerator>() {
+			public Refrigerator create() {
+				return new Refrigerator();
+			}
+		});
+		Mainmenu();
 	}
 	
 	public void Mainmenu() {
-		Refrigerator rf = null;
 		int ref,menu;
 		System.out.println("= 냉장고 식료품 관리 프로그램 =");
 		System.out.println("회원로그인(냉장고 일련번호 입력) : ");
@@ -21,6 +28,7 @@ public class Management{
 		if(rf == null) {
 			System.out.println("냉장고를 찾을 수 없습니다. 새로운 냉장고를 등록해주세요.");
 			rf = new Refrigerator();
+			System.out.println("==냉장고 입력==");
 			rf.read(scan);
 			rMgr.addItem(rf);
 		}

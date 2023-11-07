@@ -6,6 +6,7 @@ class Food implements Manageable{
 	
 	String fdname;
 	String type;
+	int num;
 	int exdate;
 	
 	public Food(String name) {
@@ -20,7 +21,9 @@ class Food implements Manageable{
 	@Override
 	public void read(Scanner scan) {
 		// TODO Auto-generated method stub
-		
+		type = scan.next();
+		num = scan.nextInt();
+		exdate = scan.nextInt();
 	}
 
 	@Override
