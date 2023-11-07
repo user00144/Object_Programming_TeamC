@@ -19,20 +19,27 @@ public class Management{
 		Mainmenu();
 	}
 	
-	public void Mainmenu() {
-		int ref,menu;
+	public void login() {
+		int ref;
 		System.out.println("= 냉장고 식료품 관리 프로그램 =");
-		System.out.println("회원로그인(냉장고 일련번호 입력) : ");
+		System.out.print("회원로그인(냉장고 일련번호 입력) : ");
 		ref = scan.nextInt();
 		rf = rMgr.find(ref+"");
+
 		if(rf == null) {
 			System.out.println("냉장고를 찾을 수 없습니다. 새로운 냉장고를 등록해주세요.");
 			rf = new Refrigerator();
 			System.out.println("==냉장고 입력==");
 			rf.read(scan);
 			rMgr.addItem(rf);
+			rMgr.writeString("ref.txt", rf.toString());
 		}
 		
+	}
+	
+	public void Mainmenu() {
+		int menu;
+		login();
 		while(true) {
 			System.out.println("로그인 일련번호 : "+rf.refcode);
 			System.out.print("1. 식료품 관리 2. 레시피 관리 : ");
@@ -54,7 +61,7 @@ public class Management{
 			menu = scan.nextInt();
 			switch(menu) {
 			case 1:
-			case 2: //출력시 유통기한 확인해서 출력
+			case 2: rf.print();//출력시 유통기한 확인해서 출력
 			case 3:
 			case 4:
 			default :

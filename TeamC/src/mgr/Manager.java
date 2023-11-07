@@ -1,6 +1,8 @@
 package mgr;
 
 import java.io.File;
+import java.io.FileWriter;
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -13,6 +15,18 @@ public class Manager<T extends Manageable> {
 		for(T m : mList) {
 			m.print();
 		}
+	}
+	
+	public void writeString(String filename,String data) {
+		try {
+			BufferedWriter bw = new BufferedWriter(new FileWriter(filename,true));
+			bw.write(data);
+			bw.close();
+		} catch (IOException e) {
+			System.out.println("파일 쓰기 오류!");
+			System.exit(0);
+		}
+
 	}
 	
 	public void addItem(T m) {
@@ -59,6 +73,7 @@ public class Manager<T extends Manageable> {
 			mList.remove(m);
 		}
 	}
+	
 	
 }
 
