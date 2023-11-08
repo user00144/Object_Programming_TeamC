@@ -8,14 +8,24 @@ import mgr.Manager;
 public class Management{
 	Scanner scan = new Scanner(System.in);
 	Manager<Refrigerator> rMgr = new Manager<>();
+	Manager<Recipe> rciMgr = new Manager<>();
+	
 	Refrigerator rf = null;
 
 	public void run() {
+		
 		rMgr.readAll("ref.txt", new Factory<Refrigerator>() {
 			public Refrigerator create() {
 				return new Refrigerator();
 			}
 		});
+		
+		rciMgr.readAll("rec.txt",new Factory<Recipe>() {
+			public Recipe create() {
+				return new Recipe();
+			}
+		});
+		
 		Mainmenu();
 	}
 	
