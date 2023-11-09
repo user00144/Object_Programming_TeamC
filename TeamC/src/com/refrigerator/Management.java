@@ -20,11 +20,11 @@ public class Management{
 			}
 		});
 		
-		rciMgr.readAll("rec.txt",new Factory<Recipe>() {
-			public Recipe create() {
-				return new Recipe();
-			}
-		});
+//		rciMgr.readAll("rec.txt",new Factory<Recipe>() {
+//			public Recipe create() {
+//				return new Recipe();
+//			}
+//		});
 		
 		Mainmenu();
 	}
@@ -72,9 +72,9 @@ public class Management{
 			switch(menu) {
 			case 1: rf.addFoods(scan); break;
 			case 2: rf.print(); break; //출력시 유통기한 확인해서 출력
-			case 3: 
-			case 4:
-			default :
+			case 3: rf.delFoods(scan); break;
+			case 4: rf.searchFoods(scan); break;
+			default : return;
 			}
 		}
 	}

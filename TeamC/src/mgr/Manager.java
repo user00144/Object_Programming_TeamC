@@ -61,6 +61,19 @@ public class Manager<T extends Manageable> {
 		}
 	}
 	
+	public void search(Scanner scan) {
+		String name = null;
+		while (true) {
+			System.out.print("키워드:");
+			name = scan.next();
+			if (name.equals("end"))
+				break;
+			for (Manageable m : mList) {
+				if (m.matches(name))
+					m.print();
+			}
+		}
+	}
 	
 }
 

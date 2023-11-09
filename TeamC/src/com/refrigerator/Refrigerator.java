@@ -14,6 +14,40 @@ class Refrigerator implements Manageable{
 	int refcode;
 
 	
+public void delFoods(Scanner scan) {
+		
+		String temp = null;
+		while(true) {
+			temp = scan.next();
+			if(temp.equals("end")) {
+				break;
+			}
+			Food fd = foodMgr.find(temp);
+			
+			if(fd == null) {
+				System.out.println("삭제 오류");
+				return;
+			}
+			foodMgr.delItem(fd);
+		}
+	}
+    
+	public void searchFoods(Scanner scan) {
+		String kwd = null;
+		while (true) {
+			System.out.print(">> 검색 키워드(종료하려면 end 입력): ");
+			kwd = scan.next();
+			if (kwd.contentEquals("end"))
+				break;
+			for (Food m: foodMgr.mList) {
+				if (m.matches(kwd))
+					m.print();			
+			}
+		}
+	}
+	
+	
+	
 	@Override
 	public void print() {
 
@@ -53,6 +87,7 @@ class Refrigerator implements Manageable{
 			fd.read(scan);
 			foodMgr.addItem(fd);
 		}
+		
 		
 	}
  

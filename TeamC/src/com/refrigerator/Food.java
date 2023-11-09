@@ -33,7 +33,8 @@ class Food implements Manageable{
 
 	@Override
 	public boolean matches(String kwd) {
-		// TODO Auto-generated method stub
+		if(fdname.equals(kwd))
+			return true;
 		return false;
 	}
 
