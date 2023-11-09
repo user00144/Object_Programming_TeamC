@@ -42,7 +42,6 @@ public class Management{
 			System.out.println("==냉장고 입력==");
 			rf.read(scan);
 			rMgr.addItem(rf);
-			rMgr.writeString("ref.txt", rf.toString());
 		}
 		
 	}
@@ -94,6 +93,9 @@ public class Management{
 		}
 	}
 	
+	public void foodsearchmenu() {
+		
+	}
 	
 	public static void main(String[] args) {
 		Management refMgr = new Management();

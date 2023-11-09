@@ -17,18 +17,6 @@ public class Manager<T extends Manageable> {
 		}
 	}
 	
-	public void writeString(String filename,String data) {
-		try {
-			BufferedWriter bw = new BufferedWriter(new FileWriter(filename,true));
-			bw.write(data);
-			bw.close();
-		} catch (IOException e) {
-			System.out.println("파일 쓰기 오류!");
-			System.exit(0);
-		}
-
-	}
-	
 	public void addItem(T m) {
 		mList.add(m);
 	}

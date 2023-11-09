@@ -37,16 +37,7 @@ class Refrigerator implements Manageable{
 		return (Integer.parseInt(simpletime.format(time)));
 	}
 	
-	@Override
-	public String toString() {
-		StringBuilder output = new StringBuilder();
-		output.append("\n"+refcode + "\n");
-		for(Food f:foodMgr.mList) {
-			output.append(f);
-		}
-		output.append("end");
-		return output.toString();
-	}
+
 
 	@Override
 	public void read(Scanner scan) {
