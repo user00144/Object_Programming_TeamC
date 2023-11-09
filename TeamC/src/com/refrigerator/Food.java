@@ -15,7 +15,7 @@ class Food implements Manageable{
 	@Override
 	public void print() {
 		// TODO Auto-generated method stub
-		System.out.printf("%s[%s],\t%d개\t유통기한 %d",fdname,type,num,exdate);
+		System.out.printf("%s[%s],\t%d\t유통기한 %d",fdname,type,num,exdate);
 	}
 
 	@Override

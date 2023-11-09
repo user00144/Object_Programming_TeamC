@@ -32,6 +32,13 @@ public class Manager<T extends Manageable> {
 		filein.close();
 	}
 	
+	public void read(Scanner scan, Factory<T> fac) {
+		T m = null;
+		m = fac.create();
+		m.read(scan);
+		mList.add(m);
+	}
+	
 	
 	public Scanner openFile(String filename) {
 		Scanner filein = null;
@@ -55,12 +62,25 @@ public class Manager<T extends Manageable> {
 		return null;
 	}
 	
-	public void delItem(T m) {
-		if(m != null) {
+	public void delItem(Scanner scan) {
+		String kwd = null;
+		while(true) {
+			System.out.print("키워드:");
+			kwd = scan.next();
+			if(kwd.contentEquals("end")) {
+				break;
+			}
+			T m = find(kwd);
+			if(m == null) {
+				System.out.println("삭제 오류");
+				return;
+			}
+			System.out.println("삭제 성공");
 			mList.remove(m);
 		}
+
 	}
-	
+		
 	public void search(Scanner scan) {
 		String name = null;
 		while (true) {

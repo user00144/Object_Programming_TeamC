@@ -19,13 +19,13 @@ public class Management{
 				return new Refrigerator();
 			}
 		});
-		
-//		rciMgr.readAll("rec.txt",new Factory<Recipe>() {
-//			public Recipe create() {
-//				return new Recipe();
-//			}
-//		});
-		
+		/*
+		rciMgr.readAll("rec.txt",new Factory<Recipe>() {
+			public Recipe create() {
+				return new Recipe();
+			}
+		});
+		*/
 		Mainmenu();
 	}
 	
@@ -85,17 +85,18 @@ public class Management{
 			System.out.print("1. 레시피 추가 2. 레시피 삭제 3. 레시피 검색 : ");
 			menu = scan.nextInt();
 			switch(menu) {
-			case 1:
-			case 2:
-			case 3:
-			default :
+			case 1: rciMgr.read(scan, new Factory<Recipe>() {
+			public Recipe create() {
+				return new Recipe();
+			}
+		}); break;
+			case 2:rciMgr.delItem(scan); break;
+			case 3:rciMgr.search(scan); break;
+			default : return;
 			}
 		}
 	}
 	
-	public void foodsearchmenu() {
-		
-	}
 	
 	public static void main(String[] args) {
 		Management refMgr = new Management();

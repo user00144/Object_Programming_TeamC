@@ -6,31 +6,27 @@ import java.text.SimpleDateFormat;
 
 import mgr.Manageable;
 import mgr.Manager;
+
+/*
+ Refrigerator Class
+ = 앞으로 구현해야 할 것 =
+  - 사용자 데이터, 레시피 추천기능
+  - 만들수있는 레시피 검색기능
+  - GUI
+ 
+ */
 class Refrigerator implements Manageable{
 	Manager<Food> foodMgr = new Manager<>();
 	Date time;
 	SimpleDateFormat simpletime;
 	int curtime;
 	int refcode;
-
+	
 	
 public void delFoods(Scanner scan) {
-		
-		String temp = null;
-		while(true) {
-			temp = scan.next();
-			if(temp.equals("end")) {
-				break;
-			}
-			Food fd = foodMgr.find(temp);
-			
-			if(fd == null) {
-				System.out.println("삭제 오류");
-				return;
-			}
-			foodMgr.delItem(fd);
+			foodMgr.delItem(scan);
 		}
-	}
+
     
 	public void searchFoods(Scanner scan) {
 		String kwd = null;
