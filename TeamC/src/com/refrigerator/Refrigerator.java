@@ -13,7 +13,6 @@ import mgr.Manager;
   - 사용자 데이터, 레시피 추천기능
   - 만들수있는 레시피 검색기능
   - GUI
- 
  */
 class Refrigerator implements Manageable{
 	Manager<Food> foodMgr = new Manager<>();
@@ -31,13 +30,15 @@ public void delFoods(Scanner scan) {
 	public void searchFoods(Scanner scan) {
 		String kwd = null;
 		while (true) {
-			System.out.print(">> 검색 키워드(종료하려면 end 입력): ");
+			System.out.print("키워드: ");
 			kwd = scan.next();
 			if (kwd.contentEquals("end"))
 				break;
 			for (Food m: foodMgr.mList) {
-				if (m.matches(kwd))
-					m.print();			
+				if (m.matches(kwd)) {
+					m.print();
+					System.out.println();
+				}
 			}
 		}
 	}
@@ -55,7 +56,7 @@ public void delFoods(Scanner scan) {
 		for(Food f : foodMgr.mList) {
 			f.print();
 			if(!f.caneat(curtime)) {
-				System.out.print("\t(경고 : 유통기한 지남)");
+				System.out.print("\t!유통기한 지남!");
 			}
 			System.out.println();
 		}

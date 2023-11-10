@@ -15,7 +15,7 @@ class Food implements Manageable{
 	@Override
 	public void print() {
 		// TODO Auto-generated method stub
-		System.out.printf("%s[%s],\t%d\t유통기한 %d",fdname,type,num,exdate);
+		System.out.printf("%s [%s] %d (유통기한 : %d)",fdname,type,num,exdate);
 	}
 
 	@Override
@@ -33,7 +33,9 @@ class Food implements Manageable{
 
 	@Override
 	public boolean matches(String kwd) {
-		if(fdname.equals(kwd))
+		if(fdname.contains(kwd))
+			return true;
+		if(kwd.equals(type))
 			return true;
 		return false;
 	}
