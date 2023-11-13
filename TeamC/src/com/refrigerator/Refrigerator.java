@@ -11,14 +11,12 @@ import mgr.Manager;
  Refrigerator Class
  = 앞으로 구현해야 할 것 =
   - 사용자 데이터, 레시피 추천기능
-  - 만들수있는 레시피 검색기능
   - GUI
  */
 class Refrigerator implements Manageable{
 	Manager<Food> foodMgr = new Manager<>();
 	Date time;
 	SimpleDateFormat simpletime;
-	int curtime;
 	int refcode;
 	
 	
@@ -26,6 +24,33 @@ public void delFoods(Scanner scan) {
 			foodMgr.delItem(scan);
 		}
 
+public boolean canmake(Recipe r) {
+	int cnt = 0;
+	boolean flag = false;
+	for(RecFd rf : r.recList) {
+		flag = false;
+		for(Food fd : foodMgr.mList) {
+			if(fd.checkRecFd(rf)&&flag==false) {
+				cnt++;
+				flag = true;
+			}
+		}
+	}
+	if(cnt == r.recList.size()) {
+		return true;
+	}
+	return false;
+}
+
+public void findRecipe(Scanner scan,Management m) {
+		System.out.println(refcode +" :<< 만들 수 있는 레시피 목록 >>");
+		for (Recipe r: m.rciMgr.mList) {
+			if(canmake(r)) {
+				r.print();
+				System.out.println();
+			}
+	}
+}
     
 	public void searchFoods(Scanner scan) {
 		String kwd = null;
@@ -47,15 +72,12 @@ public void delFoods(Scanner scan) {
 	
 	@Override
 	public void print() {
-
-		curtime = getCurrentTime();
-		
 		System.out.printf("냉장고 코드번호 : %d\t오늘 날짜 : %d\n"
-				+ "\t\t= 식료품 목록 =\n", refcode,curtime);
+				+ "\t\t= 식료품 목록 =\n", refcode,getCurrentTime());
 		
 		for(Food f : foodMgr.mList) {
 			f.print();
-			if(!f.caneat(curtime)) {
+			if(!f.caneat()) {
 				System.out.print("\t!유통기한 지남!");
 			}
 			System.out.println();

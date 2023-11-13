@@ -25,8 +25,10 @@ public class Management{
 				return new Recipe();
 			}
 		});
-
-		Mainmenu();
+		login();
+		
+		rf.findRecipe(scan, this);
+		//Mainmenu();
 	}
 	
 	public void login() {
@@ -48,7 +50,6 @@ public class Management{
 	
 	public void Mainmenu() {
 		int menu;
-		login();
 		while(true) {
 			System.out.println("로그인 일련번호 : "+rf.refcode);
 			System.out.print("1. 식료품 관리 2. 레시피 관리 3. 로그아웃 : ");

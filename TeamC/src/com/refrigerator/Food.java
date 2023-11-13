@@ -1,4 +1,6 @@
 package com.refrigerator;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Scanner;
 
 import mgr.Manageable;
@@ -8,6 +10,9 @@ class Food implements Manageable{
 	String type;
 	int num;
 	int exdate;
+	Date time;
+	SimpleDateFormat simpletime;
+	int curTime;
 	
 	public Food(String name) {
 		fdname = name;
@@ -31,6 +36,23 @@ class Food implements Manageable{
 		exdate = scan.nextInt();
 	}
 
+	public boolean checkRecFd(RecFd r) {
+		if(type.equals(r.type)) {
+			if(num>=r.num) {
+				if(caneat()) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+	
+	public int getCurrentTime() {
+		time = new Date();
+		simpletime = new SimpleDateFormat("yyyyMMdd");
+		return (Integer.parseInt(simpletime.format(time)));
+	}
+	
 	@Override
 	public boolean matches(String kwd) {
 		if(fdname.contains(kwd))
@@ -42,8 +64,9 @@ class Food implements Manageable{
 
 	
 	//유통기한 확인하는 함수(오늘 날짜값 받아서 확인)
-    public boolean caneat(int today) {
-    	if(exdate >= today) {
+    public boolean caneat() {
+    	curTime = getCurrentTime();
+    	if(exdate >= curTime) {
     		return true;
     	}
     	return false;
