@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.Scanner;
 
 import mgr.Manageable;
+
 class Food implements Manageable{
 	
 	String fdname;
@@ -22,11 +23,6 @@ class Food implements Manageable{
 		// TODO Auto-generated method stub
 		System.out.printf("%s [%s] %d (유통기한 : %d)",fdname,type,num,exdate);
 	}
-
-	@Override
-	public String toString() {
-		return (fdname+" "+type+" "+num+" "+exdate+"\n");
-	}
 	
 	@Override
 	public void read(Scanner scan) {
@@ -37,12 +33,9 @@ class Food implements Manageable{
 	}
 
 	public boolean checkRecFd(RecFd r) {
-		if(type.equals(r.type)) {
-			if(num>=r.num) {
-				if(caneat()) {
+		if(type.equals(r.type)&&
+				(num>=r.num)&& caneat()) {
 					return true;
-				}
-			}
 		}
 		return false;
 	}

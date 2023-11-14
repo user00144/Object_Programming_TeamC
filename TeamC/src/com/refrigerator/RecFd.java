@@ -4,9 +4,12 @@ import java.util.Scanner;
 import mgr.Manageable;
 
 public class RecFd implements Manageable{
-	String type;
-	int num;
+	public String type;
+	public int num;
 	
+	public RecFd(String str){
+		type = str;
+	}
 	
 	public void print() {
 		System.out.println(type + " " + num);
@@ -15,7 +18,7 @@ public class RecFd implements Manageable{
 
 	@Override
 	public void read(Scanner scan) {
-		
+		num = scan.nextInt();
 	}
 
 

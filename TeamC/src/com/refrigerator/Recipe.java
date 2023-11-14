@@ -4,19 +4,24 @@ import java.util.Scanner;
 
 import mgr.Manageable;
 
-class Recipe implements Manageable{
+public class Recipe implements Manageable{
 	Scanner tmpscan = new Scanner(System.in);
 	String name;
 	String cookName;
 	ArrayList<String> recstr = new ArrayList<>();
 	ArrayList<RecFd> recList = new ArrayList<>();
+	ArrayList<String> userinfo = new ArrayList<>();
+	
 
 	
 	@Override
 	public void print() {
 		// 요리할 음식과 필요한 식재료 출력
 		System.out.printf("\n=== %s === / 작성자 : %s\n", name,cookName);
-		System.out.printf("<< 재료 >> \n");
+		for(String str : userinfo) {
+			System.out.print("#"+str+" ");
+		}
+		System.out.printf("\n<< 재료 >>\n");
 		for (RecFd r : recList) {
 			r.print();
 		}
@@ -36,9 +41,8 @@ class Recipe implements Manageable{
 			s = scan.next();
 			if(s.contentEquals("end"))
 				break;
-			rfd = new RecFd();
-			rfd.type = s;
-			rfd.num = scan.nextInt();
+			rfd = new RecFd(s);
+			rfd.read(scan);
 			recList.add(rfd);
 		}
 		while(true) {
@@ -47,10 +51,25 @@ class Recipe implements Manageable{
 				break;
 			recstr.add(s);
 		}
+		while(true) {
+			s = scan.next();
+			if(s.contentEquals("end"))
+				break;
+			userinfo.add(s);
+		}
 
 	}
 
 
+	public boolean usermatch(String kwd) {
+		for(String str : userinfo) {
+			if(str.contains(kwd)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	@Override
 	public boolean matches(String kwd) {
 		if(kwd.contentEquals(name)) {
@@ -65,5 +84,6 @@ class Recipe implements Manageable{
 		}
 		return false;
 	}
+
 
 }

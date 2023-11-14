@@ -24,11 +24,9 @@ public class Management{
 			public Recipe create() {
 				return new Recipe();
 			}
-		});
+		});		
 		login();
-		
-		rf.findRecipe(scan, this);
-		//Mainmenu();
+		Mainmenu();
 	}
 	
 	public void login() {
@@ -99,6 +97,16 @@ public class Management{
 		}
 	}
 	
+	
+	public void printRecommandRecipe(){
+		for(Recipe r: rciMgr.mList) {
+			for(String str : rf.userinfo) {
+				if(r.usermatch(str)) {
+					r.print();
+				}
+			}
+		}
+	}
 	
 	public static void main(String[] args) {
 		Management refMgr = new Management();

@@ -2,23 +2,23 @@ package com.refrigerator;
 import java.util.Scanner;
 import java.util.Date;
 import java.text.SimpleDateFormat;
-
-
 import mgr.Manageable;
 import mgr.Manager;
+import java.util.ArrayList;
+
 
 /*
  Refrigerator Class
  = 앞으로 구현해야 할 것 =
-  - 사용자 데이터, 레시피 추천기능
+  - 리뷰기능
   - GUI
  */
 class Refrigerator implements Manageable{
 	Manager<Food> foodMgr = new Manager<>();
+	ArrayList<String> userinfo = new ArrayList<>();
 	Date time;
 	SimpleDateFormat simpletime;
 	int refcode;
-	
 	
 public void delFoods(Scanner scan) {
 			foodMgr.delItem(scan);
@@ -52,7 +52,7 @@ public void findRecipe(Scanner scan,Management m) {
 	}
 }
     
-	public void searchFoods(Scanner scan) {
+public void searchFoods(Scanner scan) {
 		String kwd = null;
 		while (true) {
 			System.out.print("키워드: ");
@@ -72,8 +72,11 @@ public void findRecipe(Scanner scan,Management m) {
 	
 	@Override
 	public void print() {
-		System.out.printf("냉장고 코드번호 : %d\t오늘 날짜 : %d\n"
-				+ "\t\t= 식료품 목록 =\n", refcode,getCurrentTime());
+		System.out.printf("냉장고 코드번호 : %d\t오늘 날짜 : %d\n", refcode,getCurrentTime());
+		for(String str : userinfo) {
+			System.out.print("#"+str+" ");
+		}
+		System.out.printf("\n\t\t= 식료품 목록 =\n");
 		
 		for(Food f : foodMgr.mList) {
 			f.print();
@@ -105,6 +108,13 @@ public void findRecipe(Scanner scan,Management m) {
 			Food fd = new Food(temp);
 			fd.read(scan);
 			foodMgr.addItem(fd);
+		}
+		while(true) {
+			temp = scan.next();
+			if(temp.equals("end")) {
+				break;
+			}
+			userinfo.add(temp);
 		}
 		
 		
