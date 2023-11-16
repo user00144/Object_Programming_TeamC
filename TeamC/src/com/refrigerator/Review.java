@@ -8,7 +8,9 @@ public class Review implements Manageable {
 	
 	ArrayList<String> reviewList = new ArrayList<>();
 	int score;
-
+	String name;
+	String cookName;
+	
 	@Override
 	public void print() {
 		// 평점 출력

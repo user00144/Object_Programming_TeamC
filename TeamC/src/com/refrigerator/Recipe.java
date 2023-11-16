@@ -6,8 +6,10 @@ import mgr.Manageable;
 
 public class Recipe implements Manageable{
 	Scanner tmpscan = new Scanner(System.in);
+	
 	String name;
 	String cookName;
+	
 	ArrayList<String> recstr = new ArrayList<>();
 	ArrayList<RecFd> recList = new ArrayList<>();
 	ArrayList<String> userinfo = new ArrayList<>();
