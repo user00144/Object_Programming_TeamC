@@ -3,9 +3,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
 
+import facade.DataEngineImpl;
+import facade.UIData;
 import mgr.Manageable;
 
-class Food implements Manageable{
+class Food implements Manageable,UIData{
 	
 	String fdname;
 	String type;
@@ -64,4 +66,14 @@ class Food implements Manageable{
     	}
     	return false;
     }
+	@Override
+	public void set(Object[] uitexts) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public String[] getUiTexts() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

@@ -5,30 +5,34 @@ import java.util.Scanner;
 import mgr.Factory;
 import mgr.Manager;
 
-public class Management{
-	Scanner scan = new Scanner(System.in);
-	Manager<Refrigerator> rMgr = new Manager<>();
-	Manager<Recipe> rciMgr = new Manager<>();
+public class Management {
+	private static Management engine = null;
 	
-	Refrigerator rf = null;
+	public static Management getInstance() {
+		if(engine == null) {
+			engine = new Management();
+		}
+		return engine;
+	}
 
+	
+	Scanner scan = new Scanner(System.in);	
+	Refrigerator rf = null;
 	public void run() {
-		
-		rMgr.readAll("ref.txt", new Factory<Refrigerator>() {
+		RefMgr.getInstance().readAll("ref.txt", new Factory<Refrigerator>() {
 			public Refrigerator create() {
 				return new Refrigerator();
 			}
 		});
 
-		rciMgr.readAll("rec.txt",new Factory<Recipe>() {
+		RecMgr.getInstance().readAll("rec.txt",new Factory<Recipe>() {
 			public Recipe create() {
 				return new Recipe();
 			}
 		});		
-		login();
-		Mainmenu();
 	}
 	
+	/*
 	public void login() {
 		int ref;
 		System.out.println("= 냉장고 식료품 관리 프로그램 =");
@@ -112,4 +116,5 @@ public class Management{
 		Management refMgr = new Management();
 		refMgr.run();
 	}
+	*/
 }

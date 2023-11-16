@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Manager<T extends Manageable> {
 	public ArrayList<T> mList = new ArrayList<>();
@@ -77,6 +78,14 @@ public class Manager<T extends Manageable> {
 			mList.remove(m);
 		}
 
+	}
+	public List<T> findAll(String kwd) {
+		List<T> result = new ArrayList<>();
+		for (T m : mList) {
+			if (m.matches(kwd))
+				result.add(m);
+		}
+		return result;
 	}
 		
 	public void search(Scanner scan) {

@@ -1,5 +1,9 @@
 package com.refrigerator;
 import java.util.Scanner;
+
+import facade.DataEngineImpl;
+import facade.UIData;
+
 import java.util.Date;
 import java.text.SimpleDateFormat;
 import mgr.Manageable;
@@ -7,18 +11,14 @@ import mgr.Manager;
 import java.util.ArrayList;
 
 
-/*
- Refrigerator Class
- = 앞으로 구현해야 할 것 =
-  - 리뷰기능
-  - GUI
- */
-class Refrigerator implements Manageable{
+class Refrigerator implements Manageable,UIData{
+	
 	Manager<Food> foodMgr = new Manager<>();
 	ArrayList<String> userinfo = new ArrayList<>();
 	Date time;
 	SimpleDateFormat simpletime;
 	int refcode;
+	
 	
 public void delFoods(Scanner scan) {
 			foodMgr.delItem(scan);
@@ -44,7 +44,7 @@ public boolean canmake(Recipe r) {
 
 public void findRecipe(Scanner scan,Management m) {
 		System.out.println(refcode +" :<< 만들 수 있는 레시피 목록 >>");
-		for (Recipe r: m.rciMgr.mList) {
+		for (Recipe r: RecMgr.getInstance().mList) {
 			if(canmake(r)) {
 				r.print();
 				System.out.println();
@@ -139,6 +139,18 @@ public void searchFoods(Scanner scan) {
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public void set(Object[] uitexts) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String[] getUiTexts() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 

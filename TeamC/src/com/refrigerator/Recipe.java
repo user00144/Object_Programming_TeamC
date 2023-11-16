@@ -2,9 +2,11 @@ package com.refrigerator;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import facade.DataEngineImpl;
+import facade.UIData;
 import mgr.Manageable;
 
-public class Recipe implements Manageable{
+public class Recipe implements Manageable,UIData{
 	Scanner tmpscan = new Scanner(System.in);
 	String name;
 	String cookName;
@@ -83,6 +85,18 @@ public class Recipe implements Manageable{
 				return true;
 		}
 		return false;
+	}
+
+	@Override
+	public void set(Object[] uitexts) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String[] getUiTexts() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 

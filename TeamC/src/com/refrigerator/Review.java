@@ -2,9 +2,11 @@ package com.refrigerator;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import facade.DataEngineImpl;
+import facade.UIData;
 import mgr.Manageable;
 
-public class Review implements Manageable{
+public class Review implements Manageable,UIData{
 	
 	ArrayList<String> reviewList = new ArrayList<>();
 	double score;
@@ -49,6 +51,18 @@ public class Review implements Manageable{
 	
 	void printReview() {
 		
+	}
+
+	@Override
+	public void set(Object[] uitexts) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String[] getUiTexts() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
