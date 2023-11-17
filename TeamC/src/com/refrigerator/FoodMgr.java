@@ -12,6 +12,7 @@ public class FoodMgr extends DataEngineImpl<Food> {
 			engine = new FoodMgr();
 		return engine;
 	}
+	
 	private String[] headers = {"식료품명", "타입", "중량","유통기한"};
 
 }

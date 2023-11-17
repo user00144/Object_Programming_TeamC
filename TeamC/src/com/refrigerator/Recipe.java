@@ -2,6 +2,8 @@ package com.refrigerator;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import javax.swing.ImageIcon;
+
 import facade.DataEngineImpl;
 import facade.UIData;
 import mgr.Manageable;
@@ -10,6 +12,7 @@ public class Recipe implements Manageable,UIData{
 	Scanner tmpscan = new Scanner(System.in);
 	String name;
 	String cookName;
+	ImageIcon img;
 	ArrayList<String> recstr = new ArrayList<>();
 	ArrayList<RecFd> recList = new ArrayList<>();
 	ArrayList<String> userinfo = new ArrayList<>();
@@ -59,6 +62,8 @@ public class Recipe implements Manageable,UIData{
 				break;
 			userinfo.add(s);
 		}
+		s = scan.next();
+		img = new ImageIcon(s);
 
 	}
 
