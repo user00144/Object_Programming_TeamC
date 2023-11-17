@@ -21,10 +21,7 @@ import javax.swing.JButton;
 
 public class submit {
 
-	public static void main(String[] args) {
-		createAndShowGUI();
-	}
-	
+
 	private static void createAndShowGUI() {
 		JFrame frame;
 		frame = new JFrame();

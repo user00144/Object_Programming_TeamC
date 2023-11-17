@@ -3,6 +3,7 @@ package ref_demo;
 import javax.swing.JFrame;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.ImageIcon;
 import javax.swing.JTable;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -11,22 +12,26 @@ import javax.swing.JScrollPane;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.table.DefaultTableModel;
+
+import java.awt.Color;
 import java.awt.Container;
+import java.awt.Graphics;
 
 public class ref_main {
-	
-	private void createAndShowGUI() {
+
+	private static void createAndShowGUI() {
 		JFrame frame;
-		frame = new JFrame();
+		frame = new JFrame("식료품을 부탁해!");
 		frame.setBounds(100, 100, 942, 724);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
 		addComponentsToPane(frame.getContentPane());
 		frame.pack();
 		frame.setVisible(true);
 
 	}
 	
-	private void addComponentsToPane(Container pane) {
+	private static void addComponentsToPane(Container pane) {
 		JTextField tf_refcode;
 		JTable table;
 

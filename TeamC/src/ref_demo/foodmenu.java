@@ -1,22 +1,33 @@
 package ref_demo;
 
+import java.awt.Color;
 import java.awt.Container;
+import java.awt.Dimension;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.BoxLayout;
 import javax.swing.GroupLayout;
+import javax.swing.ImageIcon;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JTable;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.SwingConstants;
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
 import javax.swing.table.DefaultTableModel;
 
 public class foodmenu {
+	public static void main(String[] args) {
+		createAndShowGUI();
+	}
 	
-	private void createAndShowGUI() {
+	
+	private static void createAndShowGUI() {
 		JFrame frame;
-		frame = new JFrame();
+		frame = new JFrame("식료품 관리");
 		frame.setBounds(100, 100, 942, 724);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		addComponentsToPane(frame.getContentPane());
@@ -24,49 +35,19 @@ public class foodmenu {
 		frame.setVisible(true);
 		
 	}
-	private void addComponentsToPane(Container pane) {
+	private static void addComponentsToPane(Container pane) {
 		JTextField textField;
 		JTable table;
-
-		JPanel panel = new JPanel();
-		
-		JPanel panel_1 = new JPanel();
-		
-		JButton btnNewButton = new JButton("추가");
-		
-		JButton btnNewButton_1 = new JButton("삭제");
-		
-		JButton btnNewButton_2 = new JButton("검색");
-		
-		textField = new JTextField();
-		textField.setColumns(10);
-		
 		JScrollPane scrollPane = new JScrollPane();
-		GroupLayout groupLayout = new GroupLayout(pane);
-		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 891, GroupLayout.PREFERRED_SIZE)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(panel, GroupLayout.PREFERRED_SIZE, 504, GroupLayout.PREFERRED_SIZE)
-							.addGap(18)
-							.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 382, GroupLayout.PREFERRED_SIZE)))
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-		);
-		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(77)
-					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 266, GroupLayout.PREFERRED_SIZE)
-					.addGap(18)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE)
-						.addComponent(panel, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(269, Short.MAX_VALUE))
-		);
-		
+		JPanel panel_2 = new JPanel();
+		pane.setLayout(new BoxLayout(pane, BoxLayout.Y_AXIS));
+		pane.add(panel_2);
+		pane.setBackground(Color.white);
+		panel_2.add(scrollPane);
+		panel_2.setBackground(Color.white);
+
+		panel_2.setPreferredSize(new Dimension(800,340));
+		scrollPane.setPreferredSize(new Dimension(800,340));
 		table = new JTable();
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
@@ -93,46 +74,58 @@ public class foodmenu {
 		));
 		table.setRowHeight(30);
 		scrollPane.setViewportView(table);
-		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
-		gl_panel_1.setHorizontalGroup(
-			gl_panel_1.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel_1.createSequentialGroup()
-					.addGap(35)
-					.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 67, GroupLayout.PREFERRED_SIZE)
-					.addGap(64)
-					.addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE)
-					.addGap(62)
-					.addComponent(btnNewButton_2, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)
-					.addGap(71))
+		
+		JPanel panel_1 = new JPanel();
+		pane.add(panel_1);
+		panel_1.setPreferredSize(new Dimension(800,50));
+
+		JPanel panel_3 = new JPanel();
+		panel_1.add(panel_3);
+		panel_3.setPreferredSize(new Dimension(800,40)); // 패널 사이즈 조정
+		panel_3.setBackground(Color.white);
+
+		textField = new JTextField();
+		textField.setColumns(10);
+		
+		JButton btnNewButton = new JButton("추가");
+		
+		JButton btnNewButton_1 = new JButton("삭제");
+		
+		JButton btnNewButton_2 = new JButton("검색");
+		GroupLayout gl_panel_3 = new GroupLayout(panel_3);
+		gl_panel_3.setHorizontalGroup(
+			gl_panel_3.createParallelGroup(Alignment.LEADING)
+				.addGroup(Alignment.TRAILING, gl_panel_3.createSequentialGroup()
+					.addComponent(textField, GroupLayout.PREFERRED_SIZE, 385, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED, 90, Short.MAX_VALUE)
+					.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE)
+					.addGap(67)
+					.addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE)
+					.addGap(50)
+					.addComponent(btnNewButton_2, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE))
 		);
-		gl_panel_1.setVerticalGroup(
-			gl_panel_1.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel_1.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
-						.addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnNewButton_2, GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE))
-					.addContainerGap())
+		gl_panel_3.setVerticalGroup(
+			gl_panel_3.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_3.createSequentialGroup()
+					.addGap(5)
+					.addGroup(gl_panel_3.createParallelGroup(Alignment.LEADING)
+						.addComponent(textField, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+						.addGroup(gl_panel_3.createParallelGroup(Alignment.BASELINE)
+							.addComponent(btnNewButton_2, GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+							.addComponent(btnNewButton_1, GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+							.addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE))))
 		);
-		panel_1.setLayout(gl_panel_1);
-		GroupLayout gl_panel = new GroupLayout(panel);
-		gl_panel.setHorizontalGroup(
-			gl_panel.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, gl_panel.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(textField, GroupLayout.DEFAULT_SIZE, 317, Short.MAX_VALUE)
-					.addContainerGap())
-		);
-		gl_panel.setVerticalGroup(
-			gl_panel.createParallelGroup(Alignment.TRAILING)
-				.addGroup(Alignment.LEADING, gl_panel.createSequentialGroup()
-					.addGap(13)
-					.addComponent(textField, GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
-					.addContainerGap())
-		);
-		panel.setLayout(gl_panel);
-		pane.setLayout(groupLayout);
+		panel_3.setLayout(gl_panel_3);
+		
+		JPanel panel = new JPanel();
+		pane.add(panel);
+		
+		ImageIcon image = new ImageIcon("images/food_bg.png");
+		JLabel lblNewLabel = new JLabel("이미지",image,SwingConstants.CENTER);
+
+		panel.add(lblNewLabel);
+		lblNewLabel.setPreferredSize(new Dimension(800,150));
+		
 	}
 	
 
