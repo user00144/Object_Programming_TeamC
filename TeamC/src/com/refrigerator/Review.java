@@ -8,21 +8,21 @@ import mgr.Manageable;
 
 public class Review implements Manageable,UIData{
 	
-	ArrayList<String> reviewList = new ArrayList<>();
+	String review;
 	int score;
 
 	private Recipe recipe;
 	
 	public Review(Recipe recipe) {
 		this.recipe = recipe;
+		recipe.rvList.add(this);
 	}
 	@Override
 	public void print() {
 		// 평점 출력
 				System.out.format("%s | %s | %d \n", recipe.name, recipe.cookName, score);
-				for (String s : reviewList) {
-					System.out.print(s + "\n");
-				}
+					System.out.print(review + "\n");
+
 	}
 
 	@Override
@@ -43,8 +43,7 @@ public class Review implements Manageable,UIData{
 
 		System.out.print("이 레시피의 한 줄 평을 입력해 주세요.");
 		s = scan.next();
-		reviewList.add(s);
-		
+		review = s;
 	}
 	
 	public boolean matches(String kwd) {

@@ -13,7 +13,7 @@ public class Recipe implements Manageable,UIData{
 	ArrayList<String> recstr = new ArrayList<>();
 	ArrayList<RecFd> recList = new ArrayList<>();
 	ArrayList<String> userinfo = new ArrayList<>();
-	
+	ArrayList<Review> rvList = new ArrayList<>();
 
 	
 	@Override
