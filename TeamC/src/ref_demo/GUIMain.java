@@ -1,5 +1,6 @@
 package ref_demo;
 
+import java.awt.Color;
 import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -12,6 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.ImageIcon;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class GUIMain {
@@ -42,13 +44,16 @@ public class GUIMain {
 	}
 
 	private void addComponentsToPane(Container pane) {
+		pane.setBackground(Color.white);
 		JTextField textField;
-		JLabel lblProgramname = new JLabel("회원 로그인");
+		JLabel lblProgramname = new JLabel();
+		lblProgramname.setBounds(50,100,256,256);
+		lblProgramname.setIcon(new ImageIcon("images/logo.png"));
 		lblProgramname.setHorizontalAlignment(SwingConstants.CENTER);
-		lblProgramname.setFont(new Font("나눔고딕 ExtraBold", Font.PLAIN, 33));
 		
 		JPanel loginpanel = new JPanel();
 		loginpanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
+		loginpanel.setBackground(Color.white);
 		
 		JLabel lblrefcode = new JLabel("냉장고 번호 : ");
 		lblrefcode.setFont(new Font("굴림", Font.PLAIN, 14));
