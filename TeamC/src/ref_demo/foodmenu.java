@@ -20,11 +20,7 @@ import javax.swing.JButton;
 import javax.swing.table.DefaultTableModel;
 
 public class foodmenu {
-	public static void main(String[] args) {
-		createAndShowGUI();
-	}
-	
-	
+
 	private static void createAndShowGUI() {
 		JFrame frame;
 		frame = new JFrame("식료품 관리");
