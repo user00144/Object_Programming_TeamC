@@ -19,7 +19,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JButton;
 import javax.swing.table.DefaultTableModel;
 
-public class foodmenu {
+public class FoodMgrMenu {
 
 	private static void createAndShowGUI() {
 		JFrame frame;

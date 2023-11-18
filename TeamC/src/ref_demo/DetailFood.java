@@ -15,16 +15,10 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
 
-public class detail_food extends JDialog{
+public class DetailFood extends JDialog{
 
-	public static void main(String[] args) {
-		detail_food dialog = new detail_food();
-		dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-		dialog.setVisible(true);
-	}
-	
-	
-	public detail_food(){
+
+	public DetailFood(){
 
 		JPanel contentPanel = new JPanel();
 		setBounds(100, 100, 585, 330);

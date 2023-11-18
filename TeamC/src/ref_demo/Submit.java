@@ -19,7 +19,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JTextArea;
 import javax.swing.JButton;
 
-public class submit {
+public class Submit {
 
 
 	private static void createAndShowGUI() {

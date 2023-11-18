@@ -17,7 +17,7 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.Graphics;
 
-public class ref_main {
+public class RefMain {
 
 	private static void createAndShowGUI() {
 		JFrame frame;

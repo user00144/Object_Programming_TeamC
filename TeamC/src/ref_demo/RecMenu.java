@@ -19,7 +19,7 @@ import java.awt.Insets;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 
-public class recipemenu {
+public class RecMenu {
 
 	public static void main(String[] args) {
 		createAndShowGUI();
@@ -155,13 +155,4 @@ public class recipemenu {
 
 	}
 
-
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
-
-
-		
-	}
 }
