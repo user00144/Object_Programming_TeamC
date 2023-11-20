@@ -6,11 +6,19 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import com.refrigerator.RefMgr;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
 
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
@@ -18,10 +26,15 @@ import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JTextArea;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 
 public class Submit {
 	JFrame frame;
-
+	String filepath;
+	File selectedfdfile;
+	JTextField txt_fdfile;
+	JTextField txt_refcode;
+	JTextArea textArea;
 	public Submit() {
 		createAndShowGUI();
 	}
@@ -36,13 +49,12 @@ public class Submit {
 
 	}
 	private void addComponentsToPane(Container pane) {
-		JTextField txt_fdfile;
-		JTextField txt_refcode;
+
 
 		JLabel lbluserinfo = new JLabel("사용자 정보(#로 구분해서 작성)");
 		lbluserinfo.setFont(new Font("굴림", Font.PLAIN, 14));
 		
-		JTextArea textArea = new JTextArea();
+		textArea = new JTextArea();
 		textArea.setColumns(45);
 		textArea.setRows(3);
 		
@@ -85,6 +97,42 @@ public class Submit {
 		btngetfood.setFont(new Font("굴림", Font.PLAIN, 14));
 		panel.add(btngetfood);
 		pane.add(btngetfood_1);
+		
+		btngetfood.addActionListener(new btnSubmitEvent());
+		btngetfood_1.addActionListener(new btnSubmitEvent());
+	}
+	
+	class btnSubmitEvent implements ActionListener{
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			JButton source = (JButton)e.getSource();
+			JOptionPane j = new JOptionPane();
+			if(source.getText().equals("파일 찾기")) {
+				JFileChooser file = new JFileChooser();
+				int result = file.showOpenDialog(frame);
+				if(result == JFileChooser.APPROVE_OPTION) {
+					selectedfdfile = file.getSelectedFile();
+					filepath = selectedfdfile.toString();
+					txt_fdfile.setText(filepath);
+				}
+			}
+			if(source.getText().equals("회원 가입")) {
+				String refcode = txt_refcode.getText();
+				String[] userinfo = textArea.getText().split("#");
+				if(RefMgr.getInstance().find(refcode)==null) {
+					int result = RefMgr.getInstance().addRef(refcode,userinfo,filepath);
+					if(result == 0) {
+						j.showMessageDialog(frame, "회원가입 완료", "", JOptionPane.PLAIN_MESSAGE);
+						frame.setVisible(false);
+					}else {
+						j.showMessageDialog(null, "등록 실패", "오류", JOptionPane.ERROR_MESSAGE);
+					}
+				}else {
+					j.showMessageDialog(frame, "냉장고 번호 중복", "오류", JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		}
+		
 	}
 	
 }
