@@ -36,6 +36,9 @@ public class GUIMain {
 		return main;
 	}
 	
+	public JFrame getframe() {
+		return frame;
+	}
 
 	public static void startGUI() {
         javax.swing.SwingUtilities.invokeLater(new Runnable() {

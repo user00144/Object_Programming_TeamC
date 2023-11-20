@@ -26,10 +26,11 @@ import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JTextArea;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 
 public class Submit {
-	JFrame frame;
+	JDialog frame;
 	String filepath;
 	File selectedfdfile;
 	JTextField txt_fdfile;
@@ -40,9 +41,8 @@ public class Submit {
 	}
 
 	private void createAndShowGUI() {
-		frame = new JFrame();
+		frame = new JDialog(GUIMain.getInstance().getframe(),"회원가입");
 		frame.setBounds(100, 100, 364, 326);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		addComponentsToPane(frame.getContentPane());
 		frame.pack();
 		frame.setVisible(true);

@@ -20,6 +20,7 @@ public class DetailFood extends JDialog{
 	
 	public DetailFood(String[] texts){
 		this.itemDetails = texts;
+		setup();
 	}
 //	texts = new String[] {"우유","우유","100","20231101","images/fd_img/우유.png"};
 	// format[식재료명, 타입, 중량, 유통기한, 이미지 위치]
