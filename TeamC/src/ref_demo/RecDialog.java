@@ -15,11 +15,13 @@ import javax.swing.AbstractListModel;
 import javax.swing.JScrollPane;
 
 public class RecDialog {
-	public static void main(String[] args) {
+	JFrame frame;
+	public RecDialog(){
 		createAndShowGUI();
 	}
-	private static void createAndShowGUI() {
-		JFrame frame = new JFrame();
+	
+	private void createAndShowGUI() {
+		frame = new JFrame();
 		frame.setBounds(100, 100, 412, 510);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		addComponentsToPane(frame.getContentPane());
@@ -27,7 +29,7 @@ public class RecDialog {
 		frame.setVisible(true);
 	}
 	
-	private static void addComponentsToPane(Container pane) {
+	private void addComponentsToPane(Container pane) {
 
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] {1};

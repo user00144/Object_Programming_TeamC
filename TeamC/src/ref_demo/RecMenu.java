@@ -20,13 +20,15 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 
 public class RecMenu {
-
-	public static void main(String[] args) {
+	JFrame frame;
+	DefaultTableModel data;
+	
+	public RecMenu() {
 		createAndShowGUI();
 	}
 	
-	private static void createAndShowGUI() {
-		JFrame frame = new JFrame("레시피 관리");
+	private void createAndShowGUI() {
+		frame = new JFrame("레시피 관리");
 		frame.setBounds(100, 100, 859, 654);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		addComponentsToPane(frame.getContentPane());
@@ -35,7 +37,7 @@ public class RecMenu {
 	}
 	
 
-	private static void addComponentsToPane(Container pane) {
+	private void addComponentsToPane(Container pane) {
 		JPanel panel = new JPanel();
 		JScrollPane scrollPane = new JScrollPane();
 		JTable table;
@@ -46,53 +48,7 @@ public class RecMenu {
 		pane.add(scrollPane);
 		table = new JTable();
 
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-			},
-			new String[] {
-				"\uC0AC\uC9C4", "\uC774\uB984", "\uC81C\uC791\uC790"
-			}
-		));
+		table.setModel(data);
 		scrollPane.setViewportView(table);
 		GridBagLayout gbl_panel = new GridBagLayout();
 		gbl_panel.columnWidths = new int[] {34, 281, 60, 30};

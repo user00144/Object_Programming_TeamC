@@ -20,9 +20,13 @@ import javax.swing.JButton;
 import javax.swing.table.DefaultTableModel;
 
 public class FoodMgrMenu {
+	JFrame frame;
+	public FoodMgrMenu() {
+		createAndShowGUI();
+	}
+	
+	private void createAndShowGUI() {
 
-	private static void createAndShowGUI() {
-		JFrame frame;
 		frame = new JFrame("식료품 관리");
 		frame.setBounds(100, 100, 942, 724);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -31,7 +35,7 @@ public class FoodMgrMenu {
 		frame.setVisible(true);
 		
 	}
-	private static void addComponentsToPane(Container pane) {
+	private void addComponentsToPane(Container pane) {
 		JTextField textField;
 		JTable table;
 		JScrollPane scrollPane = new JScrollPane();

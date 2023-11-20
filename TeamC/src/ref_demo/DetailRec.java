@@ -20,10 +20,14 @@ import java.awt.Color;
 import java.awt.Container;
 
 public class DetailRec {
+	JFrame frame;
 
 
+	public DetailRec() {
+		createAndShowGUI()
+	}
 
-	private static void createAndShowGUI() {
+	private void createAndShowGUI() {
 		JFrame frame;
 		frame = new JFrame();
 		frame.setBounds(100, 100, 876, 558);
@@ -32,7 +36,7 @@ public class DetailRec {
 		frame.setVisible(true);
 
 	}
-	private static void addComponentsToPane(Container pane) {
+	private void addComponentsToPane(Container pane) {
 		pane.setLayout(new GridLayout(1, 3, 0, 0));
 		JPanel panel = new JPanel();
 		pane.add(panel);

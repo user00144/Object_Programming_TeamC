@@ -13,14 +13,23 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.table.DefaultTableModel;
 
+import com.refrigerator.Refrigerator;
+
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Graphics;
 
 public class RefMain {
 
-	private static void createAndShowGUI() {
-		JFrame frame;
+	Refrigerator currentRf;
+	JFrame frame;
+	
+	RefMain(Refrigerator rf){
+		this.currentRf = rf;
+		createAndShowGUI();
+	}
+	
+	private void createAndShowGUI() {
 		frame = new JFrame("식료품을 부탁해!");
 		frame.setBounds(100, 100, 942, 724);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -31,7 +40,7 @@ public class RefMain {
 
 	}
 	
-	private static void addComponentsToPane(Container pane) {
+	private void addComponentsToPane(Container pane) {
 		JTextField tf_refcode;
 		JTable table;
 

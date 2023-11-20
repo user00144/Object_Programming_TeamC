@@ -22,9 +22,13 @@ import javax.swing.JButton;
 import javax.swing.ButtonGroup;
 
 public class reviewmenu {
+	JFrame frame;
 
-	private static void createAndShowGUI() {
-		JFrame frame;
+	public reviewmenu() {
+		createAndShowGUI();
+	}
+	
+	private void createAndShowGUI() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 909, 560);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -33,7 +37,7 @@ public class reviewmenu {
 		frame.setVisible(true);
 	}
 	
-	private static void addComponentsToPane(Container pane) {
+	private void addComponentsToPane(Container pane) {
 		JTable table;
 		ButtonGroup buttonGroup = new ButtonGroup();
 		pane.setLayout(new GridLayout(1, 2, 0, 0));

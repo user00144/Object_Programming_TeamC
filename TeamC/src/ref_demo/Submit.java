@@ -20,10 +20,13 @@ import javax.swing.JTextArea;
 import javax.swing.JButton;
 
 public class Submit {
+	JFrame frame;
 
+	public Submit() {
+		createAndShowGUI();
+	}
 
-	private static void createAndShowGUI() {
-		JFrame frame;
+	private void createAndShowGUI() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 364, 326);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -32,7 +35,7 @@ public class Submit {
 		frame.setVisible(true);
 
 	}
-	private static void addComponentsToPane(Container pane) {
+	private void addComponentsToPane(Container pane) {
 		JTextField txt_fdfile;
 		JTextField txt_refcode;
 

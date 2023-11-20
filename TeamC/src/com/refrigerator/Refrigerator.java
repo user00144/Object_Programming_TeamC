@@ -11,7 +11,7 @@ import mgr.Manager;
 import java.util.ArrayList;
 
 
-class Refrigerator implements Manageable,UIData{
+public class Refrigerator implements Manageable,UIData{
 	
 	Manager<Food> foodMgr = new Manager<>();
 	ArrayList<String> userinfo = new ArrayList<>();
