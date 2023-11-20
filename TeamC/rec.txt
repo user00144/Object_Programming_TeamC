@@ -9,7 +9,7 @@ end
 주부
 여성
 end
-/imgages/kimchi.png
+images/rec_img/김치찌개.png
 라면 조참솔
 라면 500
 end
@@ -20,7 +20,7 @@ end
 남성
 자취
 end
-/imgages/kimchi.png
+images/rec_img/라면.png
 된장찌개 박수인
 된장 50
 애호박 80
@@ -36,7 +36,7 @@ end
 남성
 자취
 end
-/imgages/kimchi.png
+images/rec_img/된장찌개.png
 감자탕 김아현
 된장 100
 들깨가루 100
@@ -55,7 +55,7 @@ end
 남성
 자취
 end
-/imgages/kimchi.png
+images/rec_img/감자탕.png
 떡볶이 이환제
 고추장 100
 고춧가루 50
@@ -70,4 +70,4 @@ end
 여성
 주부
 end
-/imgages/kimchi.png
+images/rec_img/떡볶이.png

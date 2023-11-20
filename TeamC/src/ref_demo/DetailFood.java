@@ -17,10 +17,11 @@ import java.awt.Font;
 
 public class DetailFood extends JDialog{
 	String[] itemDetails;
-
+	
 	public DetailFood(String[] texts){
 		this.itemDetails = texts;
 	}
+//	texts = new String[] {"우유","우유","100","20231101","images/fd_img/우유.png"};
 	// format[식재료명, 타입, 중량, 유통기한, 이미지 위치]
 	public void setup() {
 		setTitle("식재료 상세보기");
@@ -120,5 +121,6 @@ public class DetailFood extends JDialog{
 			lbl_foodimg.setHorizontalAlignment(SwingConstants.LEFT);
 			p_img.add(lbl_foodimg);
 		}
+		setVisible(true);
 	}
 }
