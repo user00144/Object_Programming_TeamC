@@ -24,7 +24,7 @@ public class DetailRec {
 
 
 	public DetailRec() {
-		createAndShowGUI()
+		createAndShowGUI();
 	}
 
 	private void createAndShowGUI() {
