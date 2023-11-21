@@ -176,10 +176,7 @@ public class RefMain {
 			case "로그아웃" :logout(); break;
 			default : break;
 			}
-			
-			
 		}
-		
 	}
 	
 	class MouseEventListener implements MouseListener{
@@ -187,8 +184,7 @@ public class RefMain {
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			// TODO Auto-generated method stub
-			int row = table.getSelectedRow();
-			Selectedfd = currentRf.foodMgr.mList.get(row);
+
 		}
 
 		@Override
@@ -200,7 +196,8 @@ public class RefMain {
 		@Override
 		public void mouseReleased(MouseEvent e) {
 			// TODO Auto-generated method stub
-			
+			int row = table.getSelectedRow();
+			Selectedfd = currentRf.foodMgr.mList.get(row);
 		}
 
 		@Override
