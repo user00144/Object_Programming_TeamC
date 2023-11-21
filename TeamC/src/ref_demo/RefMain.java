@@ -169,6 +169,7 @@ public class RefMain {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			JButton source = (JButton)e.getSource();
+			new FoodMgrMenu();
 			switch (source.getText()) {
 			case "상세보기":Detailfd();  break;
 			case "식료품 관리":updateTable(); break;
