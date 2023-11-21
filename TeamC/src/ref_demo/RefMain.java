@@ -171,8 +171,8 @@ public class RefMain {
 			JButton source = (JButton)e.getSource();
 			switch (source.getText()) {
 			case "상세보기":Detailfd();  break;
-			case "식료품 관리": break;
-			case "레시피 보기": break;
+			case "식료품 관리":updateTable(); break;
+			case "레시피 보기":; break;
 			case "로그아웃" :logout(); break;
 			default : break;
 			}
