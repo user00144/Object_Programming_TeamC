@@ -43,7 +43,11 @@ public class RefMain {
 		createAndShowGUI();
 		updateTable();
 	}
-	
+
+	public RefMain() {
+
+	}
+
 	private void createAndShowGUI() {
 		frame = new JFrame("식료품을 부탁해!");
 		frame.setBounds(100, 100, 942, 724);
@@ -171,7 +175,7 @@ public class RefMain {
 			JButton source = (JButton)e.getSource();
 			switch (source.getText()) {
 			case "상세보기":Detailfd();  break;
-			case "식료품 관리":new FoodMgrMenu();updateTable(); break;
+			case "식료품 관리":foodMgrExit(); break;
 			case "레시피 보기":; break;
 			case "로그아웃" :logout(); break;
 			default : break;
@@ -241,8 +245,23 @@ public class RefMain {
 		
 		DetailFood dtf = new DetailFood(str);
 	}
-	
-	
+
+	private static RefMain rmain = null;
+	public static RefMain getInstance() {
+		if (rmain == null)
+			rmain = new RefMain();
+		return rmain;
+	}
+
+	public JFrame getframe() {
+		return frame;
+	}
+
+	private void foodMgrExit() {
+		new FoodMgrMenu();updateTable();
+		frame.setVisible(true);
+		RefMain.getInstance().getframe().setVisible(true);
+	}
 	
 	private void logout() {
 		currentRf = null;
