@@ -31,7 +31,7 @@ public class FoodMgrMenu {
 
 		frame = new JFrame("식료품 관리");
 		frame.setBounds(100, 100, 942, 724);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); -> 프로그램 강제 종료됨
 		addComponentsToPane(frame.getContentPane());
 		frame.pack();
 		frame.setVisible(true);

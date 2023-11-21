@@ -16,12 +16,13 @@ import javax.swing.JScrollPane;
 
 public class RecDialog {
 	JFrame frame;
-	public RecDialog(){
-		createAndShowGUI();
+	public RecDialog(String s){
+		createAndShowGUI(s);
+		updateTable(s);
 	}
 	
-	private void createAndShowGUI() {
-		frame = new JFrame();
+	private void createAndShowGUI(String s) {
+		frame = new JFrame(s);
 		frame.setBounds(100, 100, 412, 510);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		addComponentsToPane(frame.getContentPane());
@@ -46,54 +47,6 @@ public class RecDialog {
 		gbc_scrollPane.gridy = 0;
 		pane.add(scrollPane, gbc_scrollPane);
 		JTable table = new JTable();
-
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-			},
-			new String[] {
-				"\uC0AC\uC9C4", "\uC774\uB984", "\uC81C\uC791\uC790"
-			}
-		));
 		scrollPane.setViewportView(table);
 		
 		JButton btn_detailrec = new JButton("상세보기");
@@ -103,6 +56,15 @@ public class RecDialog {
 		gbc_btn_detailrec.gridy = 1;
 		pane.add(btn_detailrec, gbc_btn_detailrec);
 
+	}
+	
+	private void updateTable(String s) {
+		if(s.contentEquals("바로 만들 수 있는 레시피")) {
+			
+		}
+		else {
+			
+		}
 	}
 
 }
