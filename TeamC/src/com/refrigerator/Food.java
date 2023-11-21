@@ -7,10 +7,10 @@ import facade.DataEngineImpl;
 import facade.UIData;
 import mgr.Manageable;
 
-class Food implements Manageable,UIData{
+public class Food implements Manageable,UIData{
 	
 	String fdname;
-	String type;
+	public String type;
 	int num;
 	int exdate;
 	Date time;
@@ -73,7 +73,8 @@ class Food implements Manageable,UIData{
 	}
 	@Override
 	public String[] getUiTexts() {
-		// TODO Auto-generated method stub
-		return null;
+		String[] str = {fdname, type, num+"",exdate+""};
+		return str;
 	}
+	
 }

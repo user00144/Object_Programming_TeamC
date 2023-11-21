@@ -4,26 +4,40 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+
+import com.refrigerator.Management;
+import com.refrigerator.RefMgr;
+import com.refrigerator.Refrigerator;
+
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class GUIMain {
-
+	private Refrigerator ref;
 	private static GUIMain main = null;
+	private JFrame frame;
+	private JTextField textField;
 	private GUIMain() {}
 	public static GUIMain getInstance() {
 		if (main == null)
 			main = new GUIMain();
 		return main;
+	}
+	
+	public JFrame getframe() {
+		return frame;
 	}
 
 	public static void startGUI() {
@@ -35,7 +49,7 @@ public class GUIMain {
     }
 	
 	private void createAndShowGUI() {
-		JFrame frame = new JFrame("식료품을 부탁해!");
+		frame = new JFrame("식료품을 부탁해!");
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		addComponentsToPane(frame.getContentPane());
@@ -45,7 +59,7 @@ public class GUIMain {
 
 	private void addComponentsToPane(Container pane) {
 		pane.setBackground(Color.white);
-		JTextField textField;
+		
 		JLabel lblProgramname = new JLabel();
 		lblProgramname.setBounds(50,100,256,256);
 		lblProgramname.setIcon(new ImageIcon("images/logo.png"));
@@ -65,10 +79,11 @@ public class GUIMain {
 		loginpanel.add(textField);
 		
 		JButton btn_login = new JButton("로그인");
-		
 		JButton btn_admin = new JButton("관리자 로그인");
-		
 		JButton btn_submit = new JButton("회원 가입");
+		btn_login.addActionListener(new btnEventHandler());
+		btn_admin.addActionListener(new btnEventHandler());
+		btn_submit.addActionListener(new btnEventHandler());
 		GroupLayout groupLayout = new GroupLayout(pane);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -107,6 +122,41 @@ public class GUIMain {
 					.addContainerGap(32, Short.MAX_VALUE))
 		);
 		pane.setLayout(groupLayout);
+	}
+	
+	class btnEventHandler implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			JButton source = (JButton)e.getSource();
+			switch (source.getText()){
+			case "로그인":guilogin(); break;
+			case "회원 가입" :guisubmit(); break;
+			case "관리자 로그인" :manage(); break;
+			default : break;
+			}
+		}
+		
+	}
+	
+	@SuppressWarnings("static-access")
+	public void guilogin() {
+		ref = RefMgr.getInstance().find(textField.getText());
+		if(ref != null) {
+			RefMain refmain = new RefMain(ref);
+			frame.setVisible(false);
+		}else {
+			JOptionPane j = new JOptionPane();
+			j.showMessageDialog(null, "냉장고 번호가 없습니다.", "오류", JOptionPane.ERROR_MESSAGE);
+		}
+	}
+	
+	public void guisubmit() {
+		Submit submit = new Submit();
+	}
+	
+	public void manage() {
+		Management.getInstance().ManagerMenu();
 	}
 
 }

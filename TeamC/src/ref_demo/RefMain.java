@@ -13,14 +13,38 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.table.DefaultTableModel;
 
+import com.refrigerator.Food;
+import com.refrigerator.FoodMgr;
+import com.refrigerator.RefMgr;
+import com.refrigerator.Refrigerator;
+
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.HashMap;
+import java.util.Map;
 
-public class ref_main {
+public class RefMain {
 
-	private static void createAndShowGUI() {
-		JFrame frame;
+	Refrigerator currentRf;
+	JFrame frame;
+	
+	Food Selectedfd;
+	JTable table;
+
+	
+	                                                                      
+	RefMain(Refrigerator rf){ 
+		this.currentRf = rf;
+		createAndShowGUI();
+		updateTable();
+	}
+	
+	private void createAndShowGUI() {
 		frame = new JFrame("식료품을 부탁해!");
 		frame.setBounds(100, 100, 942, 724);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -31,9 +55,8 @@ public class ref_main {
 
 	}
 	
-	private static void addComponentsToPane(Container pane) {
-		JTextField tf_refcode;
-		JTable table;
+	private void addComponentsToPane(Container pane) {
+		JLabel tf_refcode;
 
 		JPanel panel = new JPanel();
 		
@@ -49,9 +72,14 @@ public class ref_main {
 		
 		JLabel lblNewLabel = new JLabel("냉장고 번호: ");
 		
-		tf_refcode = new JTextField();
-		tf_refcode.setColumns(10);
+		fd_detailview.addActionListener(new BtnEventListener());
+		fd_menu.addActionListener(new BtnEventListener());
+		rec_menu.addActionListener(new BtnEventListener());
+		logout.addActionListener(new BtnEventListener());
+
 		
+		tf_refcode = new JLabel();
+		tf_refcode.setText(""+currentRf.refcode);
 		JScrollPane scrollPane = new JScrollPane();
 		GroupLayout groupLayout = new GroupLayout(pane);
 		groupLayout.setHorizontalGroup(
@@ -81,30 +109,7 @@ public class ref_main {
 		);
 		
 		table = new JTable();
-
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-				{"매일우유", "우유", 100, "20231106"},
-				{"소라빵", "소라빵", 150, "20231105"},
-				{"해찬들된장", "된장", 1000, "20241111"},
-				{"고추장", "고추장", 1500, "20241212"},
-				{"삼양라면", "라면", 500, "20261111"},
-				{"깻잎", "깻잎", 200, "20231201"},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-			},
-			new String[] {
-				"이름", "타입", "중량", "유통기한"
-			}
-		));
+		table.addMouseListener(new MouseEventListener());
 		table.setRowHeight(30);
 		scrollPane.setViewportView(table);
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
@@ -152,7 +157,98 @@ public class ref_main {
 						.addComponent(lblNewLabel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE))
 					.addContainerGap())
 		);
+		
+		
+		
 		panel.setLayout(gl_panel);
 		pane.setLayout(groupLayout);
 	}
+	
+	class BtnEventListener implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			JButton source = (JButton)e.getSource();
+			switch (source.getText()) {
+			case "상세보기":Detailfd();  break;
+			case "식료품 관리": break;
+			case "레시피 보기": break;
+			case "로그아웃" :logout(); break;
+			default : break;
+			}
+		}
+	}
+	
+	class MouseEventListener implements MouseListener{
+
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public void mousePressed(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			// TODO Auto-generated method stub
+			int row = table.getSelectedRow();
+			Selectedfd = currentRf.foodMgr.mList.get(row);
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+		
+	}
+	
+	
+	private void updateTable() {
+		DefaultTableModel df = null;
+		df = new DefaultTableModel(null,FoodMgr.getInstance().headers) {
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		};
+		for(Food fd : currentRf.foodMgr.mList) {
+			df.addRow(fd.getUiTexts());
+		}
+		table.setModel(df);
+	}
+	
+	private void Detailfd() {
+		String[] str = new String[5];
+		if(Selectedfd != null) {
+			int i = 0;
+			for(String s:Selectedfd.getUiTexts()) {
+				str[i] = s;
+				i++;
+			}
+			str[4] = FoodMgr.getInstance().imagemap.get(Selectedfd.type);
+		}
+		
+		DetailFood dtf = new DetailFood(str);
+	}
+	
+	
+	
+	private void logout() {
+		currentRf = null;
+		frame.setVisible(false);
+		GUIMain.getInstance().getframe().setVisible(true);
+	}
+	
+	
 }

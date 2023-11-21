@@ -11,18 +11,20 @@ import mgr.Manager;
 import java.util.ArrayList;
 
 
-class Refrigerator implements Manageable,UIData{
+public class Refrigerator implements Manageable,UIData{
 	
-	Manager<Food> foodMgr = new Manager<>();
+	public Manager<Food> foodMgr = new Manager<>();
 	ArrayList<String> userinfo = new ArrayList<>();
 	Date time;
 	SimpleDateFormat simpletime;
-	int refcode;
+	public int refcode;
 	
 	
 public void delFoods(Scanner scan) {
 			foodMgr.delItem(scan);
 		}
+
+
 
 public boolean canmake(Recipe r) {
 	int cnt = 0;

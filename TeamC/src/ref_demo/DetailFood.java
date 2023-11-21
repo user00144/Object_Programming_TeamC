@@ -15,17 +15,17 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
 
-public class detail_food extends JDialog{
-
-	public static void main(String[] args) {
-		detail_food dialog = new detail_food();
-		dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-		dialog.setVisible(true);
+public class DetailFood extends JDialog{
+	String[] itemDetails;
+	
+	public DetailFood(String[] texts){
+		this.itemDetails = texts;
+		setup();
 	}
-	
-	
-	public detail_food(){
-
+//	texts = new String[] {"우유","우유","100","20231101","images/fd_img/우유.png"};
+	// format[식재료명, 타입, 중량, 유통기한, 이미지 위치]
+	public void setup() {
+		setTitle("식재료 상세보기");
 		JPanel contentPanel = new JPanel();
 		setBounds(100, 100, 585, 330);
 		getContentPane().setLayout(new GridLayout(0, 2, 0, 0));
@@ -57,7 +57,7 @@ public class detail_food extends JDialog{
 		lbl_01_1.setFont(new Font("굴림", Font.PLAIN, 15));
 		p_fdname.add(lbl_01_1);
 		
-		JLabel lbl_fdname_1 = new JLabel("fdname");
+		JLabel lbl_fdname_1 = new JLabel(itemDetails[0]);
 		lbl_fdname_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_fdname_1.setFont(new Font("굴림", Font.PLAIN, 15));
 		p_fdname.add(lbl_fdname_1);
@@ -73,7 +73,7 @@ public class detail_food extends JDialog{
 		lbl_01_1_1.setFont(new Font("굴림", Font.PLAIN, 15));
 		p_type.add(lbl_01_1_1);
 		
-		JLabel lbl_type = new JLabel("type");
+		JLabel lbl_type = new JLabel(itemDetails[1]);
 		lbl_type.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_type.setFont(new Font("굴림", Font.PLAIN, 15));
 		p_type.add(lbl_type);
@@ -89,7 +89,7 @@ public class detail_food extends JDialog{
 		lbl_01_1_2.setFont(new Font("굴림", Font.PLAIN, 15));
 		p_num.add(lbl_01_1_2);
 		
-		JLabel lbl_num = new JLabel("num");
+		JLabel lbl_num = new JLabel(itemDetails[2]);
 		lbl_num.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_num.setFont(new Font("굴림", Font.PLAIN, 15));
 		p_num.add(lbl_num);
@@ -105,7 +105,7 @@ public class detail_food extends JDialog{
 		lbl_010.setFont(new Font("굴림", Font.PLAIN, 15));
 		p_exdate.add(lbl_010);
 		
-		JLabel lbl_exdate = new JLabel("exdate");
+		JLabel lbl_exdate = new JLabel(itemDetails[3]);
 		lbl_exdate.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_exdate.setFont(new Font("굴림", Font.PLAIN, 15));
 		p_exdate.add(lbl_exdate);
@@ -117,11 +117,11 @@ public class detail_food extends JDialog{
 			JLabel lbl_foodimg = new JLabel("이미지");
 			lbl_foodimg.setVerticalAlignment(SwingConstants.TOP);
 			lbl_foodimg.setAlignmentY(0.0f);
-			lbl_foodimg.setIcon(new ImageIcon("")); // Map에서 찾아서 넣기
+			lbl_foodimg.setIcon(new ImageIcon(itemDetails[4])); // Map에서 찾아서 넣기
 			lbl_foodimg.setPreferredSize(new Dimension(250,250));
 			lbl_foodimg.setHorizontalAlignment(SwingConstants.LEFT);
 			p_img.add(lbl_foodimg);
 		}
+		setVisible(true);
 	}
-	
 }
