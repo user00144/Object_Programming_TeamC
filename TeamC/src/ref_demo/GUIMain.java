@@ -30,6 +30,7 @@ public class GUIMain {
 	private JFrame frame;
 	private JTextField textField;
 	private GUIMain() {}
+	private final String Passwd = new String("!!");
 	public static GUIMain getInstance() {
 		if (main == null)
 			main = new GUIMain();
@@ -156,7 +157,9 @@ public class GUIMain {
 	}
 	
 	public void manage() {
-		Management.getInstance().ManagerMenu();
+		if(textField.getText().equals(Passwd)) {
+			Management.getInstance().ManagerMenu();
+		}
 	}
 
 }
