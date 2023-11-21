@@ -28,7 +28,6 @@ public class FoodMgrMenu {
 	}
 	
 	void createAndShowGUI() {
-
 		frame = new JFrame("식료품 관리");
 		frame.setBounds(100, 100, 942, 724);
 		//frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); -> 프로그램 강제 종료됨
