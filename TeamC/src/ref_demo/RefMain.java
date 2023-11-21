@@ -33,7 +33,7 @@ import java.awt.event.MouseListener;
 import java.util.HashMap;
 import java.util.Map;
 
-public class RefMain {
+public class RefMain { 
 
    Refrigerator currentRf;
    JFrame frame;
