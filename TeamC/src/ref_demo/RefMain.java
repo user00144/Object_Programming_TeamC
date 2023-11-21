@@ -161,12 +161,9 @@ public class RefMain {
                .addContainerGap())
       );
       
-      
-      
       panel.setLayout(gl_panel);
       pane.setLayout(groupLayout);
    }
-   
    
    class BtnEventListener implements ActionListener{
 
