@@ -176,7 +176,6 @@ private void createAndShowGUI() {
       public void actionPerformed(ActionEvent e) {
          JButton source = (JButton)e.getSource();
          
-         
          switch (source.getText()) {
          case "상세보기":Detailfd();  break;
          case "식료품 관리":foodMgrExit(); break;
@@ -191,7 +190,7 @@ private void createAndShowGUI() {
    class MouseEventListener implements MouseListener{
 
       @Override
-      public void mouseClicked(MouseEvent e) {
+      public void mouseClicked(MouseEvent e) { 
          // TODO Auto-generated method stub
 
 
