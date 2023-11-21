@@ -236,7 +236,7 @@ private void createAndShowGUI() {
       }
       table.setModel(df);
    }
-   
+    
    private void Detailfd() {
       String[] str = new String[5];
       if(Selectedfd != null) {
