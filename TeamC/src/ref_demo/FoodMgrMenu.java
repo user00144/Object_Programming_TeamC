@@ -3,6 +3,7 @@ package ref_demo;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -15,6 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.SwingConstants;
+import javax.swing.WindowConstants;
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
 import javax.swing.table.DefaultTableModel;
@@ -25,7 +27,7 @@ public class FoodMgrMenu {
 		createAndShowGUI();
 	}
 	
-	private void createAndShowGUI() {
+	void createAndShowGUI() {
 
 		frame = new JFrame("식료품 관리");
 		frame.setBounds(100, 100, 942, 724);
@@ -35,7 +37,7 @@ public class FoodMgrMenu {
 		frame.setVisible(true);
 		
 	}
-	private void addComponentsToPane(Container pane) {
+	static void addComponentsToPane(Container pane) {
 		JTextField textField;
 		JTable table;
 		JScrollPane scrollPane = new JScrollPane();
@@ -128,5 +130,4 @@ public class FoodMgrMenu {
 		
 	}
 	
-
 }
