@@ -12,5 +12,5 @@ public class RecMgr extends DataEngineImpl<Recipe>{
 			engine = new RecMgr();
 		return engine;
 	}
-	private String[] headers = {"이미지","레시피명"};
+	public String[] headers = {"이미지", "레시피명", "제작자"};
 }

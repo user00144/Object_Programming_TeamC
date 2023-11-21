@@ -10,21 +10,38 @@ import java.awt.GridBagLayout;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
+import com.refrigerator.Food;
+import com.refrigerator.FoodMgr;
+import com.refrigerator.RecMgr;
+import com.refrigerator.Recipe;
+
 import javax.swing.JTextField;
 import java.awt.GridBagConstraints;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class RecMenu {
+	
 	JFrame frame;
 	DefaultTableModel data;
+	Recipe selectedRc;
+	JTable table;
+	JTextField txt_findrecipe;
+	JButton btn_findrecipe;
 	
 	public RecMenu() {
 		createAndShowGUI();
+		updateTable();
 	}
 	
 	private void createAndShowGUI() {
@@ -40,19 +57,21 @@ public class RecMenu {
 	private void addComponentsToPane(Container pane) {
 		JPanel panel = new JPanel();
 		JScrollPane scrollPane = new JScrollPane();
-		JTable table;
-		JTextField txt_findrecipe;
-		JButton btn_findrecipe;
 		pane.setLayout(new GridLayout(0, 2, 0, 0));
 		pane.add(panel);
 		pane.add(scrollPane);
 		table = new JTable();
-
-		table.setModel(data);
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				int row = table.getSelectedRow();
+				selectedRc = RecMgr.getInstance().mList.get(row);
+			}
+		});
 		scrollPane.setViewportView(table);
 		GridBagLayout gbl_panel = new GridBagLayout();
 		gbl_panel.columnWidths = new int[] {34, 281, 60, 30};
-		gbl_panel.rowHeights = new int[]{38, 47, 78, 78, 44, 78, 48, 78, 68, 23, 0};
+		gbl_panel.rowHeights = new int[] {38, 47, 78, 78, 44, 78, 48, 78, 68, 23, 30, 0};
 		gbl_panel.columnWeights = new double[]{0.0, 1.0, 1.0, Double.MIN_VALUE};
 		gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, Double.MIN_VALUE};
 		panel.setLayout(gbl_panel);
@@ -66,7 +85,8 @@ public class RecMenu {
 		gbc_textField.gridy = 1;
 		panel.add(txt_findrecipe, gbc_textField);
 		
-		btn_findrecipe = new JButton("검색 ");
+		btn_findrecipe = new JButton("검색");
+		btn_findrecipe.addActionListener(new btnRecEvent());
 		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
 		gbc_btnNewButton.fill = GridBagConstraints.VERTICAL;
 		gbc_btnNewButton.insets = new Insets(0, 0, 5, 0);
@@ -75,6 +95,7 @@ public class RecMenu {
 		panel.add(btn_findrecipe, gbc_btnNewButton);
 		
 		JButton btn_makenow = new JButton("바로 만들 수 있는 레시피");
+		btn_makenow.addActionListener(new btnRecEvent());
 		GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
 		gbc_btnNewButton_1.fill = GridBagConstraints.BOTH;
 		gbc_btnNewButton_1.insets = new Insets(0, 0, 5, 0);
@@ -84,6 +105,7 @@ public class RecMenu {
 		panel.add(btn_makenow, gbc_btnNewButton_1);
 		
 		JButton btn_recommand = new JButton("레시피 추천 보기");
+		btn_recommand.addActionListener(new btnRecEvent());
 		GridBagConstraints gbc_btnNewButton_1_1 = new GridBagConstraints();
 		gbc_btnNewButton_1_1.fill = GridBagConstraints.BOTH;
 		gbc_btnNewButton_1_1.insets = new Insets(0, 0, 5, 0);
@@ -93,6 +115,7 @@ public class RecMenu {
 		panel.add(btn_recommand, gbc_btnNewButton_1_1);
 		
 		JButton btn_deatilrecipe = new JButton("레시피 상세보기");
+		btn_deatilrecipe.addActionListener(new btnRecEvent());
 		GridBagConstraints gbc_btnNewButton_1_2 = new GridBagConstraints();
 		gbc_btnNewButton_1_2.fill = GridBagConstraints.BOTH;
 		gbc_btnNewButton_1_2.insets = new Insets(0, 0, 5, 0);
@@ -102,6 +125,7 @@ public class RecMenu {
 		panel.add(btn_deatilrecipe, gbc_btnNewButton_1_2);
 		
 		JButton btn_goback = new JButton("돌아가기");
+		btn_goback.addActionListener(new btnRecEvent());
 		GridBagConstraints gbc_btnNewButton_2 = new GridBagConstraints();
 		gbc_btnNewButton_2.anchor = GridBagConstraints.NORTHWEST;
 		gbc_btnNewButton_2.insets = new Insets(0, 0, 0, 5);
@@ -109,6 +133,64 @@ public class RecMenu {
 		gbc_btnNewButton_2.gridy = 9;
 		panel.add(btn_goback, gbc_btnNewButton_2);
 
+	}
+	
+	class btnRecEvent implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			JButton source = (JButton)e.getSource();
+			String s = source.getText();
+			switch(s) {
+			case "검색":
+				updateTable();
+				break;
+			case "바로 만들 수 있는 레시피":
+				new RecDialog(s);
+				break;
+			case "레시피 추천 보기":
+				new RecDialog(s);
+				break;
+			case "레시피 상세보기":
+				break;
+			case "돌아가기":
+				goBack();
+				break;
+			}
+		}
+		
+	}
+	
+	private void updateTable() {
+		String s = null;
+		try {
+			s = txt_findrecipe.getText();
+		}
+		catch(NullPointerException e){
+			s = null;
+		}
+		DefaultTableModel df = null;
+		df = new DefaultTableModel(null,RecMgr.getInstance().headers) {
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		};
+		if(s==null) {
+			for(Recipe r : RecMgr.getInstance().mList) {
+				df.addRow(r.getUiTexts());
+			}
+		}
+		else {
+			for(Recipe r : RecMgr.getInstance().mList) {
+				if(r.matches(s))
+					df.addRow(r.getUiTexts());
+			}
+		}
+		table.setModel(df);
+	}
+	
+	private void goBack() {
+		frame.setVisible(false);
 	}
 
 }
