@@ -165,16 +165,17 @@ public class RefMain {
       pane.setLayout(groupLayout);
    }
    
+   
    class BtnEventListener implements ActionListener{
 
       @Override
       public void actionPerformed(ActionEvent e) {
          JButton source = (JButton)e.getSource();
-         new FoodMgrMenu();
+         
          
          switch (source.getText()) {
          case "상세보기":Detailfd();  break;
-         case "식료품 관리":updateTable(); break;
+         case "식료품 관리":new FoodMgrMenu();updateTable(); break;
          case "레시피 보기":createAndShowGUI(); break;
          case "로그아웃" :logout(); break;
          default : break;
