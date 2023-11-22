@@ -10,6 +10,9 @@ import javax.swing.JLabel;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
@@ -73,11 +76,24 @@ public class DetailRec {
 		panel.add(lblNewLabel_4, gbc_lblNewLabel_4);
 		
 		JButton btnNewButton = new JButton("리뷰보기");
-		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
-		gbc_btnNewButton.fill = GridBagConstraints.BOTH;
-		gbc_btnNewButton.gridx = 0;
-		gbc_btnNewButton.gridy = 4;
-		panel.add(btnNewButton, gbc_btnNewButton);
+		btnNewButton.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				
+				showReview();
+			}
+
+			public void showReview() {
+				// TODO Auto-generated method stub
+				JDialog dialog = new JDialog(frame, "리뷰보기", true);
+				dialog.setSize(300, 200);
+				dialog.setLocationRelativeTo(frame);
+				
+				JLabel reviewLabel = new JLabel("리뷰 내용");
+				dialog.add(reviewLabel);
+				
+				dialog.setVisible(true);
+			}
+		});
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
@@ -97,5 +113,6 @@ public class DetailRec {
 		lblNewLabel_2.setBackground(new Color(255, 255, 255));
 		panel_2.add(lblNewLabel_2);
 	}
-
+	
+	
 }

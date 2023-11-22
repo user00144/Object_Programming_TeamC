@@ -16,6 +16,9 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JTextArea;
 import javax.swing.JRadioButton;
 import javax.swing.JButton;
@@ -214,6 +217,19 @@ public class reviewmenu {
 		panel_1.add(rdbtnNewRadioButton_4, gbc_rdbtnNewRadioButton_4);
 		
 		JButton btnNewButton = new JButton("리뷰작성");
+		btnNewButton.addActionListener(new ActionListener(){
+			
+			public void actionPerformed(ActionEvent e) {
+				
+				String review = textArea.getText();{
+				int score = getSelectScore();
+					
+				Review(review, score);
+				}
+			}
+			
+		});
+		
 		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
 		gbc_btnNewButton.fill = GridBagConstraints.BOTH;
 		gbc_btnNewButton.gridwidth = 5;
@@ -221,4 +237,15 @@ public class reviewmenu {
 		gbc_btnNewButton.gridy = 6;
 		panel_1.add(btnNewButton, gbc_btnNewButton);
 	}
+	
+	public int getSelectScore() {
+	
+	return 0;
+	}
+	
+	public void Review(String review, int score) {
+		System.out.println("리뷰 : " + review);
+		System.out.println("평점 : " + score);
+	}
+	
 }
