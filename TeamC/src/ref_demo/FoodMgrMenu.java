@@ -3,42 +3,41 @@ package ref_demo;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.Vector;
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.BoxLayout;
 import javax.swing.GroupLayout;
-import javax.swing.ImageIcon;
 import javax.swing.GroupLayout.Alignment;
-import javax.swing.JTable;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.SwingConstants;
-import javax.swing.WindowConstants;
-import javax.swing.JScrollPane;
-import javax.swing.JButton;
-import javax.swing.JDialog;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 import com.refrigerator.Food;
 import com.refrigerator.FoodMgr;
-import com.refrigerator.RecMgr;
-import com.refrigerator.Recipe;
 import com.refrigerator.Refrigerator;
 
-import ref_demo.RecMenu.btnRecEvent;
+import facade.IDataEngine;
 
 public class FoodMgrMenu {
 	JFrame frame;
 	Refrigerator curRf;
 	JTextField textField;
 	JTable table;
+	IDataEngine<?> dataMgr;
 	public FoodMgrMenu(Refrigerator rf) {
 		this.curRf = rf;
 		createAndShowGUI();
@@ -97,6 +96,7 @@ public class FoodMgrMenu {
 		textField.setColumns(10);
 		
 		JButton btnNewButton = new JButton("추가");
+		btnNewButton.addActionListener(new BtnEventListener());
 		
 		JButton btnNewButton_1 = new JButton("삭제");
 		
@@ -145,13 +145,85 @@ public class FoodMgrMenu {
 	      public void actionPerformed(ActionEvent e) {
 	         JButton source = (JButton)e.getSource();
 	         switch (source.getText()) {
-	         case "추가": break;
-	         case "삭제": break;
-	         case "검색": updateTable();break;
+	         case "추가": addRecord(); break;
+	         case "삭제": deleteRecord(); break;
+	         case "검색": updateTable(); break;
 	         default : break;
 	         }
 	      }
 	   }
+   
+   private void addRecord() {
+	   String s = null;
+	   String[] mobS;
+	   int cnt = 0;
+	   Vector data = new Vector<>(); // 전체 데이터를 저장할 Vector 객체 생성
+	   Vector rowData = new Vector<>(); // 1개 행 데이터를 저장할 Vector 객체 생성 및 데이터 저장
+		
+		try {
+			s = textField.getText();
+		}
+		catch(NullPointerException e){
+			s = null;
+		}
+		
+		DefaultTableModel df = null;
+		
+		df = new DefaultTableModel(null,FoodMgr.getInstance().headers) {
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		};
+		
+		if(s == null || s.equals(" ") || s.length() == 0) {
+			try {
+				mobS = s.split(",");
+			}
+			catch(NullPointerException e){
+				mobS = null;
+			}
+			JOptionPane.showMessageDialog(null, "공백 값은 허용되지 않습니다.", "오류", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+		else {
+			mobS = s.split(",");
+			for(Food f : curRf.foodMgr.mList) {
+				for(int i = 0; i < s.length(); i++) {
+					if(s.contains(",")) {
+						if(s.length() >= 14) { // 형식에 맞게 문자열 길이 처리하기 위함(이름 => 최소 1, 타입 => 최소 1, 중량 => 최소 1, 유통기한 => 8)
+							JOptionPane.showMessageDialog(null, "추가되었습니다.", "알림", JOptionPane.INFORMATION_MESSAGE);
+							for(i = 0; i < 4; i++) {
+								rowData.add(mobS[i]);
+							}
+							for(Food food : curRf.foodMgr.mList) {
+								df.addRow(food.getUiTexts());
+							}
+							df.addRow(rowData);
+							updateTable();
+							table.setModel(df);
+							return;
+						}
+						else{
+							JOptionPane.showMessageDialog(null, "형식에 맞지 않습니다.", "오류", JOptionPane.ERROR_MESSAGE);
+							return;
+						}
+					}
+					else {
+						JOptionPane.showMessageDialog(null, "형식에 맞지 않습니다.", "오류", JOptionPane.ERROR_MESSAGE);
+						return;
+					}
+				}
+			}
+			
+
+		}
+		table.setModel(df);
+   }
+
+
+private void deleteRecord() {
+	
+   }
 	   
    private void updateTable() {
 		String s = null;

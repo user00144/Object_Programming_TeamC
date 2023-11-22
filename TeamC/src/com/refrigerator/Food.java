@@ -2,6 +2,7 @@ package com.refrigerator;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
+import java.util.Vector;
 
 import facade.DataEngineImpl;
 import facade.UIData;
@@ -72,15 +73,16 @@ public class Food implements Manageable,UIData{
     	}
     	return false;
     }
-	@Override
-	public void set(Object[] uitexts) {
-		// TODO Auto-generated method stub
-		
-	}
+
 	@Override
 	public String[] getUiTexts() {
 		String[] str = {fdname, type, num+"",exdate+""};
 		return str;
+	}
+	@Override
+	public void set(Object[] uitexts) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	
