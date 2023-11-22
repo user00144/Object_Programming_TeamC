@@ -79,10 +79,7 @@ public class Recipe implements Manageable,UIData{
 	
 	@Override
 	public boolean matches(String kwd) {
-		if(kwd.equals("")) {
-			return true;
-		}
-		if(kwd.equals(name)) {
+		if(name.contains(kwd)) {
 			return true;
 		}
 		if(kwd.contentEquals(cookName)) {
@@ -131,7 +128,7 @@ public class Recipe implements Manageable,UIData{
 	}
 	
 	public Object[] getImgContent() {
-		Object[] temp = {img, name,cookName};
+		Object[] temp = {img, name, cookName};
 		return temp;
 	}
 

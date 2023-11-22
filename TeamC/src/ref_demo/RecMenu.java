@@ -43,6 +43,7 @@ public class RecMenu {
 	JTextField txt_findrecipe;
 	JButton btn_findrecipe;
 	Refrigerator curRf;
+	DefaultTableModel df;
 	
 	public RecMenu(Refrigerator rf) {
 		this.curRf = rf;
@@ -160,10 +161,10 @@ public class RecMenu {
 				updateTable();
 				break;
 			case "바로 만들 수 있는 레시피":
-				new RecDialog(s);
+				new RecDialog(s, curRf);
 				break;
 			case "레시피 추천 보기":
-				new RecDialog(s);
+				new RecDialog(s, curRf);
 				break;
 			case "레시피 상세보기":
 				if(selectedRc != null) {
@@ -180,21 +181,16 @@ public class RecMenu {
 	
 	private void updateTable() {
 		String s = null;
-		try {
-			s = txt_findrecipe.getText();
-		}
-		catch(NullPointerException e){
-			s = null;
-		}
+		s = txt_findrecipe.getText();
 		
-		DefaultTableModel df = null;
+		df = null;
 		
 		df = new DefaultTableModel(null,RecMgr.getInstance().headers) {
 			public boolean isCellEditable(int row, int column) {
 				return false;
 			}
 		};
-		if(s==null) {
+		if(s.contentEquals("")) {
 			for(Recipe r : RecMgr.getInstance().mList) {
 				df.addRow(r.getImgContent());
 			}

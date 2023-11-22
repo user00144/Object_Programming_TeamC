@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class Refrigerator implements Manageable,UIData{
 	
 	public Manager<Food> foodMgr = new Manager<>();
-	ArrayList<String> userinfo = new ArrayList<>();
+	public ArrayList<String> userinfo = new ArrayList<>();
 	Date time;
 	SimpleDateFormat simpletime;
 	public int refcode;
