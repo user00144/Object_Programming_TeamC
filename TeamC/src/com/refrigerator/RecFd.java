@@ -21,7 +21,11 @@ public class RecFd implements Manageable{
 		num = scan.nextInt();
 	}
 
-
+	@Override
+	public String toString() {
+		return type+" "+num;
+	}
+	
 	@Override
 	public boolean matches(String kwd) {
 		return false;

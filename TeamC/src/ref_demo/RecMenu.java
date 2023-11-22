@@ -13,8 +13,10 @@ import javax.swing.table.DefaultTableModel;
 
 import com.refrigerator.Food;
 import com.refrigerator.FoodMgr;
+import com.refrigerator.Management;
 import com.refrigerator.RecMgr;
 import com.refrigerator.Recipe;
+import com.refrigerator.RefMgr;
 import com.refrigerator.Refrigerator;
 
 import javax.swing.JTextField;
@@ -30,6 +32,7 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 public class RecMenu {
 	
@@ -72,8 +75,10 @@ public class RecMenu {
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
+				String kwd = null;
 				int row = table.getSelectedRow();
-				selectedRc = RecMgr.getInstance().mList.get(row);
+				kwd = (String)table.getValueAt(row, 1);
+				selectedRc = RecMgr.getInstance().find(kwd);
 			}
 		});
 		table.setRowHeight(250);
@@ -161,6 +166,9 @@ public class RecMenu {
 				new RecDialog(s);
 				break;
 			case "레시피 상세보기":
+				if(selectedRc != null) {
+					new DetailRec(selectedRc);
+				}
 				break;
 			case "돌아가기":
 				goBack();
@@ -205,5 +213,4 @@ public class RecMenu {
 	private void goBack() {
 		frame.setVisible(false);
 	}
-
 }

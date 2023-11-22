@@ -27,6 +27,7 @@ import javax.swing.ButtonGroup;
 public class reviewmenu {
 	JFrame frame;
 
+
 	public reviewmenu() {
 		createAndShowGUI();
 	}
@@ -224,7 +225,6 @@ public class reviewmenu {
 				String review = textArea.getText();{
 				int score = getSelectScore();
 					
-				Review(review, score);
 				}
 			}
 			
@@ -243,9 +243,6 @@ public class reviewmenu {
 	return 0;
 	}
 	
-	public void Review(String review, int score) {
-		System.out.println("리뷰 : " + review);
-		System.out.println("평점 : " + score);
-	}
+
 	
 }

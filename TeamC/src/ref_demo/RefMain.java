@@ -223,19 +223,27 @@ public class RefMain {
       
    }
    
-   
    private void updateTable() {
       DefaultTableModel df = null;
-      df = new DefaultTableModel(null,FoodMgr.getInstance().headers) {
+      
+      df = new DefaultTableModel(null,FoodMgr.getInstance().headers){
+    	  
          public boolean isCellEditable(int row, int column) {
+        	 
             return false;
+            
          }
       };
+      
       for(Food fd : currentRf.foodMgr.mList) {
+    	  
          df.addRow(fd.getUiTexts());
+         
       }
+      
       table.setModel(df);
    }
+   
     
    private void Detailfd() {
       String[] str = new String[5];
