@@ -262,8 +262,14 @@ public class RefMain {
 	}
 	
    private void foodMgr() {
+	  frame.setVisible(false);
 	  FoodMgrMenu fd = new FoodMgrMenu(currentRf);
-	  updateTable();
+   }
+   
+   public void foodMgrExit(Refrigerator currentRf) {
+	   this.currentRf = currentRf;
+	   createAndShowGUI();
+	   updateTable();
    }
    
    private void showRecipe() {

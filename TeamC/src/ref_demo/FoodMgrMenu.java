@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -25,7 +27,7 @@ import javax.swing.table.DefaultTableModel;
 import com.refrigerator.Refrigerator;
 
 public class FoodMgrMenu {
-	JDialog frame;
+	JFrame frame;
 	Refrigerator curRf;
 	public FoodMgrMenu(Refrigerator rf) {
 		this.curRf = rf;
@@ -33,11 +35,11 @@ public class FoodMgrMenu {
 	}
 	
 	void createAndShowGUI() {
-		frame = new JDialog();
+		frame = new JFrame();
 		frame.setTitle("식료품 관리");
 		frame.setBounds(100, 100, 942, 724);
-		//frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); -> 프로그램 강제 종료됨
 		addComponentsToPane(frame.getContentPane());
+		frame.addWindowListener(new WindowClosingEvent());
 		frame.pack();
 		frame.setVisible(true);
 		
@@ -133,6 +135,14 @@ public class FoodMgrMenu {
 		panel.add(lblNewLabel);
 		lblNewLabel.setPreferredSize(new Dimension(800,150));
 		
+	}
+	
+	class WindowClosingEvent extends WindowAdapter{
+		public void windowClosing(WindowEvent e) {
+			JFrame frame = (JFrame)e.getWindow();
+			frame.setVisible(false);
+			RefMain.getInstance().foodMgrExit(curRf);
+		}
 	}
 	
 }
