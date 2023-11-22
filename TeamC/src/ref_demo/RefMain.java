@@ -178,7 +178,7 @@ public class RefMain {
          
          switch (source.getText()) {
          case "상세보기":Detailfd();  break;
-         case "식료품 관리":foodMgrExit(); break;
+         case "식료품 관리":foodMgr(); break;
          case "레시피 보기":showRecipe(); break;
          case "로그아웃" :logout(); break;
          default : break;
@@ -257,15 +257,13 @@ public class RefMain {
 			rmain = new RefMain();
 		return rmain;
 	}
-	public final JFrame getframe() {
-		return frame = new JFrame(); // frame 값이 null이면 오류가 뜨기 때문에 객체 생성을 해주었습니다.
+	public JFrame getframe() {
+		return frame;
 	}
 	
-   private void foodMgrExit() {
-	  new FoodMgrMenu();
+   private void foodMgr() {
+	  FoodMgrMenu fd = new FoodMgrMenu(currentRf);
 	  updateTable();
-      frame.setVisible(true);
-      RefMain.getInstance().getframe().setVisible(true);
    }
    
    private void showRecipe() {

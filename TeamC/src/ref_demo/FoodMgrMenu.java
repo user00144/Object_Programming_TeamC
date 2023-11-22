@@ -19,16 +19,22 @@ import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.table.DefaultTableModel;
 
+import com.refrigerator.Refrigerator;
+
 public class FoodMgrMenu {
-	JFrame frame;
-	public FoodMgrMenu() {
+	JDialog frame;
+	Refrigerator curRf;
+	public FoodMgrMenu(Refrigerator rf) {
+		this.curRf = rf;
 		createAndShowGUI();
 	}
 	
 	void createAndShowGUI() {
-		frame = new JFrame("식료품 관리");
+		frame = new JDialog();
+		frame.setTitle("식료품 관리");
 		frame.setBounds(100, 100, 942, 724);
 		//frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); -> 프로그램 강제 종료됨
 		addComponentsToPane(frame.getContentPane());
