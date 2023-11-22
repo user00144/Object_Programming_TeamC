@@ -79,7 +79,10 @@ public class Recipe implements Manageable,UIData{
 	
 	@Override
 	public boolean matches(String kwd) {
-		if(kwd.contentEquals(name)) {
+		if(kwd.equals("")) {
+			return true;
+		}
+		if(kwd.equals(name)) {
 			return true;
 		}
 		if(kwd.contentEquals(cookName)) {
@@ -100,8 +103,31 @@ public class Recipe implements Manageable,UIData{
 
 	@Override
 	public String[] getUiTexts() {
-		// TODO Auto-generated method stub
-		return null;
+		String[] result = new String[2];
+		
+		StringBuffer stbf = new StringBuffer();
+		
+		
+		stbf.append("<HTML> =식재료 목록= <br>");
+		for(RecFd r : recList) {
+			stbf.append(r+"<br>");
+		}
+		stbf.append("</HTML>");
+		result[0] = stbf.toString();
+
+		
+		stbf.delete(0, stbf.length());
+		
+		stbf.append("<HTML> =요리방법= <br>");
+
+		for(String str : recstr) {
+			stbf.append(str+"<br>");
+		}
+		stbf.append("</HTML>");
+
+		result[1] = stbf.toString();
+
+		return result;
 	}
 	
 	public Object[] getImgContent() {

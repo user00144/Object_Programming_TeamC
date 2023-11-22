@@ -33,6 +33,6 @@ public class FoodMgr extends DataEngineImpl<Food> {
 
 
 	}};
-	public String[] headers = {"식료품명", "타입", "중량","유통기한"};
+	public String[] headers = {"이름", "타입", "중량", "유통기한"};
 
 }

@@ -243,7 +243,7 @@ public class RefMain {
       
       table.setModel(df);
    }
-   
+
     
    private void Detailfd() {
       String[] str = new String[5];

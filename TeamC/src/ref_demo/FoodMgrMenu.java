@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -24,11 +26,19 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.table.DefaultTableModel;
 
+import com.refrigerator.Food;
+import com.refrigerator.FoodMgr;
+import com.refrigerator.RecMgr;
+import com.refrigerator.Recipe;
 import com.refrigerator.Refrigerator;
+
+import ref_demo.RecMenu.btnRecEvent;
 
 public class FoodMgrMenu {
 	JFrame frame;
 	Refrigerator curRf;
+	JTextField textField;
+	JTable table;
 	public FoodMgrMenu(Refrigerator rf) {
 		this.curRf = rf;
 		createAndShowGUI();
@@ -44,9 +54,8 @@ public class FoodMgrMenu {
 		frame.setVisible(true);
 		
 	}
-	static void addComponentsToPane(Container pane) {
-		JTextField textField;
-		JTable table;
+	void addComponentsToPane(Container pane) {
+
 		JScrollPane scrollPane = new JScrollPane();
 		JPanel panel_2 = new JPanel();
 		pane.setLayout(new BoxLayout(pane, BoxLayout.Y_AXIS));
@@ -58,29 +67,20 @@ public class FoodMgrMenu {
 		panel_2.setPreferredSize(new Dimension(800,340));
 		scrollPane.setPreferredSize(new Dimension(800,340));
 		table = new JTable();
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-				{"매일우유", "우유", 100, "20231106"},
-				{"소라빵", "소라빵", 150, "20231105"},
-				{"해찬들된장", "된장", 1000, "20241111"},
-				{"고추장", "고추장", 1500, "20241212"},
-				{"삼양라면", "라면", 500, "20261111"},
-				{"깻잎", "깻잎", 200, "20231201"},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-			},
-			new String[] {
-				"이름", "타입", "중량", "유통기한"
+		
+		DefaultTableModel df = null;
+		
+		df = new DefaultTableModel(null,FoodMgr.getInstance().headers) {
+			public boolean isCellEditable(int row, int column) {
+				return false;
 			}
-		));
+			
+		};
+		for(Food f : curRf.foodMgr.mList) {
+			df.addRow(f.getUiTexts());
+		}
+		
+		table.setModel(df);
 		table.setRowHeight(30);
 		scrollPane.setViewportView(table);
 		
@@ -101,6 +101,8 @@ public class FoodMgrMenu {
 		JButton btnNewButton_1 = new JButton("삭제");
 		
 		JButton btnNewButton_2 = new JButton("검색");
+		btnNewButton_2.addActionListener(new BtnEventListener());
+		
 		GroupLayout gl_panel_3 = new GroupLayout(panel_3);
 		gl_panel_3.setHorizontalGroup(
 			gl_panel_3.createParallelGroup(Alignment.LEADING)
@@ -135,6 +137,51 @@ public class FoodMgrMenu {
 		panel.add(lblNewLabel);
 		lblNewLabel.setPreferredSize(new Dimension(800,150));
 		
+	}
+	
+   class BtnEventListener implements ActionListener{
+
+	      @Override
+	      public void actionPerformed(ActionEvent e) {
+	         JButton source = (JButton)e.getSource();
+	         switch (source.getText()) {
+	         case "추가": break;
+	         case "삭제": break;
+	         case "검색": updateTable();break;
+	         default : break;
+	         }
+	      }
+	   }
+	   
+   private void updateTable() {
+		String s = null;
+		try {
+			s = textField.getText();
+		}
+		catch(NullPointerException e){
+			s = null;
+		}
+		
+		DefaultTableModel df = null;
+		
+		df = new DefaultTableModel(null,FoodMgr.getInstance().headers) {
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		};
+		
+		if(s==null) {
+			for(Food f : curRf.foodMgr.mList) {
+				df.addRow(f.getUiTexts());
+			}
+		}
+		else {
+			for(Food f : curRf.foodMgr.mList) {
+				if(f.matches(s))
+					df.addRow(f.getUiTexts());
+			}
+		}
+		table.setModel(df);
 	}
 	
 	class WindowClosingEvent extends WindowAdapter{

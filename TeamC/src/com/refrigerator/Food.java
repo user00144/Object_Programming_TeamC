@@ -50,9 +50,15 @@ public class Food implements Manageable,UIData{
 	
 	@Override
 	public boolean matches(String kwd) {
-		if(fdname.contains(kwd))
+		if(kwd.equals(""))
+			return true;
+		if(kwd.equals(fdname))
 			return true;
 		if(kwd.equals(type))
+			return true;
+		if(kwd.equals(""+num))
+			return true;
+		if(kwd.equals(""+exdate))
 			return true;
 		return false;
 	}
@@ -76,5 +82,6 @@ public class Food implements Manageable,UIData{
 		String[] str = {fdname, type, num+"",exdate+""};
 		return str;
 	}
+	
 	
 }
