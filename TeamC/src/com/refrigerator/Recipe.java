@@ -103,6 +103,11 @@ public class Recipe implements Manageable,UIData{
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	public Object[] getImgContent() {
+		Object[] temp = {img, name,cookName};
+		return temp;
+	}
 
 
 }

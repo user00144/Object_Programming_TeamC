@@ -24,7 +24,6 @@ public class RecDialog {
 	private void createAndShowGUI(String s) {
 		frame = new JFrame(s);
 		frame.setBounds(100, 100, 412, 510);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		addComponentsToPane(frame.getContentPane());
 		frame.pack();
 		frame.setVisible(true);

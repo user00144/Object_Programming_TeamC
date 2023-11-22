@@ -15,6 +15,7 @@ import com.refrigerator.Food;
 import com.refrigerator.FoodMgr;
 import com.refrigerator.RecMgr;
 import com.refrigerator.Recipe;
+import com.refrigerator.Refrigerator;
 
 import javax.swing.JTextField;
 import java.awt.GridBagConstraints;
@@ -38,8 +39,10 @@ public class RecMenu {
 	JTable table;
 	JTextField txt_findrecipe;
 	JButton btn_findrecipe;
+	Refrigerator curRf;
 	
-	public RecMenu() {
+	public RecMenu(Refrigerator rf) {
+		this.curRf = rf;
 		createAndShowGUI();
 		updateTable();
 	}
@@ -47,7 +50,6 @@ public class RecMenu {
 	private void createAndShowGUI() {
 		frame = new JFrame("레시피 관리");
 		frame.setBounds(100, 100, 859, 654);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		addComponentsToPane(frame.getContentPane());
 		frame.pack();
 		frame.setVisible(true);
@@ -60,7 +62,13 @@ public class RecMenu {
 		pane.setLayout(new GridLayout(0, 2, 0, 0));
 		pane.add(panel);
 		pane.add(scrollPane);
-		table = new JTable();
+		table = new JTable(){
+            
+            @Override
+            public Class<?> getColumnClass(int column)  {
+                 return getValueAt(0,  column).getClass();
+            }};
+            
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
@@ -68,6 +76,7 @@ public class RecMenu {
 				selectedRc = RecMgr.getInstance().mList.get(row);
 			}
 		});
+		table.setRowHeight(250);
 		scrollPane.setViewportView(table);
 		GridBagLayout gbl_panel = new GridBagLayout();
 		gbl_panel.columnWidths = new int[] {34, 281, 60, 30};
@@ -169,7 +178,9 @@ public class RecMenu {
 		catch(NullPointerException e){
 			s = null;
 		}
+		
 		DefaultTableModel df = null;
+		
 		df = new DefaultTableModel(null,RecMgr.getInstance().headers) {
 			public boolean isCellEditable(int row, int column) {
 				return false;
@@ -177,16 +188,18 @@ public class RecMenu {
 		};
 		if(s==null) {
 			for(Recipe r : RecMgr.getInstance().mList) {
-				df.addRow(r.getUiTexts());
+				df.addRow(r.getImgContent());
 			}
 		}
 		else {
 			for(Recipe r : RecMgr.getInstance().mList) {
 				if(r.matches(s))
-					df.addRow(r.getUiTexts());
+					df.addRow(r.getImgContent());
 			}
 		}
+		
 		table.setModel(df);
+		table.getColumnModel().getColumn(0).setPreferredWidth(200);
 	}
 	
 	private void goBack() {

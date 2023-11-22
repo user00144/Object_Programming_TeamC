@@ -246,9 +246,9 @@ public class RefMain {
             i++;
          }
          str[4] = FoodMgr.getInstance().imagemap.get(Selectedfd.type);
+         DetailFood dtf = new DetailFood(str);
       }
       
-      DetailFood dtf = new DetailFood(str);
    }
    
    private static RefMain rmain = null;
@@ -273,7 +273,7 @@ public class RefMain {
    }
    
    private void showRecipe() {
-	   
+	   new RecMenu(currentRf);
    }
    
    
