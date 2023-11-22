@@ -225,17 +225,19 @@ public class RefMain {
    
    
    private void updateTable() {
-      DefaultTableModel df = null;
-      df = new DefaultTableModel(null,FoodMgr.getInstance().headers) {
-         public boolean isCellEditable(int row, int column) {
-            return false;
-         }
-      };
-      for(Food fd : currentRf.foodMgr.mList) {
-         df.addRow(fd.getUiTexts());
-      }
-      table.setModel(df);
-   }
+	DefaultTableModel df = null;
+	
+	df = new DefaultTableModel(null,FoodMgr.getInstance().headers) {
+		public boolean isCellEditable(int row, int column) {
+			return false;
+		}
+		
+	};
+	for(Food f : currentRf.foodMgr.mList) {
+		df.addRow(f.getImgContent());
+	}
+	table.setModel(df);
+	}
     
    private void Detailfd() {
       String[] str = new String[5];
