@@ -40,19 +40,19 @@ public class FoodMgrMenu {
 	IDataEngine<?> dataMgr;
 	public FoodMgrMenu(Refrigerator rf) {
 		this.curRf = rf;
-		createAndShowGUI();
+		//createAndShowGUI();
 	}
 	
-	void createAndShowGUI() {
-		frame = new JFrame();
-		frame.setTitle("식료품 관리");
-		frame.setBounds(100, 100, 942, 724);
-		addComponentsToPane(frame.getContentPane());
-		frame.addWindowListener(new WindowClosingEvent());
-		frame.pack();
-		frame.setVisible(true);
-		
-	}
+//	void createAndShowGUI() {
+//		frame = new JFrame();
+//		frame.setTitle("식료품 관리");
+//		frame.setBounds(100, 100, 942, 724);
+//		addComponentsToPane(frame.getContentPane());
+//		frame.addWindowListener(new WindowClosingEvent());
+//		frame.pack();
+//		frame.setVisible(true);
+//
+//	}
 	void addComponentsToPane(Container pane) {
 
 		JScrollPane scrollPane = new JScrollPane();
@@ -256,12 +256,12 @@ private void deleteRecord() {
 		table.setModel(df);
 	}
 	
-	class WindowClosingEvent extends WindowAdapter{
-		public void windowClosing(WindowEvent e) {
-			JFrame frame = (JFrame)e.getWindow();
-			frame.setVisible(false);
-			RefMain.getInstance().foodMgrExit(curRf);
-		}
-	}
+//	class WindowClosingEvent extends WindowAdapter{
+//		public void windowClosing(WindowEvent e) {
+//			JFrame frame = (JFrame)e.getWindow();
+//			frame.setVisible(false);
+//			RefMain.getInstance().foodMgrExit(curRf);
+//		}
+//	}
 	
 }

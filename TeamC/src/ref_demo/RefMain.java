@@ -1,17 +1,8 @@
 package ref_demo;
 
-import javax.swing.JFrame;
-import javax.swing.GroupLayout;
+import javax.swing.*;
 import javax.swing.GroupLayout.Alignment;
-import javax.swing.ImageIcon;
-import javax.swing.JTable;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.WindowConstants;
 import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.JScrollPane;
-import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.table.DefaultTableModel;
 
 import com.refrigerator.Food;
@@ -55,8 +46,24 @@ public class RefMain {
       frame = new JFrame("식료품을 부탁해!");
       frame.setBounds(100, 100, 942, 724);
       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+      JTabbedPane jtab = new JTabbedPane();
+      FoodMgrMenu fmm = new FoodMgrMenu(currentRf);
+      RecMenu rm = new RecMenu(currentRf);
 
-      addComponentsToPane(frame.getContentPane());
+      JPanel jtab_panel = new JPanel();
+      JPanel fmm_panel = new JPanel();
+      JPanel rm_panel = new JPanel();
+
+      addComponentsToPane(jtab_panel);
+      jtab.add("메인화면", jtab_panel);
+
+      fmm.addComponentsToPane(fmm_panel);
+      jtab.add("식료품 관리", fmm_panel);
+
+      rm.addComponentsToPane(rm_panel);
+      jtab.add("레시피 관리", rm_panel);
+
+      frame.getContentPane().add(jtab);
       frame.pack();
       frame.setVisible(true);
 
@@ -71,17 +78,17 @@ public class RefMain {
       
       JButton fd_detailview = new JButton("상세보기");
       
-      JButton fd_menu = new JButton("식료품 관리");
-      
-      JButton rec_menu = new JButton("레시피 보기");
+//      JButton fd_menu = new JButton("식료품 관리");
+//
+//      JButton rec_menu = new JButton("레시피 보기");
       
       JButton logout = new JButton("로그아웃");
       
       JLabel lblNewLabel = new JLabel("냉장고 번호: ");
       
       fd_detailview.addActionListener(new BtnEventListener());
-      fd_menu.addActionListener(new BtnEventListener());
-      rec_menu.addActionListener(new BtnEventListener());
+//      fd_menu.addActionListener(new BtnEventListener());
+//      rec_menu.addActionListener(new BtnEventListener());
       logout.addActionListener(new BtnEventListener());
 
       
@@ -126,12 +133,11 @@ public class RefMain {
                .addGap(119)
                .addComponent(fd_detailview, GroupLayout.PREFERRED_SIZE, 88, GroupLayout.PREFERRED_SIZE)
                .addGap(18)
-               .addComponent(fd_menu)
-               .addGap(18)
-               .addComponent(rec_menu)
-               .addGap(18)
-               .addComponent(logout)
-               .addGap(30))
+//               .addComponent(fd_menu)
+//               .addGap(18)
+//               .addComponent(rec_menu)
+//               .addGap(18)
+               .addComponent(logout))
       );
       gl_panel_1.setVerticalGroup(
          gl_panel_1.createParallelGroup(Alignment.LEADING)
@@ -140,9 +146,9 @@ public class RefMain {
                .addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
                   .addComponent(logout, GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
                   .addComponent(fd_detailview, GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
-                  .addComponent(fd_menu, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
-                  .addComponent(rec_menu, GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE))
-               .addContainerGap())
+//                  .addComponent(fd_menu, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
+                  /*.addComponent(rec_menu, GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)*/)
+               /*.addContainerGap()*/)
       );
       panel_1.setLayout(gl_panel_1);
       GroupLayout gl_panel = new GroupLayout(panel);
@@ -178,8 +184,8 @@ public class RefMain {
          
          switch (source.getText()) {
          case "상세보기":Detailfd();  break;
-         case "식료품 관리":foodMgr(); break;
-         case "레시피 보기":showRecipe(); break;
+//         case "식료품 관리":foodMgr(); break;
+//         case "레시피 보기":showRecipe(); break;
          case "로그아웃" :logout(); break;
          default : break;
          }
@@ -269,22 +275,21 @@ public class RefMain {
 		return frame;
 	}
 	
-   private void foodMgr() {
-	  frame.setVisible(false);
-	  FoodMgrMenu fd = new FoodMgrMenu(currentRf);
-   }
-   
-   public void foodMgrExit(Refrigerator currentRf) {
-	   this.currentRf = currentRf;
-	   createAndShowGUI();
-	   updateTable();
-   }
-   
-   private void showRecipe() {
-	   new RecMenu(currentRf);
-   }
-   
-   
+//   private void foodMgr() {
+//	  frame.setVisible(false);
+//	  FoodMgrMenu fd = new FoodMgrMenu(currentRf);
+//   }
+//
+//   public void foodMgrExit(Refrigerator currentRf) {
+//	   this.currentRf = currentRf;
+//	   createAndShowGUI();
+//	   updateTable();
+//   }
+//
+//   private void showRecipe() {
+//	   new RecMenu(currentRf);
+//   }
+
    private void logout() {
       currentRf = null;
       frame.setVisible(false);

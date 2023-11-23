@@ -47,8 +47,8 @@ public class RecMenu {
 	
 	public RecMenu(Refrigerator rf) {
 		this.curRf = rf;
-		createAndShowGUI();
-		updateTable();
+		//createAndShowGUI();
+		//updateTable();
 	}
 	
 	private void createAndShowGUI() {
@@ -60,7 +60,7 @@ public class RecMenu {
 	}
 	
 
-	private void addComponentsToPane(Container pane) {
+	void addComponentsToPane(Container pane) {
 		JPanel panel = new JPanel();
 		JScrollPane scrollPane = new JScrollPane();
 		pane.setLayout(new GridLayout(0, 2, 0, 0));
@@ -148,6 +148,7 @@ public class RecMenu {
 		gbc_btnNewButton_2.gridy = 9;
 		panel.add(btn_goback, gbc_btnNewButton_2);
 
+		updateTable();
 	}
 	
 	class btnRecEvent implements ActionListener {
