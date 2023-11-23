@@ -12,11 +12,6 @@ import com.refrigerator.Refrigerator;
 
 
 import java.awt.*;
-import java.awt.Color;
-import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -55,16 +50,17 @@ public class RefMain {
       JPanel rm_panel = new JPanel();
 
       addComponentsToPane(jtab_panel);
-      jtab.add("메인화면", jtab_panel);
+      jtab.addTab("메인화면", jtab_panel);
 
       fmm.addComponentsToPane(fmm_panel);
-      jtab.add("식료품 관리", fmm_panel);
+      jtab.addTab("식료품 관리", fmm_panel);
 
       rm.addComponentsToPane(rm_panel);
-      jtab.add("레시피 관리", rm_panel);
-
+      jtab.addTab("레시피 관리", rm_panel);
+      
       frame.getContentPane().add(jtab);
       frame.pack();
+      frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
       frame.setVisible(true);
 
    }
@@ -76,19 +72,22 @@ public class RefMain {
       
       JPanel panel_1 = new JPanel();
       
-      JButton fd_detailview = new JButton("상세보기");
+//      JButton fd_detailview = new JButton("상세보기");
       
 //      JButton fd_menu = new JButton("식료품 관리");
 //
 //      JButton rec_menu = new JButton("레시피 보기");
       
+      JButton user = new JButton("사용자 정보");
+      
       JButton logout = new JButton("로그아웃");
       
       JLabel lblNewLabel = new JLabel("냉장고 번호: ");
       
-      fd_detailview.addActionListener(new BtnEventListener());
+//      fd_detailview.addActionListener(new BtnEventListener());
 //      fd_menu.addActionListener(new BtnEventListener());
 //      rec_menu.addActionListener(new BtnEventListener());
+      user.addActionListener(new BtnEventListener());
       logout.addActionListener(new BtnEventListener());
 
       
@@ -121,23 +120,28 @@ public class RefMain {
                .addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 266, GroupLayout.PREFERRED_SIZE)
                .addContainerGap(80, Short.MAX_VALUE))
       );
-      
       table = new JTable();
-      table.addMouseListener(new MouseEventListener());
-      table.setRowHeight(30);
+//      table.addMouseListener(new MouseEventListener());
+      table.setRowHeight(40);
+      Font font = new Font("굴림", Font.BOLD, 18);
+		table.setFont(font);
       scrollPane.setViewportView(table);
+      scrollPane.setPreferredSize(new Dimension(800, Toolkit.getDefaultToolkit().getScreenSize().height));
+
+      
+      
       GroupLayout gl_panel_1 = new GroupLayout(panel_1);
       gl_panel_1.setHorizontalGroup(
          gl_panel_1.createParallelGroup(Alignment.LEADING)
             .addGroup(gl_panel_1.createSequentialGroup()
-               .addGap(119)
-               .addComponent(fd_detailview, GroupLayout.PREFERRED_SIZE, 88, GroupLayout.PREFERRED_SIZE)
-               .addGap(18)
+//               .addComponent(fd_detailview, GroupLayout.PREFERRED_SIZE, 88, GroupLayout.PREFERRED_SIZE)
 //               .addComponent(fd_menu)
 //               .addGap(18)
 //               .addComponent(rec_menu)
 //               .addGap(18)
-               .addComponent(logout))
+               .addComponent(logout)
+               .addGap(40)
+               .addComponent(user))
       );
       gl_panel_1.setVerticalGroup(
          gl_panel_1.createParallelGroup(Alignment.LEADING)
@@ -145,7 +149,9 @@ public class RefMain {
                .addContainerGap()
                .addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
                   .addComponent(logout, GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
-                  .addComponent(fd_detailview, GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
+                  .addGap(40)
+                  .addComponent(user, GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+//                  .addComponent(fd_detailview, GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
 //                  .addComponent(fd_menu, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
                   /*.addComponent(rec_menu, GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)*/)
                /*.addContainerGap()*/)
@@ -183,13 +189,19 @@ public class RefMain {
          JButton source = (JButton)e.getSource();
          
          switch (source.getText()) {
-         case "상세보기":Detailfd();  break;
+//         case "상세보기":Detailfd();  break;
 //         case "식료품 관리":foodMgr(); break;
 //         case "레시피 보기":showRecipe(); break;
          case "로그아웃" :logout(); break;
+         case "사용자 정보" :userInfo(); break;
          default : break;
          }
       }
+
+	private void userInfo() {
+		// TODO Auto-generated method stub
+		
+	}
       
    }
     
@@ -211,8 +223,8 @@ public class RefMain {
       @Override
       public void mouseReleased(MouseEvent e) {
          // TODO Auto-generated method stub
-         int row = table.getSelectedRow();
-         Selectedfd = currentRf.foodMgr.mList.get(row);
+//         int row = table.getSelectedRow();
+//         Selectedfd = currentRf.foodMgr.mList.get(row);
       }
 
       @Override
@@ -251,19 +263,19 @@ public class RefMain {
    }
 
     
-   private void Detailfd() {
-      String[] str = new String[5];
-      if(Selectedfd != null) {
-         int i = 0;
-         for(String s:Selectedfd.getUiTexts()) {
-            str[i] = s;
-            i++;
-         }
-         str[4] = FoodMgr.getInstance().imagemap.get(Selectedfd.type);
-         DetailFood dtf = new DetailFood(str);
-      }
-      
-   }
+//   private void Detailfd() {
+//      String[] str = new String[5];
+//      if(Selectedfd != null) {
+//         int i = 0;
+//         for(String s:Selectedfd.getUiTexts()) {
+//            str[i] = s;
+//            i++;
+//         }
+//         str[4] = FoodMgr.getInstance().imagemap.get(Selectedfd.type);
+//         DetailFood dtf = new DetailFood(str);
+//      }
+//      
+//   }
    
    private static RefMain rmain = null;
 	public static RefMain getInstance() {

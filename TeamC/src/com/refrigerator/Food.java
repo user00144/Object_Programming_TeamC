@@ -10,16 +10,19 @@ import mgr.Manageable;
 
 public class Food implements Manageable,UIData{
 	
-	String fdname;
+	public String fdname;
 	public String type;
-	int num;
-	int exdate;
+	public int num;
+	public int exdate;
 	Date time;
 	SimpleDateFormat simpletime;
 	int curTime;
 	
 	public Food(String name) {
 		fdname = name;
+	}
+	public Food() {
+		// TODO Auto-generated constructor stub
 	}
 	@Override
 	public void print() {
