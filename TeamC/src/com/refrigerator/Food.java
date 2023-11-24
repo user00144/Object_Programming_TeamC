@@ -1,5 +1,6 @@
 package com.refrigerator;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Scanner;
 import java.util.Vector;
@@ -24,6 +25,12 @@ public class Food implements Manageable,UIData{
 	public Food() {
 		// TODO Auto-generated constructor stub
 	}
+    public Food(String fdname, String type, int num, int exdate) {
+        this.fdname = fdname;
+        this.type = type;
+        this.num = num;
+        this.exdate = exdate;
+    }
 	@Override
 	public void print() {
 		// TODO Auto-generated method stub
@@ -86,6 +93,9 @@ public class Food implements Manageable,UIData{
 	public void set(Object[] uitexts) {
 		// TODO Auto-generated method stub
 		
+	}
+	public LocalDate getExpirationDate() {
+		return LocalDate.now();
 	}
 	
 	

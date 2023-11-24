@@ -3,6 +3,9 @@ package mgr;
 import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
+
+import com.refrigerator.Food;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -101,6 +104,7 @@ public class Manager<T extends Manageable> {
 			}
 		}
 	}
+
 	
 	
 }
