@@ -9,6 +9,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+
 import javax.swing.BoxLayout;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -41,11 +44,11 @@ public class FoodMgrMenu {
     Food Selectedfd;
     IDataEngine<?> dataMgr;
     boolean isCheckBoxSelected = false;
+    JRadioButton exdateCheckBox;
     
     public FoodMgrMenu(Refrigerator rf) {
         this.curRf = rf;
     }
-    
     
     public JPanel run(Refrigerator rf) {
         this.curRf = rf;
@@ -104,6 +107,15 @@ public class FoodMgrMenu {
 
         JButton btnNewButton_1 = new JButton("삭제");
         btnNewButton_1.addActionListener(new BtnEventListener());
+        
+        exdateCheckBox = new JRadioButton("유통기한이 지난 식재료 삭제");
+        exdateCheckBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                isCheckBoxSelected = exdateCheckBox.isSelected();
+            }
+        });
+        panel_3.add(exdateCheckBox);
 
         JButton btnNewButton_2 = new JButton("검색");
         btnNewButton_2.addActionListener(new BtnEventListener());
@@ -126,6 +138,8 @@ public class FoodMgrMenu {
                     .addGap(40)
                     .addComponent(fd_detailview, GroupLayout.PREFERRED_SIZE, 103, GroupLayout.PREFERRED_SIZE))
                     .addGap(40)
+                    .addComponent(exdateCheckBox)
+                    .addGap(40)
         );
         gl_panel_3.setVerticalGroup(
             gl_panel_3.createParallelGroup(Alignment.LEADING)
@@ -137,6 +151,8 @@ public class FoodMgrMenu {
                             .addComponent(btnNewButton_1, GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
                             .addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
                             .addComponent(fd_detailview, GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE))))
+                			.addComponent(exdateCheckBox)
+
                 );
         
         panel_3.setLayout(gl_panel_3);
@@ -159,7 +175,11 @@ public class FoodMgrMenu {
                     addRecord();
                     break;
                 case "삭제":
-                	deleteRecord();
+                	if (isCheckBoxSelected) {
+                        deleteExpiredRecords();
+                    } else {
+                        deleteRecord();
+                    }
                     break;
                 case "검색":
                     updateTable();
@@ -282,22 +302,30 @@ public class FoodMgrMenu {
 
     private void deleteRecord() {
         int selectedRow = table.getSelectedRow();
+        
+        if (selectedRow == -1 || (Integer)selectedRow == null) {
+            JOptionPane.showMessageDialog(null, "삭제할 행을 선택하세요.", "오류", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
         String[] str = new String[4];
         Food fd = null;
         str[0] = (String)table.getValueAt(selectedRow,0);
         str[1] = (String)table.getValueAt(selectedRow,1);
         str[2] = (String)table.getValueAt(selectedRow,2);
         str[3] = (String)table.getValueAt(selectedRow,3);
-
-        if (selectedRow == -1) {
+        
+        for(Food m : curRf.foodMgr.mList) {
+            if(m.Allmatches(str)) {
+                fd = m;
+            }
+        }
+        
+        if (fd == null) {
             JOptionPane.showMessageDialog(null, "삭제할 행을 선택하세요.", "오류", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        for(Food m : curRf.foodMgr.mList) {
-        	if(m.Allmatches(str)) {
-        		fd = m;
-        	}
-        }
+
         curRf.foodMgr.mList.remove(fd);
 
         DefaultTableModel df = (DefaultTableModel) table.getModel();
@@ -306,6 +334,26 @@ public class FoodMgrMenu {
         updateTable();
         RefMain.getInstance(curRf).updateTable();
         JOptionPane.showMessageDialog(null, "선택된 행이 삭제되었습니다.", "알림", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    private void deleteExpiredRecords() {
+        int rowCount = table.getRowCount();
+        DefaultTableModel df = (DefaultTableModel) table.getModel();
+
+        for (int i = rowCount - 1; i >= 0; i--) {
+            String exdateStr = (String) table.getValueAt(i, 3);
+            int exdate = Integer.parseInt(exdateStr);
+
+            if (exdate < curRf.foodMgr.mList.get(i).getCurrentTime()) {
+                Food fd = curRf.foodMgr.mList.get(i);
+                curRf.foodMgr.mList.remove(fd);
+                df.removeRow(i);
+            }
+        }
+
+        updateTable();
+        RefMain.getInstance(curRf).updateTable();
+        JOptionPane.showMessageDialog(null, "유통기한이 지난 식재료는 일괄 삭제되었습니다.", "알림", JOptionPane.INFORMATION_MESSAGE);
     }
 
     private void updateTable() {
