@@ -74,6 +74,17 @@ public class Food implements Manageable,UIData{
 		return false;
 	}
 
+	public boolean Allmatches(String[] kwd) {
+		if(kwd.length == 4) {
+			if(kwd[0].equals(fdname)
+					&&kwd[1].equals(type)
+					&&kwd[2].contentEquals(num+"")
+					&&kwd[3].contentEquals(exdate+"")) {
+				return true;
+			}
+		}
+		return false;
+	}
 	
 	//유통기한 확인하는 함수(오늘 날짜값 받아서 확인)
     public boolean caneat() {

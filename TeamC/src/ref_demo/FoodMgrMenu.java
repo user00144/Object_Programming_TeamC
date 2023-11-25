@@ -282,13 +282,23 @@ public class FoodMgrMenu {
 
     private void deleteRecord() {
         int selectedRow = table.getSelectedRow();
+        String[] str = new String[4];
+        Food fd = null;
+        str[0] = (String)table.getValueAt(selectedRow,0);
+        str[1] = (String)table.getValueAt(selectedRow,1);
+        str[2] = (String)table.getValueAt(selectedRow,2);
+        str[3] = (String)table.getValueAt(selectedRow,3);
 
         if (selectedRow == -1) {
             JOptionPane.showMessageDialog(null, "삭제할 행을 선택하세요.", "오류", JOptionPane.ERROR_MESSAGE);
             return;
         }
-
-        curRf.foodMgr.mList.remove(selectedRow);
+        for(Food m : curRf.foodMgr.mList) {
+        	if(m.Allmatches(str)) {
+        		fd = m;
+        	}
+        }
+        curRf.foodMgr.mList.remove(fd);
 
         DefaultTableModel df = (DefaultTableModel) table.getModel();
         df.removeRow(selectedRow);
