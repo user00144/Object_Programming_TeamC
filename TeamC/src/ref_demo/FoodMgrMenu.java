@@ -34,7 +34,7 @@ import facade.IDataEngine;
 
 public class FoodMgrMenu {
 
-    JFrame frame;
+    JPanel frame;
     static Refrigerator curRf;
     JTextField textField;
     JTable table;
@@ -44,7 +44,15 @@ public class FoodMgrMenu {
     
     public FoodMgrMenu(Refrigerator rf) {
         this.curRf = rf;
-        // createAndShowGUI();
+    }
+    
+    
+    public JPanel run(Refrigerator rf) {
+        this.curRf = rf;
+        frame = new JPanel();
+        addComponentsToPane(frame);
+        updateTable();
+ 	      return frame;
     }
 
     void addComponentsToPane(Container pane) {
@@ -264,7 +272,7 @@ public class FoodMgrMenu {
             df.addRow(newFood.getUiTexts());
             updateTable();
             table.setModel(df);
-
+            RefMain.getInstance(curRf).updateTable();
             JOptionPane.showMessageDialog(null, "추가되었습니다.", "알림", JOptionPane.INFORMATION_MESSAGE);
 
         } catch (NumberFormatException e) {
@@ -286,7 +294,7 @@ public class FoodMgrMenu {
         df.removeRow(selectedRow);
 
         updateTable();
-
+        RefMain.getInstance(curRf).updateTable();
         JOptionPane.showMessageDialog(null, "선택된 행이 삭제되었습니다.", "알림", JOptionPane.INFORMATION_MESSAGE);
     }
 
@@ -335,9 +343,9 @@ public class FoodMgrMenu {
 
     private static FoodMgrMenu fmm = null;
 
-    public static FoodMgrMenu getInstance() {
+    public static FoodMgrMenu getInstance(Refrigerator rf) {
         if (fmm == null)
-            fmm = new FoodMgrMenu(curRf);
+            fmm = new FoodMgrMenu(rf);
         return fmm;
     }
 

@@ -36,7 +36,7 @@ import java.awt.event.MouseListener;
 
 public class RecMenu {
 	
-	JFrame frame;
+	JPanel frame;
 	DefaultTableModel data;
 	Recipe selectedRc;
 	JTable table;
@@ -45,12 +45,27 @@ public class RecMenu {
 	Refrigerator curRf;
 	DefaultTableModel df;
 	
+	   private static RecMenu engine = null;
+		public static RecMenu getInstance(Refrigerator ref) {
+			if (engine == null)
+				engine = new RecMenu(ref);
+			return engine;
+		}
+	
+	
 	public RecMenu(Refrigerator rf) {
 		this.curRf = rf;
-		//createAndShowGUI();
-		//updateTable();
 	}
 	
+
+    public JPanel run(Refrigerator rf) {
+        this.curRf = rf;
+        frame = new JPanel();
+        addComponentsToPane(frame);
+        updateTable();
+ 	      return frame;
+    }
+	/*
 	private void createAndShowGUI() {
 		frame = new JFrame("레시피 관리");
 		frame.setBounds(100, 100, 859, 654);
@@ -58,7 +73,7 @@ public class RecMenu {
 		frame.pack();
 		frame.setVisible(true);
 	}
-	
+	*/
 
 	void addComponentsToPane(Container pane) {
 		JPanel panel = new JPanel();
@@ -210,4 +225,6 @@ public class RecMenu {
 	private void goBack() {
 		frame.setVisible(false);
 	}
+	
+	
 }

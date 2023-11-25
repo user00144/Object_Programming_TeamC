@@ -22,40 +22,41 @@ import java.util.Map;
 public class RefMain { 
 
    Refrigerator currentRf;
-   JFrame frame;
+   JPanel frame;
    
    Food Selectedfd;
    JTable table;
                                                                          
    RefMain(Refrigerator rf){ 
-      this.currentRf = rf;
-      createAndShowGUI();
-      updateTable();
+	      run(rf);
    }
    
-   public RefMain() {
-	// TODO Auto-generated constructor stub
-}
-
+   public JPanel run(Refrigerator rf) {
+	      this.currentRf = rf;
+	      frame = new JPanel();
+	      addComponentsToPane(frame);
+	      updateTable();
+	      return frame;
+   }
+   
+/*
    void createAndShowGUI() {
       frame = new JFrame("식료품을 부탁해!");
       frame.setBounds(100, 100, 942, 724);
       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       JTabbedPane jtab = new JTabbedPane();
-      FoodMgrMenu fmm = new FoodMgrMenu(currentRf);
-      RecMenu rm = new RecMenu(currentRf);
 
       JPanel jtab_panel = new JPanel();
       JPanel fmm_panel = new JPanel();
       JPanel rm_panel = new JPanel();
 
-      addComponentsToPane(jtab_panel);
+      RefMain.getInstance(currentRf).addComponentsToPane(jtab_panel);
       jtab.addTab("메인화면", jtab_panel);
 
-      fmm.addComponentsToPane(fmm_panel);
+      FoodMgrMenu.getInstance(currentRf).addComponentsToPane(fmm_panel);
       jtab.addTab("식료품 관리", fmm_panel);
 
-      rm.addComponentsToPane(rm_panel);
+      RecMenu.getInstance(currentRf).addComponentsToPane(rm_panel);
       jtab.addTab("레시피 관리", rm_panel);
       
       frame.getContentPane().add(jtab);
@@ -64,8 +65,8 @@ public class RefMain {
       frame.setVisible(true);
 
    }
-   
-   private void addComponentsToPane(Container pane) {
+  */ 
+   public void addComponentsToPane(Container pane) {
       JLabel tf_refcode;
 
       JPanel panel = new JPanel();
@@ -179,6 +180,7 @@ public class RefMain {
       
       panel.setLayout(gl_panel);
       pane.setLayout(groupLayout);
+      
    }
    
    
@@ -241,7 +243,7 @@ public class RefMain {
       
    }
    
-   private void updateTable() {
+   public void updateTable() {
       DefaultTableModel df = null;
       
       df = new DefaultTableModel(null,FoodMgr.getInstance().headers){
@@ -278,13 +280,10 @@ public class RefMain {
 //   }
    
    private static RefMain rmain = null;
-	public static RefMain getInstance() {
+	public static RefMain getInstance(Refrigerator ref) {
 		if (rmain == null)
-			rmain = new RefMain();
+			rmain = new RefMain(ref);
 		return rmain;
-	}
-	public JFrame getframe() {
-		return frame;
 	}
 	
 //   private void foodMgr() {
@@ -303,8 +302,7 @@ public class RefMain {
 //   }
 
    private void logout() {
-      currentRf = null;
-      frame.setVisible(false);
+      Tab_Control_GUI.getInstance(currentRf).setVisible(false);
       GUIMain.getInstance().getframe().setVisible(true);
    }
    

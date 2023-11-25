@@ -137,7 +137,7 @@ public class GUIMain {
 	public void guilogin() {
 		ref = RefMgr.getInstance().find(textField.getText());
 		if(ref != null) {
-			RefMain refmain = new RefMain(ref);
+			Tab_Control_GUI.getInstance(ref).run(ref);
 			frame.setVisible(false);
 		}else {
 			JOptionPane j = new JOptionPane();
