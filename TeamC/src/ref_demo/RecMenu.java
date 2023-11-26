@@ -62,7 +62,7 @@ public class RecMenu {
         this.curRf = rf;
         frame = new JPanel();
         addComponentsToPane(frame);
-        updateTable();
+        updateTable("");
  	      return frame;
     }
 	/*
@@ -153,17 +153,8 @@ public class RecMenu {
 		gbc_btnNewButton_1_2.gridx = 1;
 		gbc_btnNewButton_1_2.gridy = 7;
 		panel.add(btn_deatilrecipe, gbc_btnNewButton_1_2);
-		
-		JButton btn_goback = new JButton("돌아가기");
-		btn_goback.addActionListener(new btnRecEvent());
-		GridBagConstraints gbc_btnNewButton_2 = new GridBagConstraints();
-		gbc_btnNewButton_2.anchor = GridBagConstraints.NORTHWEST;
-		gbc_btnNewButton_2.insets = new Insets(0, 0, 0, 5);
-		gbc_btnNewButton_2.gridx = 1;
-		gbc_btnNewButton_2.gridy = 9;
-		panel.add(btn_goback, gbc_btnNewButton_2);
 
-		updateTable();
+		updateTable("");
 	}
 	
 	class btnRecEvent implements ActionListener {
@@ -174,28 +165,25 @@ public class RecMenu {
 			String s = source.getText();
 			switch(s) {
 			case "검색":
-				updateTable();
+				updateTable("");
 				break;
 			case "바로 만들 수 있는 레시피":
-				new RecDialog(s, curRf);
+				updateTable(s);
 				break;
 			case "레시피 추천 보기":
-				new RecDialog(s, curRf);
+				updateTable(s);
 				break;
 			case "레시피 상세보기":
 				if(selectedRc != null) {
 					new DetailRec(selectedRc);
 				}
 				break;
-			case "돌아가기":
-				goBack();
-				break;
 			}
 		}
 		
 	}
 	
-	private void updateTable() {
+	private void updateTable(String str) {
 		String s = null;
 		s = txt_findrecipe.getText();
 		
@@ -206,25 +194,38 @@ public class RecMenu {
 				return false;
 			}
 		};
-		if(s.contentEquals("")) {
-			for(Recipe r : RecMgr.getInstance().mList) {
-				df.addRow(r.getImgContent());
+		switch(str) {
+		case "":
+			if(s.contentEquals("")) {
+				for(Recipe r : RecMgr.getInstance().mList) {
+					df.addRow(r.getImgContent());
+				}
 			}
-		}
-		else {
+			else {
+				for(Recipe r : RecMgr.getInstance().mList) {
+					if(r.matches(s))
+						df.addRow(r.getImgContent());
+				}
+			}
+			break;
+		case "바로 만들 수 있는 레시피":
 			for(Recipe r : RecMgr.getInstance().mList) {
-				if(r.matches(s))
+				if(curRf.canmake(r))
 					df.addRow(r.getImgContent());
 			}
+			break;
+		case "레시피 추천 보기":
+			for(String string : curRf.userinfo) {
+				for(Recipe r : RecMgr.getInstance().mList) {
+					if(r.usermatch(string))
+						df.addRow(r.getImgContent());
+				}
+			}
+			break;
 		}
 		
 		table.setModel(df);
 		table.getColumnModel().getColumn(0).setPreferredWidth(200);
 	}
-	
-	private void goBack() {
-		frame.setVisible(false);
-	}
-	
 	
 }

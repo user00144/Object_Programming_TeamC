@@ -131,6 +131,11 @@ public class Recipe implements Manageable,UIData{
 		Object[] temp = {img, name, cookName};
 		return temp;
 	}
+	
+	public Object[] getRecommendContent(String s) {
+		Object[] temp = {img, name, cookName, s};
+		return temp;
+	}
 
 
 }
