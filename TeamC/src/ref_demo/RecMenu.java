@@ -87,7 +87,32 @@ public class RecMenu {
             public Class<?> getColumnClass(int column)  {
                  return getValueAt(0,  column).getClass();
             }};
-            
+        table.addMouseListener(new MouseAdapter() {
+        	public void mouseClicked(MouseEvent e) {
+        		if(e.getClickCount()== 2) {
+        			int row = table.getSelectedRow();
+        			String kwd = (String) table.getValueAt(row,1);
+        			selectedRc = RecMgr.getInstance().find(kwd);
+        			
+        			if(selectedRc != null) {
+        				openReviewMenu(selectedRc);
+        			}
+        		}
+        	}
+
+			private void openReviewMenu(Recipe recipe) {
+				// TODO Auto-generated method stub
+				EventQueue.invokeLater(new Runnable() {
+					public void run() {
+						try {reviewmenu reviewMenu = new reviewmenu();
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+				
+				});
+			}
+        });    
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
