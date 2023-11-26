@@ -10,6 +10,7 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.SwingUtilities;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -36,7 +37,8 @@ public class reviewmenu {
 	JTable table;
 	DefaultTableModel tableModel;
 	ButtonGroup buttonGroup;
-	List<Review> reviewList = new ArrayList<>();
+	ArrayList<Review> rvList = new ArrayList<>();
+	JButton btnNewButton;
 
 	public reviewmenu() {
 		createAndShowGUI();
@@ -45,7 +47,7 @@ public class reviewmenu {
 	private void createAndShowGUI() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 909, 560);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		addComponentsToPane(frame.getContentPane());
 		frame.pack();
 		frame.setVisible(true);
@@ -53,7 +55,7 @@ public class reviewmenu {
 
 	private void addComponentsToPane(Container pane) {
 		JTable table;
-		ButtonGroup buttonGroup = new ButtonGroup();
+		buttonGroup = new ButtonGroup();
 		pane.setLayout(new GridLayout(1, 2, 0, 0));
 
 		JPanel panel = new JPanel();
@@ -82,18 +84,12 @@ public class reviewmenu {
 		gbc_lblNewLabel_1.gridy = 1;
 		panel.add(lblNewLabel_1, gbc_lblNewLabel_1);
 
-		JScrollPane scrollPane = new JScrollPane();
-
 		table = new JTable();
-		table.setModel(new DefaultTableModel(
-				new Object[][] { { null, null }, { null, null }, { null, null }, { null, null }, { null, null },
-						{ null, null }, { null, null }, { null, null }, { null, null }, { null, null }, { null, null },
-						{ null, null }, { null, null }, { null, null }, { null, null }, { null, null }, { null, null },
-						{ null, null }, { null, null }, { null, null }, { null, null }, { null, null }, { null, null },
-						{ null, null }, { null, null }, { null, null }, { null, null }, { null, null }, { null, null },
-						{ null, null }, { null, null }, { null, null }, { null, null }, { null, null }, { null, null },
-						{ null, null }, { null, null }, { null, null }, { null, null }, { null, null }, },
-				new String[] { "\uB9AC\uBDF0", "\uD3C9\uC810" }));
+		tableModel = new DefaultTableModel(new Object[][] {}, 
+				new String[] { "한줄평", "평점" });
+		table.setModel(tableModel);
+		
+		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setViewportView(table);
 		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
 		gbc_scrollPane.fill = GridBagConstraints.BOTH;
@@ -202,102 +198,58 @@ public class reviewmenu {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-
-				String score = getSelectedScore();
 				String reviewText = textArea.getText();
+				int selectedRating = getSelectedRating();
 				
-				int selectedRow = table.getSelectedRow();
-				if(selectedRow != 1) {
-					if(selectedRow < reviewList.size()) {
-					Review review = reviewList.get(selectedRow);
-					review.setReviewText(reviewText);
-					review.setScore(score);
-				} else {
-					Review review = new Review("음식이름", "제작자", reviewText, score);
-
-					reviewList.add(review);
+				Review review = new Review(reviewText, selectedRating);
+				rvList.add(review);
+				
+				if(!reviewText.isEmpty()) {
+					tableModel.addRow(new Object[] {reviewText, selectedRating});
+					
+					textArea.setText("");
 				}
-
 				updateTable();
-				}
-
 			}
 
 		});
 	}
-
-	public void updateTable() {
-		tableModel.setRowCount(0);
-
-		for (Review review : reviewList) {
-			tableModel.addRow(new Object[] { review.getFoodName(), review.getFoodName(), review.getReviewText(),
-					review.getScore() });
-
-		}
-	}
-
-	public String getSelectedScore() {
-		Enumeration<AbstractButton> elements = buttonGroup.getElements();
-		while (elements.hasMoreElements()) {
-			AbstractButton button = elements.nextElement();
-			if (button.isSelected()) {
-				return button.getText();
+	public int getSelectedRating() {
+		Enumeration<AbstractButton> buttons = buttonGroup.getElements();
+		while (buttons.hasMoreElements()) {
+			AbstractButton button = buttons.nextElement();
+			if(button.isSelected()) {
+				return Integer.parseInt(button.getText());
+				
 			}
 		}
-		return null;
-	}
-
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					new reviewmenu();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-		class Review {
-			private String foodName;
-			private String name;
-			private String reviewText;
-			private String score;
-
-			public Review(String foodName, String name, String reviewText, String score) {
-				this.foodName = foodName;
-				this.name = name;
-				this.reviewText = reviewText;
-				this.score = score;
-			}
-
-			public String getFoodName() {
-				return foodName;
-			}
-
-			public String getName() {
-				return name;
-			}
-
-			public String getReviewText() {
-				return reviewText;
-			}
-
-			public String getScore() {
-				return score;
-			}
-			
-			public void setReviewText(String reviewText) {
-				this.reviewText = reviewText;
-			}
-			
-			public void setScore(String score) {
-				this.score = score;
-			}
-		}
-		
-			
-		
+		return 0;
 	}
 	
+	public void updateTable() {
+		// TODO Auto-generated method stub
+		int rowCount = tableModel.getRowCount();
+
+	    for (int i = rowCount; i < rvList.size(); i++) {
+	        Review review = rvList.get(i);
+	        tableModel.addRow(new Object[]{review.getReviewText(), review.getRating()});
+	    }
+	    
+	    tableModel.fireTableDataChanged();
+	    buttonGroup.clearSelection();
+	}
+	
+	public static void main(String[] args) {
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    reviewmenu window = new reviewmenu();
+                    window.frame.setVisible(true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
 
 }
