@@ -18,7 +18,7 @@ public class Review implements Manageable,UIData{
 		recipe.rvList.add(this);
 	}
 	
-	public Review(String string, String string2, String reviewText, String score2) {
+	public Review(String reviewText, int selectedRating) {
 		// TODO Auto-generated constructor stub
 	}
 
@@ -53,12 +53,7 @@ public class Review implements Manageable,UIData{
 		return new String[] {review, ""+score};
 	}
 
-	public Object getFoodName() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public Object getScore() {
+	public Object getRating() {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -67,22 +62,5 @@ public class Review implements Manageable,UIData{
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-	public Object getName() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public void setScore(String score2) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void setReviewText(String reviewText) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
 
 }
