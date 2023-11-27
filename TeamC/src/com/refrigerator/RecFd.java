@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 import mgr.Manageable;
 
-public class RecFd implements Manageable{
+public class RecFd implements Manageable{ //레시피에 필요한 재료의 타입&중량
 	public String type;
 	public int num;
 	

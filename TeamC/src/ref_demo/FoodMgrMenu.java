@@ -393,7 +393,7 @@ public class FoodMgrMenu {
                 str[i] = s;
                 i++;
             }
-            str[4] = FoodMgr.getInstance().imagemap.get(Selectedfd.type);
+            str[4] = FoodMgr.getInstance().imagemap.get(Selectedfd.fdname);
             DetailFood dtf = new DetailFood(str);
         }
 

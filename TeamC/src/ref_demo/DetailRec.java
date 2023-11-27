@@ -129,7 +129,7 @@ public class DetailRec {
 		JLabel lblNewLabel_2 = new JLabel("New label");
 		lblNewLabel_2.setBackground(new Color(255, 255, 255));
 		panel_2.add(lblNewLabel_2);
-		lblNewLabel_2.setFont(new Font("맑은 고딕",Font.PLAIN,20));
+		lblNewLabel_2.setFont(new Font("맑은 고딕",Font.PLAIN,15));
 		lblNewLabel_2.setText(str[1]);
 	}
 	
