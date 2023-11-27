@@ -15,6 +15,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import com.refrigerator.Recipe;
 import com.refrigerator.Review;
 
 import java.awt.GridBagLayout;
@@ -23,6 +24,7 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Enumeration;
 import java.util.List;
 
@@ -37,7 +39,7 @@ public class reviewmenu {
 	JTable table;
 	DefaultTableModel tableModel;
 	ButtonGroup buttonGroup;
-	ArrayList<Review> rvList = new ArrayList<>();
+	ArrayList<Recipe> rvList = new ArrayList<>();
 	JButton btnNewButton;
 
 	public reviewmenu() {
@@ -201,8 +203,8 @@ public class reviewmenu {
 				String reviewText = textArea.getText();
 				int selectedRating = getSelectedRating();
 				
-				Review review = new Review(reviewText, selectedRating);
-				rvList.add(review);
+				Recipe recipe = new Recipe(reviewText, selectedRating);
+				rvList.add(recipe);
 				
 				if(!reviewText.isEmpty()) {
 					tableModel.addRow(new Object[] {reviewText, selectedRating});
@@ -231,7 +233,7 @@ public class reviewmenu {
 		int rowCount = tableModel.getRowCount();
 
 	    for (int i = rowCount; i < rvList.size(); i++) {
-	        Review review = rvList.get(i);
+	        Recipe review = rvList.get(i);
 	        tableModel.addRow(new Object[]{review.getReviewText(), review.getRating()});
 	    }
 	    
@@ -239,17 +241,4 @@ public class reviewmenu {
 	    buttonGroup.clearSelection();
 	}
 	
-	public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    reviewmenu window = new reviewmenu();
-                    window.frame.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
-
 }

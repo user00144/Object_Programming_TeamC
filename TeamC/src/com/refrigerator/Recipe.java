@@ -18,7 +18,14 @@ public class Recipe implements Manageable,UIData{
 	ArrayList<String> userinfo = new ArrayList<>();
 	ArrayList<Review> rvList = new ArrayList<>();
 
-	
+	public Recipe(String reviewText, int selectedRating) {
+		// TODO Auto-generated constructor stub
+	}
+
+	public Recipe() {
+		// TODO Auto-generated constructor stub
+	}
+
 	@Override
 	public void print() {
 		// 요리할 음식과 필요한 식재료 출력
@@ -135,6 +142,16 @@ public class Recipe implements Manageable,UIData{
 	public Object[] getRecommendContent(String s) {
 		Object[] temp = {img, name, cookName, s};
 		return temp;
+	}
+
+	public Object getReviewText() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Object getRating() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 

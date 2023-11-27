@@ -27,7 +27,7 @@ public class Management {
 
 		RecMgr.getInstance().readAll("rec.txt",new Factory<Recipe>() {
 			public Recipe create() {
-				return new Recipe();
+				return new Recipe(null, 0);
 			}
 		});		
 	}
