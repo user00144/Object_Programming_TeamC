@@ -10,13 +10,13 @@ import mgr.Manageable;
 
 public class Recipe implements Manageable,UIData{
 	Scanner tmpscan = new Scanner(System.in);
-	String name;
-	String cookName;
+	public String name;
+	public String cookName;
 	ImageIcon img;
 	ArrayList<String> recstr = new ArrayList<>();
 	ArrayList<RecFd> recList = new ArrayList<>();
 	ArrayList<String> userinfo = new ArrayList<>();
-	ArrayList<Review> rvList = new ArrayList<>();
+	public ArrayList<Review> rvList = new ArrayList<>();
 
 	public Recipe(String reviewText, int selectedRating) {
 		// TODO Auto-generated constructor stub
@@ -144,19 +144,10 @@ public class Recipe implements Manageable,UIData{
 		return temp;
 	}
 
-	public Object getReviewText() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public Object getRating() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	public void addReview(String reviewText, int selectedRating) {
 		// TODO Auto-generated method stub
-		
+		Review rv = new Review(reviewText,selectedRating);
+		rvList.add(rv);
 	}
 
 

@@ -15,6 +15,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import com.refrigerator.Food;
+import com.refrigerator.FoodMgr;
 import com.refrigerator.Recipe;
 import com.refrigerator.Review;
 
@@ -40,9 +42,13 @@ public class reviewmenu {
 	DefaultTableModel tableModel;
 	ButtonGroup buttonGroup;
 	JButton btnNewButton;
+	Recipe curRc;
+    String[] rvheader = {"리뷰", "평점"};
 
-	public reviewmenu() {
+	public reviewmenu(Recipe rc) {
+		this.curRc = rc;
 		createAndShowGUI();
+		updateTable();
 	}
 
 	private void createAndShowGUI() {
@@ -55,7 +61,6 @@ public class reviewmenu {
 	}
 
 	private void addComponentsToPane(Container pane) {
-		JTable table;
 		buttonGroup = new ButtonGroup();
 		pane.setLayout(new GridLayout(1, 2, 0, 0));
 
@@ -69,6 +74,7 @@ public class reviewmenu {
 		panel.setLayout(gbl_panel);
 
 		JLabel lblNewLabel = new JLabel("음식이름");
+		lblNewLabel.setText(curRc.name);
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
 		gbc_lblNewLabel.fill = GridBagConstraints.BOTH;
 		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
@@ -77,6 +83,7 @@ public class reviewmenu {
 		panel.add(lblNewLabel, gbc_lblNewLabel);
 
 		JLabel lblNewLabel_1 = new JLabel("제작자");
+		lblNewLabel_1.setText(curRc.cookName);
 		GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
 		gbc_lblNewLabel_1.anchor = GridBagConstraints.WEST;
 		gbc_lblNewLabel_1.fill = GridBagConstraints.VERTICAL;
@@ -202,15 +209,9 @@ public class reviewmenu {
 				String reviewText = textArea.getText();
 				int selectedRating = getSelectedRating();
 				
-				Recipe recipe = new Recipe();
-				recipe.addReview(reviewText, selectedRating);
+				curRc.addReview(reviewText, selectedRating);
 				
-				if(!reviewText.isEmpty()) {
-					tableModel.addRow
-					(new Object[] {reviewText, selectedRating});
-					
-					textArea.setText("");
-				}
+				updateTable();
 				
 			}
 
@@ -227,7 +228,26 @@ public class reviewmenu {
 		}
 		return 0;
 	}
-	
+	   public void updateTable() {
+		      DefaultTableModel df = null;
+		      
+		      df = new DefaultTableModel(null,rvheader){
+		    	  
+		         public boolean isCellEditable(int row, int column) {
+		        	 
+		            return false;
+		            
+		         }
+		      };
+		      
+		      for(Review rv : curRc.rvList) {
+		    	  
+		         df.addRow(rv.getUiTexts());
+		         
+		      }
+		      table.setModel(df);
+		   }
+
 	
 	
 	

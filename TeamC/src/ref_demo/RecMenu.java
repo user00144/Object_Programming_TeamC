@@ -102,15 +102,12 @@ public class RecMenu {
 
 			private void openReviewMenu(Recipe recipe) {
 				// TODO Auto-generated method stub
-				EventQueue.invokeLater(new Runnable() {
-					public void run() {
-						try {reviewmenu reviewMenu = new reviewmenu();
+						try {reviewmenu reviewMenu = new reviewmenu(recipe);
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
-				}
 				
-				});
+
 			}
         });    
 		table.addMouseListener(new MouseAdapter() {

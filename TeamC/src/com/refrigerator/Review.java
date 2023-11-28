@@ -10,16 +10,11 @@ public class Review implements Manageable,UIData{
 	
 	String review;
 	int score;
-
-	private Recipe recipe;
-	
-	public Review(Recipe recipe) {
-		this.recipe = recipe;
-		recipe.rvList.add(this);
-	}
 	
 	public Review(String reviewText, int selectedRating) {
 		// TODO Auto-generated constructor stub
+		this.review = reviewText;
+		this.score = selectedRating;
 	}
 
 	@Override
