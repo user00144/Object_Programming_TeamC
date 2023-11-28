@@ -53,6 +53,16 @@ public class Review implements Manageable,UIData{
 		return new String[] {review, ""+score};
 	}
 
+	public Object getReviewText() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Object getRating() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	
 
 }

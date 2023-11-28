@@ -154,5 +154,10 @@ public class Recipe implements Manageable,UIData{
 		return null;
 	}
 
+	public void addReview(String reviewText, int selectedRating) {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 }

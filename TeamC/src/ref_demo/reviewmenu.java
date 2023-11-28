@@ -39,7 +39,6 @@ public class reviewmenu {
 	JTable table;
 	DefaultTableModel tableModel;
 	ButtonGroup buttonGroup;
-	ArrayList<Recipe> rvList = new ArrayList<>();
 	JButton btnNewButton;
 
 	public reviewmenu() {
@@ -203,15 +202,16 @@ public class reviewmenu {
 				String reviewText = textArea.getText();
 				int selectedRating = getSelectedRating();
 				
-				Recipe recipe = new Recipe(reviewText, selectedRating);
-				rvList.add(recipe);
+				Recipe recipe = new Recipe();
+				recipe.addReview(reviewText, selectedRating);
 				
 				if(!reviewText.isEmpty()) {
-					tableModel.addRow(new Object[] {reviewText, selectedRating});
+					tableModel.addRow
+					(new Object[] {reviewText, selectedRating});
 					
 					textArea.setText("");
 				}
-				updateTable();
+				
 			}
 
 		});
@@ -228,17 +228,7 @@ public class reviewmenu {
 		return 0;
 	}
 	
-	public void updateTable() {
-		// TODO Auto-generated method stub
-		int rowCount = tableModel.getRowCount();
-
-	    for (int i = rowCount; i < rvList.size(); i++) {
-	        Recipe review = rvList.get(i);
-	        tableModel.addRow(new Object[]{review.getReviewText(), review.getRating()});
-	    }
-	    
-	    tableModel.fireTableDataChanged();
-	    buttonGroup.clearSelection();
-	}
+	
+	
 	
 }
