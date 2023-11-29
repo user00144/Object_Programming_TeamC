@@ -41,56 +41,21 @@ public class RefMain {
 	      return frame;
    }
    
-/*
-   void createAndShowGUI() {
-      frame = new JFrame("식료품을 부탁해!");
-      frame.setBounds(100, 100, 942, 724);
-      frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-      JTabbedPane jtab = new JTabbedPane();
-
-      JPanel jtab_panel = new JPanel();
-      JPanel fmm_panel = new JPanel();
-      JPanel rm_panel = new JPanel();
-
-      RefMain.getInstance(currentRf).addComponentsToPane(jtab_panel);
-      jtab.addTab("메인화면", jtab_panel);
-
-      FoodMgrMenu.getInstance(currentRf).addComponentsToPane(fmm_panel);
-      jtab.addTab("식료품 관리", fmm_panel);
-
-      RecMenu.getInstance(currentRf).addComponentsToPane(rm_panel);
-      jtab.addTab("레시피 관리", rm_panel);
-      
-      frame.getContentPane().add(jtab);
-      frame.pack();
-      frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-      frame.setVisible(true);
-
-   }
-  */ 
    public void addComponentsToPane(Container pane) {
+	   pane.setBackground(Color.WHITE);
       JLabel tf_refcode;
 
       JPanel panel = new JPanel();
       
       JPanel panel_1 = new JPanel();
-      
-//      JButton fd_detailview = new JButton("상세보기");
-      
-//      JButton fd_menu = new JButton("식료품 관리");
-//
-//      JButton rec_menu = new JButton("레시피 보기");
-      
-      JButton user = new JButton("사용자 정보");
+
+      JLabel user = new JLabel("사용자 정보");
       
       JButton logout = new JButton("로그아웃");
       
       JLabel lblNewLabel = new JLabel("냉장고 번호: ");
       
-//      fd_detailview.addActionListener(new BtnEventListener());
-//      fd_menu.addActionListener(new BtnEventListener());
-//      rec_menu.addActionListener(new BtnEventListener());
-      user.addActionListener(new BtnEventListener());
+
       logout.addActionListener(new BtnEventListener());
 
       
@@ -145,7 +110,6 @@ public class RefMain {
       table_1.setRowHeight(250);
       scrollPane_1.setViewportView(table_1);
       table = new JTable();
-//      table.addMouseListener(new MouseEventListener());
       table.setRowHeight(40);
       Font font = new Font("굴림", Font.BOLD, 18);
 		table.setFont(font);
@@ -158,11 +122,6 @@ public class RefMain {
       gl_panel_1.setHorizontalGroup(
          gl_panel_1.createParallelGroup(Alignment.LEADING)
             .addGroup(gl_panel_1.createSequentialGroup()
-//               .addComponent(fd_detailview, GroupLayout.PREFERRED_SIZE, 88, GroupLayout.PREFERRED_SIZE)
-//               .addComponent(fd_menu)
-//               .addGap(18)
-//               .addComponent(rec_menu)
-//               .addGap(18)
                .addComponent(logout)
                .addGap(40)
                .addComponent(user))
@@ -174,13 +133,13 @@ public class RefMain {
                .addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
                   .addComponent(logout, GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
                   .addGap(40)
-                  .addComponent(user, GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
-//                  .addComponent(fd_detailview, GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
-//                  .addComponent(fd_menu, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
-                  /*.addComponent(rec_menu, GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)*/)
-               /*.addContainerGap()*/)
+                  .addComponent(user, GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)))
       );
+      
+      
       panel_1.setLayout(gl_panel_1);
+      
+      
       GroupLayout gl_panel = new GroupLayout(panel);
       gl_panel.setHorizontalGroup(
          gl_panel.createParallelGroup(Alignment.LEADING)
@@ -214,57 +173,14 @@ public class RefMain {
          JButton source = (JButton)e.getSource();
          
          switch (source.getText()) {
-//         case "상세보기":Detailfd();  break;
-//         case "식료품 관리":foodMgr(); break;
-//         case "레시피 보기":showRecipe(); break;
+
          case "로그아웃" :logout(); break;
-         case "사용자 정보" :userInfo(); break;
          default : break;
          }
       }
-
-	private void userInfo() {
-		// TODO Auto-generated method stub
-		
-	}
       
    }
-    
-   class MouseEventListener implements MouseListener{
-
-      @Override
-      public void mouseClicked(MouseEvent e) { 
-         // TODO Auto-generated method stub
-
-
-      }
-
-      @Override
-      public void mousePressed(MouseEvent e) {
-         // TODO Auto-generated method stub
-         
-      }
-
-      @Override
-      public void mouseReleased(MouseEvent e) {
-         // TODO Auto-generated method stub
-//         int row = table.getSelectedRow();
-//         Selectedfd = currentRf.foodMgr.mList.get(row);
-      }
-
-      @Override
-      public void mouseEntered(MouseEvent e) {
-         // TODO Auto-generated method stub
-         
-      }
-
-      @Override
-      public void mouseExited(MouseEvent e) {
-         // TODO Auto-generated method stub
-         
-      }
-      
-   }
+   
    
    public void updateTable() {
       DefaultTableModel df = null;
@@ -287,21 +203,6 @@ public class RefMain {
       table.setModel(df);
    }
 
-    
-//   private void Detailfd() {
-//      String[] str = new String[5];
-//      if(Selectedfd != null) {
-//         int i = 0;
-//         for(String s:Selectedfd.getUiTexts()) {
-//            str[i] = s;
-//            i++;
-//         }
-//         str[4] = FoodMgr.getInstance().imagemap.get(Selectedfd.type);
-//         DetailFood dtf = new DetailFood(str);
-//      }
-//      
-//   }
-   
    private static RefMain rmain = null;
    private JTable table_1;
 	public static RefMain getInstance(Refrigerator ref) {
@@ -309,21 +210,6 @@ public class RefMain {
 			rmain = new RefMain(ref);
 		return rmain;
 	}
-	
-//   private void foodMgr() {
-//	  frame.setVisible(false);
-//	  FoodMgrMenu fd = new FoodMgrMenu(currentRf);
-//   }
-//
-//   public void foodMgrExit(Refrigerator currentRf) {
-//	   this.currentRf = currentRf;
-//	   createAndShowGUI();
-//	   updateTable();
-//   }
-//
-//   private void showRecipe() {
-//	   new RecMenu(currentRf);
-//   }
 
    private void logout() {
       Tab_Control_GUI.getInstance(currentRf).setVisible(false);

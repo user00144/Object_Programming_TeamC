@@ -1,5 +1,6 @@
 package ref_demo;
 
+import java.awt.Color;
 import java.awt.Container;
 import java.awt.EventQueue;
 
@@ -76,6 +77,7 @@ public class RecMenu {
 	*/
 
 	void addComponentsToPane(Container pane) {
+		   pane.setBackground(Color.WHITE);
 		JPanel panel = new JPanel();
 		JScrollPane scrollPane = new JScrollPane();
 		pane.setLayout(new GridLayout(0, 2, 0, 0));

@@ -59,6 +59,7 @@ public class FoodMgrMenu {
     }
 
     void addComponentsToPane(Container pane) {
+ 	   pane.setBackground(Color.WHITE);
 
         JScrollPane scrollPane = new JScrollPane();
 
