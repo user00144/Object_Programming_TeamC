@@ -23,6 +23,9 @@ import java.util.Map;
 
 public class RefMain { 
 
+	Font lblFont = new Font("나눔스퀘어라운드 Light", Font.PLAIN, 15);
+	Font titleFont = new Font("나눔스퀘어라운드 ExtraBold", Font.PLAIN, 17);
+
    Refrigerator currentRf;
    JPanel frame;
    
@@ -50,22 +53,30 @@ public class RefMain {
       JPanel panel_1 = new JPanel();
 
       JLabel user = new JLabel("사용자 정보");
+      user.setFont(lblFont);
+      user.setText(currentRf.getuserInfo());
+      
       
       JButton logout = new JButton("로그아웃");
+      logout.setFont(lblFont);
       
       JLabel lblNewLabel = new JLabel("냉장고 번호: ");
-      
+      lblNewLabel.setFont(titleFont);
 
       logout.addActionListener(new BtnEventListener());
 
       
       tf_refcode = new JLabel();
       tf_refcode.setText(""+currentRf.refcode);
+      tf_refcode.setFont(titleFont);
+
       JScrollPane scrollPane = new JScrollPane();
       
       JLabel recommendation = new JLabel();
-      
+      recommendation.setFont(titleFont);
       JScrollPane scrollPane_1 = new JScrollPane();
+      
+      
       GroupLayout groupLayout = new GroupLayout(pane);
       groupLayout.setHorizontalGroup(
       	groupLayout.createParallelGroup(Alignment.LEADING)
@@ -111,8 +122,8 @@ public class RefMain {
       scrollPane_1.setViewportView(table_1);
       table = new JTable();
       table.setRowHeight(40);
-      Font font = new Font("굴림", Font.BOLD, 18);
-		table.setFont(font);
+		table.setFont(lblFont);
+		table_1.setFont(lblFont);
       scrollPane.setViewportView(table);
       scrollPane.setPreferredSize(new Dimension(800, Toolkit.getDefaultToolkit().getScreenSize().height));
       
@@ -145,8 +156,8 @@ public class RefMain {
          gl_panel.createParallelGroup(Alignment.LEADING)
             .addGroup(gl_panel.createSequentialGroup()
                .addGap(18)
-               .addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE)
-               .addPreferredGap(ComponentPlacement.RELATED)
+               .addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
+               .addGap(15)
                .addComponent(tf_refcode, GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
                .addContainerGap())
       );
@@ -160,6 +171,8 @@ public class RefMain {
                .addContainerGap())
       );
       
+      panel_1.setBackground(Color.white);
+      panel.setBackground(Color.white);
       panel.setLayout(gl_panel);
       pane.setLayout(groupLayout);
       

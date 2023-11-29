@@ -25,7 +25,6 @@ public void delFoods(Scanner scan) {
 		}
 
 
-
 public boolean canmake(Recipe r) {
 	int cnt = 0;
 	boolean flag = false;
@@ -143,6 +142,7 @@ public void searchFoods(Scanner scan) {
 		return false;
 	}
 
+	
 	@Override
 	public void set(Object[] uitexts) {
 		// TODO Auto-generated method stub
@@ -151,9 +151,21 @@ public void searchFoods(Scanner scan) {
 
 	@Override
 	public String[] getUiTexts() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
+	public String getuserInfo() {
+		String result;
+		StringBuffer stbf = new StringBuffer();
+		
+		
+		stbf.append("<HTML>");
+		for(String r : userinfo) {
+			stbf.append("#"+r);
+		}
+		stbf.append("</HTML>");
+		result = stbf.toString();
+		return result;
+	}
 
 }
