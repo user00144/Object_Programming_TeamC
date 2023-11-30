@@ -30,8 +30,10 @@ public class RefMain {
    JPanel frame;
    
    Food Selectedfd;
-   JTable table;
-                                                                         
+   JTable fd_table;    
+   JTable rec_table;
+
+	
    RefMain(Refrigerator rf){ 
 	      run(rf);
    }
@@ -45,137 +47,111 @@ public class RefMain {
    }
    
    public void addComponentsToPane(Container pane) {
-	   pane.setBackground(Color.WHITE);
-      JLabel tf_refcode;
 
-      JPanel panel = new JPanel();
-      
-      JPanel panel_1 = new JPanel();
+		
+		pane.setBackground(new Color(255, 255, 255));
+		GridBagLayout gridBagLayout = new GridBagLayout();
+		gridBagLayout.columnWidths = new int[]{932, 932, 0};
+		gridBagLayout.rowHeights = new int[]{100, 600, 0, 0};
+		gridBagLayout.columnWeights = new double[]{1.0, 1.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 1.0, Double.MIN_VALUE};
+		pane.setLayout(gridBagLayout);
+		
+		JPanel pan_upper = new JPanel();
+		pan_upper.setBackground(Color.WHITE);
+		GridBagConstraints gbc_pan_upper = new GridBagConstraints();
+		gbc_pan_upper.fill = GridBagConstraints.HORIZONTAL;
+		gbc_pan_upper.insets = new Insets(0, 0, 5, 5);
+		gbc_pan_upper.gridx = 0;
+		gbc_pan_upper.gridy = 0;
+		pane.add(pan_upper, gbc_pan_upper);
+		pan_upper.setLayout(new GridLayout(0, 4, 0, 0));
+		
+		JLabel lblref = new JLabel("냉장고 번호 : ");
+		pan_upper.add(lblref);
+		lblref.setFont(titleFont);
+		
+		JLabel lblrefcode = new JLabel();
+		pan_upper.add(lblrefcode);
+		lblrefcode.setText(currentRf.refcode+"");
+		lblrefcode.setFont(titleFont);
+		
+		JLabel lbluserinfo = new JLabel();
+		pan_upper.add(lbluserinfo);
+		lbluserinfo.setText(currentRf.getuserInfo());
+		lbluserinfo.setFont(titleFont);
+		
+		JButton btnlogout = new JButton("로그아웃");
+		pan_upper.add(btnlogout);
+		btnlogout.addActionListener(new BtnEventListener());
+		btnlogout.setFont(titleFont);
+		
+		JPanel pan_upper2 = new JPanel();
+		GridBagConstraints gbc_pan_upper2 = new GridBagConstraints();
+		gbc_pan_upper2.insets = new Insets(0, 0, 5, 0);
+		gbc_pan_upper2.fill = GridBagConstraints.HORIZONTAL;
+		gbc_pan_upper2.gridx = 1;
+		gbc_pan_upper2.gridy = 0;
+		pan_upper2.setBackground(Color.white);
+		pane.add(pan_upper2, gbc_pan_upper2);
+		pan_upper2.setLayout(new GridLayout(0, 1, 0, 0));
+		
+		JLabel lbl_rec_ = new JLabel("추천 레시피 목록");
+		lbl_rec_.setHorizontalAlignment(SwingConstants.CENTER);
+		pan_upper2.add(lbl_rec_);
+		lbl_rec_.setFont(titleFont);
+		
+		JLabel lbl_recommand = new JLabel();
+		lbl_recommand.setHorizontalAlignment(SwingConstants.CENTER);
+		pan_upper2.add(lbl_recommand);
+		lbl_recommand.setFont(titleFont);
 
-      JLabel user = new JLabel("사용자 정보");
-      user.setFont(lblFont);
-      user.setText(currentRf.getuserInfo());
-      
-      
-      JButton logout = new JButton("로그아웃");
-      logout.setFont(lblFont);
-      
-      JLabel lblNewLabel = new JLabel("냉장고 번호: ");
-      lblNewLabel.setFont(titleFont);
+		
+		JScrollPane fd_pane = new JScrollPane();
+		GridBagConstraints gbc_fd_pane = new GridBagConstraints();
+		gbc_fd_pane.insets = new Insets(0, 0, 5, 5);
+		gbc_fd_pane.fill = GridBagConstraints.BOTH;
+		gbc_fd_pane.gridx = 0;
+		gbc_fd_pane.gridy = 1;
+		pane.add(fd_pane, gbc_fd_pane);
+		
+	
+		fd_table = new JTable();
+		fd_pane.setViewportView(fd_table);
+		fd_table.setRowHeight(40);
+		
+		JScrollPane recom_pane = new JScrollPane();
+		GridBagConstraints gbc_recom_pane = new GridBagConstraints();
+		gbc_recom_pane.fill = GridBagConstraints.BOTH;
+		gbc_recom_pane.insets = new Insets(0, 0, 5, 0);
+		gbc_recom_pane.gridx = 1;
+		gbc_recom_pane.gridy = 1;
+		pane.add(recom_pane, gbc_recom_pane);
+		
+		rec_table = new JTable(){
+	          
+	          @Override
+	          public Class<?> getColumnClass(int column)  {
+	               return getValueAt(0,  column).getClass();
+	          }
+	      };
+	      rec_table.setRowHeight(250);
+		recom_pane.setViewportView(rec_table);
+		
+		JPanel pan_bottom = new JPanel();
+		pan_bottom.setBackground(new Color(255, 255, 255));
+		GridBagConstraints gbc_pan_bottom = new GridBagConstraints();
+		gbc_pan_bottom.gridwidth = 2;
+		gbc_pan_bottom.insets = new Insets(0, 0, 0, 5);
+		gbc_pan_bottom.fill = GridBagConstraints.BOTH;
+		gbc_pan_bottom.gridx = 0;
+		gbc_pan_bottom.gridy = 2;
+		pane.add(pan_bottom, gbc_pan_bottom);
+		
+		JLabel lbl_image = new JLabel("이미지");
+		pan_bottom.add(lbl_image);
+        setRecommendation(lbl_recommand);
 
-      logout.addActionListener(new BtnEventListener());
-
-      
-      tf_refcode = new JLabel();
-      tf_refcode.setText(""+currentRf.refcode);
-      tf_refcode.setFont(titleFont);
-
-      JScrollPane scrollPane = new JScrollPane();
-      
-      JLabel recommendation = new JLabel();
-      recommendation.setFont(titleFont);
-      JScrollPane scrollPane_1 = new JScrollPane();
-      
-      
-      GroupLayout groupLayout = new GroupLayout(pane);
-      groupLayout.setHorizontalGroup(
-      	groupLayout.createParallelGroup(Alignment.LEADING)
-      		.addGroup(groupLayout.createSequentialGroup()
-      			.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-      				.addGroup(groupLayout.createSequentialGroup()
-      					.addGap(12)
-      					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 300, GroupLayout.PREFERRED_SIZE)
-      					.addPreferredGap(ComponentPlacement.UNRELATED)
-      					.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 550, GroupLayout.PREFERRED_SIZE))
-      				.addGroup(groupLayout.createSequentialGroup()
-      					.addContainerGap()
-      					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
-      						.addComponent(recommendation, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-      						.addComponent(scrollPane, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-      						.addComponent(scrollPane_1, Alignment.LEADING))))
-      			.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-      );
-      groupLayout.setVerticalGroup(
-      	groupLayout.createParallelGroup(Alignment.LEADING)
-      		.addGroup(groupLayout.createSequentialGroup()
-      			.addGap(10)
-      			.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-      				.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE)
-      				.addComponent(panel, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE))
-      			.addPreferredGap(ComponentPlacement.UNRELATED)
-      			.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 266, GroupLayout.PREFERRED_SIZE)
-      			.addGap(18)
-      			.addComponent(recommendation, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)
-      			.addGap(18)
-      			.addComponent(scrollPane_1, GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
-      			.addContainerGap())
-      );
-      
-      table_1 = new JTable(){
-          
-          @Override
-          public Class<?> getColumnClass(int column)  {
-               return getValueAt(0,  column).getClass();
-          }
-      };
-      table_1.setRowHeight(250);
-      scrollPane_1.setViewportView(table_1);
-      table = new JTable();
-      table.setRowHeight(40);
-		table.setFont(lblFont);
-		table_1.setFont(lblFont);
-      scrollPane.setViewportView(table);
-      scrollPane.setPreferredSize(new Dimension(800, Toolkit.getDefaultToolkit().getScreenSize().height));
-      
-      setRecommendation(recommendation);
-      
-      GroupLayout gl_panel_1 = new GroupLayout(panel_1);
-      gl_panel_1.setHorizontalGroup(
-         gl_panel_1.createParallelGroup(Alignment.LEADING)
-            .addGroup(gl_panel_1.createSequentialGroup()
-               .addComponent(logout)
-               .addGap(40)
-               .addComponent(user))
-      );
-      gl_panel_1.setVerticalGroup(
-         gl_panel_1.createParallelGroup(Alignment.LEADING)
-            .addGroup(gl_panel_1.createSequentialGroup()
-               .addContainerGap()
-               .addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-                  .addComponent(logout, GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
-                  .addGap(40)
-                  .addComponent(user, GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)))
-      );
-      
-      
-      panel_1.setLayout(gl_panel_1);
-      
-      
-      GroupLayout gl_panel = new GroupLayout(panel);
-      gl_panel.setHorizontalGroup(
-         gl_panel.createParallelGroup(Alignment.LEADING)
-            .addGroup(gl_panel.createSequentialGroup()
-               .addGap(18)
-               .addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
-               .addGap(15)
-               .addComponent(tf_refcode, GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
-               .addContainerGap())
-      );
-      gl_panel.setVerticalGroup(
-         gl_panel.createParallelGroup(Alignment.LEADING)
-            .addGroup(Alignment.TRAILING, gl_panel.createSequentialGroup()
-               .addGap(13)
-               .addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
-                  .addComponent(tf_refcode, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
-                  .addComponent(lblNewLabel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE))
-               .addContainerGap())
-      );
-      
-      panel_1.setBackground(Color.white);
-      panel.setBackground(Color.white);
-      panel.setLayout(gl_panel);
-      pane.setLayout(groupLayout);
-      
    }
    
    
@@ -213,11 +189,10 @@ public class RefMain {
          
       }
       
-      table.setModel(df);
+      fd_table.setModel(df);
    }
 
    private static RefMain rmain = null;
-   private JTable table_1;
 	public static RefMain getInstance(Refrigerator ref) {
 		if (rmain == null)
 			rmain = new RefMain(ref);
@@ -261,8 +236,8 @@ public class RefMain {
 			   sb.append(" ");
 		   }
 	   }
-	   table_1.setModel(df);
-	   table_1.getColumnModel().getColumn(0).setPreferredWidth(200);
+	   rec_table.setModel(df);
+	   rec_table.getColumnModel().getColumn(0).setPreferredWidth(200);
 	   String s = sb.toString();
 	   j.setText("이런 분들에게 추천합니다: "+s);
    }
