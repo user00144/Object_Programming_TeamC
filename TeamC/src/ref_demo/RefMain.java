@@ -119,6 +119,7 @@ public class RefMain {
 		fd_table = new JTable();
 		fd_pane.setViewportView(fd_table);
 		fd_table.setRowHeight(40);
+		fd_table.setFont(lblFont);
 		
 		JScrollPane recom_pane = new JScrollPane();
 		GridBagConstraints gbc_recom_pane = new GridBagConstraints();
@@ -137,6 +138,7 @@ public class RefMain {
 	      };
 	      rec_table.setRowHeight(250);
 		recom_pane.setViewportView(rec_table);
+		rec_table.setFont(lblFont);
 		
 		JPanel pan_bottom = new JPanel();
 		pan_bottom.setBackground(new Color(255, 255, 255));
@@ -148,7 +150,7 @@ public class RefMain {
 		gbc_pan_bottom.gridy = 2;
 		pane.add(pan_bottom, gbc_pan_bottom);
 		
-		JLabel lbl_image = new JLabel("이미지");
+		JLabel lbl_image = new JLabel(new ImageIcon("images/ui_img/ref_main.png"));
 		pan_bottom.add(lbl_image);
         setRecommendation(lbl_recommand);
 
