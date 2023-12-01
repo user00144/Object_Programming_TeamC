@@ -37,8 +37,11 @@ import facade.IDataEngine;
 
 public class FoodMgrMenu {
 
+	Font lblFont = new Font("나눔스퀘어라운드 Light", Font.PLAIN, 15);
+	Font titleFont = new Font("나눔스퀘어라운드 ExtraBold", Font.PLAIN, 17);
+	
     JPanel frame;
-    static Refrigerator curRf;
+    Refrigerator curRf;
     JTextField textField;
     JTable table;
     Food Selectedfd;
@@ -89,8 +92,7 @@ public class FoodMgrMenu {
         table.setModel(df);
         table.setRowHeight(40);
         table.addMouseListener(new MouseEventListener());
-        Font font = new Font("굴림", Font.BOLD, 18);
-        table.setFont(font);
+        table.setFont(lblFont);
         scrollPane.setViewportView(table);
 
         JPanel panel_1 = new JPanel();
@@ -104,12 +106,15 @@ public class FoodMgrMenu {
         textField.setColumns(10);
 
         JButton btnNewButton = new JButton("추가");
+        btnNewButton.setFont(titleFont);
         btnNewButton.addActionListener(new BtnEventListener());
 
         JButton btnNewButton_1 = new JButton("삭제");
+        btnNewButton_1.setFont(titleFont);
         btnNewButton_1.addActionListener(new BtnEventListener());
         
         exdateCheckBox = new JRadioButton("유통기한이 지난 식재료 삭제");
+        exdateCheckBox.setFont(titleFont);
         exdateCheckBox.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -119,25 +124,29 @@ public class FoodMgrMenu {
         panel_3.add(exdateCheckBox);
 
         JButton btnNewButton_2 = new JButton("검색");
+        btnNewButton_2.setFont(titleFont);
+
         btnNewButton_2.addActionListener(new BtnEventListener());
 
         JButton fd_detailview = new JButton("상세보기");
+        fd_detailview.setFont(titleFont);
+
         fd_detailview.addActionListener(new BtnEventListener());
         
         GroupLayout gl_panel_3 = new GroupLayout(panel_3);
         gl_panel_3.setHorizontalGroup(
             gl_panel_3.createParallelGroup(Alignment.LEADING)
                 .addGroup(Alignment.LEADING, gl_panel_3.createSequentialGroup()
-                    .addGap(810)
+                    .addGap(700)
                     .addComponent(textField, GroupLayout.PREFERRED_SIZE, 250, GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
-                    .addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
                     .addGap(40)
-                    .addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
                     .addGap(40)
-                    .addComponent(btnNewButton_2, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnNewButton_2, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
                     .addGap(40)
-                    .addComponent(fd_detailview, GroupLayout.PREFERRED_SIZE, 103, GroupLayout.PREFERRED_SIZE))
+                    .addComponent(fd_detailview, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE))
                     .addGap(40)
                     .addComponent(exdateCheckBox)
                     .addGap(40)
