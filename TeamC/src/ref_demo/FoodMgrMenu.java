@@ -11,6 +11,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collection;
 
 import javax.swing.BoxLayout;
 import javax.swing.GroupLayout;
@@ -137,9 +139,9 @@ public class FoodMgrMenu {
         gl_panel_3.setHorizontalGroup(
             gl_panel_3.createParallelGroup(Alignment.LEADING)
                 .addGroup(Alignment.LEADING, gl_panel_3.createSequentialGroup()
-                    .addGap(700)
-                    .addComponent(textField, GroupLayout.PREFERRED_SIZE, 250, GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                    .addGap(350)
+                    .addComponent(textField, GroupLayout.PREFERRED_SIZE, 450, GroupLayout.PREFERRED_SIZE)
+                    .addGap(40)
                     .addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
                     .addGap(40)
                     .addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
@@ -221,8 +223,7 @@ public class FoodMgrMenu {
         @Override
         public void mouseReleased(MouseEvent e) {
             // TODO Auto-generated method stub
-            int row = table.getSelectedRow();
-            Selectedfd = curRf.foodMgr.mList.get(row);
+            Selectedfd = getselectedFood();
         }
 
         @Override
@@ -310,16 +311,17 @@ public class FoodMgrMenu {
         }
     }
 
-    private void deleteRecord() {
+    private Food getselectedFood() {
+    	Food fd = null;
+    	
+
         int selectedRow = table.getSelectedRow();
         
-        if (selectedRow == -1 || (Integer)selectedRow == null) {
-            JOptionPane.showMessageDialog(null, "삭제할 행을 선택하세요.", "오류", JOptionPane.ERROR_MESSAGE);
-            return;
+        if(selectedRow == -1) {
+        	return null;
         }
         
         String[] str = new String[4];
-        Food fd = null;
         str[0] = (String)table.getValueAt(selectedRow,0);
         str[1] = (String)table.getValueAt(selectedRow,1);
         str[2] = (String)table.getValueAt(selectedRow,2);
@@ -330,7 +332,15 @@ public class FoodMgrMenu {
                 fd = m;
             }
         }
-        
+    	
+    	return fd;
+    }
+    
+    private void deleteRecord() {
+    	
+        int selectedRow = table.getSelectedRow();
+    	
+        Food fd = getselectedFood();
         if (fd == null) {
             JOptionPane.showMessageDialog(null, "삭제할 행을 선택하세요.", "오류", JOptionPane.ERROR_MESSAGE);
             return;
@@ -347,6 +357,7 @@ public class FoodMgrMenu {
     }
 
     private void deleteExpiredRecords() {
+
         int rowCount = table.getRowCount();
         DefaultTableModel df = (DefaultTableModel) table.getModel();
 
@@ -360,6 +371,8 @@ public class FoodMgrMenu {
                 df.removeRow(i);
             }
         }
+
+      
 
         updateTable();
         RefMain.getInstance(curRf).updateTable();
