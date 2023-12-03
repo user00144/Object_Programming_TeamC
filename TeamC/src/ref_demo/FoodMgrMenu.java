@@ -50,6 +50,10 @@ public class FoodMgrMenu {
     IDataEngine<?> dataMgr;
     boolean isCheckBoxSelected = false;
     JRadioButton exdateCheckBox;
+	private JButton btnNewButton;
+	private JButton btnNewButton_1;
+	private JButton btnNewButton_2;
+	private JButton fd_detailview;
     
     public FoodMgrMenu(Refrigerator rf) {
         this.curRf = rf;
@@ -101,21 +105,30 @@ public class FoodMgrMenu {
         pane.add(panel_1);
         panel_1.setPreferredSize(new Dimension(Toolkit.getDefaultToolkit().getScreenSize().width, 200));
         JPanel panel_3 = new JPanel();
+        panel_3.setBackground(Color.white);
         panel_1.add(panel_3);
         panel_3.setPreferredSize(new Dimension(Toolkit.getDefaultToolkit().getScreenSize().width, 100)); // 패널 사이즈 조정
 
         textField = new JTextField();
         textField.setColumns(10);
+        textField.setBackground(Color.lightGray);
 
-        JButton btnNewButton = new JButton("추가");
+        btnNewButton = new JButton(new ImageIcon("images/ui_img/btn_add.png"));
+        btnNewButton.setBorderPainted(false);
+        btnNewButton.setBackground(Color.white);
+        btnNewButton.setOpaque(false);
         btnNewButton.setFont(titleFont);
         btnNewButton.addActionListener(new BtnEventListener());
 
-        JButton btnNewButton_1 = new JButton("삭제");
+        btnNewButton_1 = new JButton(new ImageIcon("images/ui_img/btn_delete.png"));
+        btnNewButton_1.setBorderPainted(false);
+        btnNewButton_1.setBackground(Color.white);
+        btnNewButton_1.setOpaque(false);
         btnNewButton_1.setFont(titleFont);
         btnNewButton_1.addActionListener(new BtnEventListener());
         
         exdateCheckBox = new JRadioButton("유통기한이 지난 식재료 삭제");
+        exdateCheckBox.setBackground(Color.white);
         exdateCheckBox.setFont(titleFont);
         exdateCheckBox.addActionListener(new ActionListener() {
             @Override
@@ -125,12 +138,18 @@ public class FoodMgrMenu {
         });
         panel_3.add(exdateCheckBox);
 
-        JButton btnNewButton_2 = new JButton("검색");
+        btnNewButton_2 = new JButton(new ImageIcon("images/ui_img/btn_search.png"));
+        btnNewButton_2.setBorderPainted(false);
+        btnNewButton_2.setBackground(Color.white);
+        btnNewButton_2.setOpaque(false);
         btnNewButton_2.setFont(titleFont);
 
         btnNewButton_2.addActionListener(new BtnEventListener());
 
-        JButton fd_detailview = new JButton("상세보기");
+        fd_detailview = new JButton(new ImageIcon("images/ui_img/btn_detail.png"));
+        fd_detailview.setBorderPainted(false);
+        fd_detailview.setBackground(Color.white);
+        fd_detailview.setOpaque(false);
         fd_detailview.setFont(titleFont);
 
         fd_detailview.addActionListener(new BtnEventListener());
@@ -170,6 +189,7 @@ public class FoodMgrMenu {
         panel_3.setLayout(gl_panel_3);
 
         JPanel panel = new JPanel();
+        panel.setBackground(Color.white);
         pane.add(panel);
 
         ImageIcon image = new ImageIcon("images/food_bg.png");
@@ -182,7 +202,19 @@ public class FoodMgrMenu {
         @Override
         public void actionPerformed(ActionEvent e) {
             JButton source = (JButton) e.getSource();
-            switch (source.getText()) {
+            if(source.equals(btnNewButton))
+            	addRecord();
+            if(source.equals(btnNewButton_1))
+            	if (isCheckBoxSelected) {
+                    deleteExpiredRecords();
+                } else {
+                    deleteRecord();
+                }
+            if(source.equals(btnNewButton_2))
+            	updateTable();
+            if(source.equals(fd_detailview))
+            	Detailfd();
+            /*switch (source.getText()) {
                 case "추가":
                     addRecord();
                     break;
@@ -201,7 +233,7 @@ public class FoodMgrMenu {
                     break;
                 default:
                     break;
-            }
+            }*/
             textField.setText("");
         }
     }

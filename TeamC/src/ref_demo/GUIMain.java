@@ -24,6 +24,9 @@ public class GUIMain {
 	private JTextField textField;
 	private GUIMain() {}
 	private final String Passwd = new String("!!");
+	private JButton btn_login;
+	private JButton btn_admin;
+	private JButton btn_submit;
 	public static GUIMain getInstance() {
 		if (main == null)
 			main = new GUIMain();
@@ -72,9 +75,18 @@ public class GUIMain {
 		textField.setColumns(10);
 		loginpanel.add(textField);
 		
-		JButton btn_login = new JButton("로그인");
-		JButton btn_admin = new JButton("관리자 로그인");
-		JButton btn_submit = new JButton("회원 가입");
+		btn_login = new JButton(new ImageIcon("images/ui_img/btn_login.png"));
+		btn_login.setBorderPainted(false);
+		btn_login.setBackground(Color.white);
+		btn_login.setOpaque(false);
+		btn_admin = new JButton(new ImageIcon("images/ui_img/btn_admin.png"));
+		btn_admin.setBorderPainted(false);
+		btn_admin.setBackground(Color.white);
+		btn_admin.setOpaque(false);
+		btn_submit = new JButton(new ImageIcon("images/ui_img/btn_new.png"));
+		btn_submit.setBorderPainted(false);
+		btn_submit.setBackground(Color.white);
+		btn_submit.setOpaque(false);
 		btn_login.addActionListener(new btnEventHandler());
 		btn_admin.addActionListener(new btnEventHandler());
 		btn_submit.addActionListener(new btnEventHandler());
@@ -123,12 +135,18 @@ public class GUIMain {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			JButton source = (JButton)e.getSource();
-			switch (source.getText()){
+			if(source.equals(btn_login))
+				guilogin();
+			if(source.equals(btn_admin))
+				manage();
+			if(source.equals(btn_submit))
+				guisubmit();
+			/*switch (source.getText()){
 			case "로그인":guilogin(); break;
 			case "회원 가입" :guisubmit(); break;
 			case "관리자 로그인" :manage(); break;
 			default : break;
-			}
+			}*/
 		}
 	}
 	

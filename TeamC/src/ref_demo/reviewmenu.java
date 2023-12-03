@@ -1,5 +1,6 @@
 package ref_demo;
 
+import java.awt.Color;
 import java.awt.Container;
 import java.awt.EventQueue;
 
@@ -7,6 +8,7 @@ import javax.swing.JFrame;
 import java.awt.GridLayout;
 import javax.swing.JPanel;
 import javax.swing.GroupLayout;
+import javax.swing.ImageIcon;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
 import javax.swing.LayoutStyle.ComponentPlacement;
@@ -63,8 +65,10 @@ public class reviewmenu {
 	private void addComponentsToPane(Container pane) {
 		buttonGroup = new ButtonGroup();
 		pane.setLayout(new GridLayout(1, 2, 0, 0));
+		pane.setBackground(Color.WHITE);
 
 		JPanel panel = new JPanel();
+		panel.setBackground(Color.WHITE);
 		pane.add(panel);
 		GridBagLayout gbl_panel = new GridBagLayout();
 		gbl_panel.columnWidths = new int[] { 35, 73, 287, 30, 0 };
@@ -107,6 +111,7 @@ public class reviewmenu {
 		panel.add(scrollPane, gbc_scrollPane);
 
 		JPanel panel_1 = new JPanel();
+		panel_1.setBackground(Color.WHITE);
 		pane.add(panel_1);
 		GridBagLayout gbl_panel_1 = new GridBagLayout();
 		gbl_panel_1.columnWidths = new int[] { 33, 50, 50, 50, 50, 155, 30, 0 };
@@ -126,6 +131,7 @@ public class reviewmenu {
 		panel_1.add(lblNewLabel_2, gbc_lblNewLabel_2);
 
 		JTextArea textArea = new JTextArea();
+		textArea.setBackground(Color.lightGray);
 		GridBagConstraints gbc_textArea = new GridBagConstraints();
 		gbc_textArea.fill = GridBagConstraints.BOTH;
 		gbc_textArea.insets = new Insets(0, 0, 5, 0);
@@ -145,6 +151,7 @@ public class reviewmenu {
 		panel_1.add(lblNewLabel_3, gbc_lblNewLabel_3);
 
 		JRadioButton rdbtnNewRadioButton = new JRadioButton("1");
+		rdbtnNewRadioButton.setBackground(Color.WHITE);
 		buttonGroup.add(rdbtnNewRadioButton);
 		GridBagConstraints gbc_rdbtnNewRadioButton = new GridBagConstraints();
 		gbc_rdbtnNewRadioButton.anchor = GridBagConstraints.NORTH;
@@ -155,6 +162,7 @@ public class reviewmenu {
 		panel_1.add(rdbtnNewRadioButton, gbc_rdbtnNewRadioButton);
 
 		JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("2");
+		rdbtnNewRadioButton_1.setBackground(Color.WHITE);
 		buttonGroup.add(rdbtnNewRadioButton_1);
 		GridBagConstraints gbc_rdbtnNewRadioButton_1 = new GridBagConstraints();
 		gbc_rdbtnNewRadioButton_1.anchor = GridBagConstraints.NORTH;
@@ -165,6 +173,7 @@ public class reviewmenu {
 		panel_1.add(rdbtnNewRadioButton_1, gbc_rdbtnNewRadioButton_1);
 
 		JRadioButton rdbtnNewRadioButton_2 = new JRadioButton("3");
+		rdbtnNewRadioButton_2.setBackground(Color.WHITE);
 		buttonGroup.add(rdbtnNewRadioButton_2);
 		GridBagConstraints gbc_rdbtnNewRadioButton_2 = new GridBagConstraints();
 		gbc_rdbtnNewRadioButton_2.anchor = GridBagConstraints.NORTH;
@@ -175,6 +184,7 @@ public class reviewmenu {
 		panel_1.add(rdbtnNewRadioButton_2, gbc_rdbtnNewRadioButton_2);
 
 		JRadioButton rdbtnNewRadioButton_3 = new JRadioButton("4");
+		rdbtnNewRadioButton_3.setBackground(Color.WHITE);
 		buttonGroup.add(rdbtnNewRadioButton_3);
 		GridBagConstraints gbc_rdbtnNewRadioButton_3 = new GridBagConstraints();
 		gbc_rdbtnNewRadioButton_3.anchor = GridBagConstraints.NORTH;
@@ -185,6 +195,7 @@ public class reviewmenu {
 		panel_1.add(rdbtnNewRadioButton_3, gbc_rdbtnNewRadioButton_3);
 
 		JRadioButton rdbtnNewRadioButton_4 = new JRadioButton("5");
+		rdbtnNewRadioButton_4.setBackground(Color.WHITE);
 		buttonGroup.add(rdbtnNewRadioButton_4);
 		GridBagConstraints gbc_rdbtnNewRadioButton_4 = new GridBagConstraints();
 		gbc_rdbtnNewRadioButton_4.anchor = GridBagConstraints.NORTHWEST;
@@ -193,7 +204,10 @@ public class reviewmenu {
 		gbc_rdbtnNewRadioButton_4.gridy = 4;
 		panel_1.add(rdbtnNewRadioButton_4, gbc_rdbtnNewRadioButton_4);
 
-		JButton btnNewButton = new JButton("리뷰작성");
+		JButton btnNewButton = new JButton(new ImageIcon("images/ui_img/btn_review.png"));
+		btnNewButton.setBorderPainted(false);
+		btnNewButton.setBackground(Color.white);
+		btnNewButton.setOpaque(false);
 		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
 		gbc_btnNewButton.fill = GridBagConstraints.BOTH;
 		gbc_btnNewButton.gridwidth = 5;

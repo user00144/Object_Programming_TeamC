@@ -3,6 +3,7 @@ package ref_demo;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.EventQueue;
+import java.awt.Font;
 
 import javax.swing.JFrame;
 import java.awt.GridLayout;
@@ -30,10 +31,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.GroupLayout;
+import javax.swing.ImageIcon;
 import javax.swing.GroupLayout.Alignment;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import javax.swing.JLabel;
 
 public class RecMenu {
 	
@@ -45,6 +48,12 @@ public class RecMenu {
 	JButton btn_findrecipe;
 	Refrigerator curRf;
 	DefaultTableModel df;
+	
+	Font lblFont = new Font("나눔스퀘어라운드 Light", Font.PLAIN, 15);
+	Font titleFont = new Font("나눔스퀘어라운드 ExtraBold", Font.PLAIN, 17);
+	JButton btn_makenow;
+	JButton btn_recommand;
+	JButton btn_deatilrecipe;
 	
 	   private static RecMenu engine = null;
 		public static RecMenu getInstance(Refrigerator ref) {
@@ -59,6 +68,9 @@ public class RecMenu {
 	}
 	
 
+    /**
+     * @wbp.parser.entryPoint
+     */
     public JPanel run(Refrigerator rf) {
         this.curRf = rf;
         frame = new JPanel();
@@ -79,6 +91,7 @@ public class RecMenu {
 	void addComponentsToPane(Container pane) {
 		   pane.setBackground(Color.WHITE);
 		JPanel panel = new JPanel();
+		panel.setBackground(Color.WHITE);
 		JScrollPane scrollPane = new JScrollPane();
 		pane.setLayout(new GridLayout(0, 2, 0, 0));
 		pane.add(panel);
@@ -122,6 +135,7 @@ public class RecMenu {
 			}
 		});
 		table.setRowHeight(250);
+		table.setFont(lblFont);
 		scrollPane.setViewportView(table);
 		GridBagLayout gbl_panel = new GridBagLayout();
 		gbl_panel.columnWidths = new int[] {34, 281, 60, 30};
@@ -131,6 +145,7 @@ public class RecMenu {
 		panel.setLayout(gbl_panel);
 		
 		txt_findrecipe = new JTextField();
+		txt_findrecipe.setBackground(Color.lightGray);
 		txt_findrecipe.setColumns(10);
 		GridBagConstraints gbc_textField = new GridBagConstraints();
 		gbc_textField.fill = GridBagConstraints.BOTH;
@@ -139,7 +154,11 @@ public class RecMenu {
 		gbc_textField.gridy = 1;
 		panel.add(txt_findrecipe, gbc_textField);
 		
-		btn_findrecipe = new JButton("검색");
+		btn_findrecipe = new JButton(new ImageIcon("images/ui_img/btn_search.png"));
+		btn_findrecipe.setBorderPainted(false);
+		btn_findrecipe.setBackground(Color.white);
+		btn_findrecipe.setOpaque(false);
+		btn_findrecipe.setFont(titleFont);
 		btn_findrecipe.addActionListener(new btnRecEvent());
 		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
 		gbc_btnNewButton.fill = GridBagConstraints.VERTICAL;
@@ -148,7 +167,11 @@ public class RecMenu {
 		gbc_btnNewButton.gridy = 1;
 		panel.add(btn_findrecipe, gbc_btnNewButton);
 		
-		JButton btn_makenow = new JButton("바로 만들 수 있는 레시피");
+		btn_makenow = new JButton(new ImageIcon("images/ui_img/btn_now.png"));
+		btn_makenow.setBorderPainted(false);
+		btn_makenow.setBackground(Color.white);
+		btn_makenow.setOpaque(false);
+		btn_makenow.setFont(titleFont);
 		btn_makenow.addActionListener(new btnRecEvent());
 		GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
 		gbc_btnNewButton_1.fill = GridBagConstraints.BOTH;
@@ -158,7 +181,11 @@ public class RecMenu {
 		gbc_btnNewButton_1.gridy = 3;
 		panel.add(btn_makenow, gbc_btnNewButton_1);
 		
-		JButton btn_recommand = new JButton("레시피 추천 보기");
+		btn_recommand = new JButton(new ImageIcon("images/ui_img/btn_recommend.png"));
+		btn_recommand.setBorderPainted(false);
+		btn_recommand.setBackground(Color.white);
+		btn_recommand.setOpaque(false);
+		btn_recommand.setFont(titleFont);
 		btn_recommand.addActionListener(new btnRecEvent());
 		GridBagConstraints gbc_btnNewButton_1_1 = new GridBagConstraints();
 		gbc_btnNewButton_1_1.fill = GridBagConstraints.BOTH;
@@ -168,7 +195,11 @@ public class RecMenu {
 		gbc_btnNewButton_1_1.gridy = 5;
 		panel.add(btn_recommand, gbc_btnNewButton_1_1);
 		
-		JButton btn_deatilrecipe = new JButton("레시피 상세보기");
+		btn_deatilrecipe = new JButton(new ImageIcon("images/ui_img/btn_detailRec.png"));
+		btn_deatilrecipe.setBorderPainted(false);
+		btn_deatilrecipe.setBackground(Color.white);
+		btn_deatilrecipe.setOpaque(false);
+		btn_deatilrecipe.setFont(titleFont);
 		btn_deatilrecipe.addActionListener(new btnRecEvent());
 		GridBagConstraints gbc_btnNewButton_1_2 = new GridBagConstraints();
 		gbc_btnNewButton_1_2.fill = GridBagConstraints.BOTH;
@@ -177,6 +208,15 @@ public class RecMenu {
 		gbc_btnNewButton_1_2.gridx = 1;
 		gbc_btnNewButton_1_2.gridy = 7;
 		panel.add(btn_deatilrecipe, gbc_btnNewButton_1_2);
+		
+		JLabel lblNewLabel = new JLabel(new ImageIcon("images/ui_img/recMenu.png"));
+		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
+		gbc_lblNewLabel.gridheight = 3;
+		gbc_lblNewLabel.gridwidth = 3;
+		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_lblNewLabel.gridx = 0;
+		gbc_lblNewLabel.gridy = 9;
+		panel.add(lblNewLabel, gbc_lblNewLabel);
 
 		updateTable("");
 	}
@@ -186,23 +226,31 @@ public class RecMenu {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			JButton source = (JButton)e.getSource();
-			String s = source.getText();
+			if(source.equals(btn_findrecipe))
+				updateTable("");
+			if(source.equals(btn_makenow))
+				updateTable("바로 만들 수 있는 레시피");
+			if(source.equals(btn_recommand))
+				updateTable("레시피 추천 보기");
+			if(source.equals(btn_deatilrecipe))
+				new DetailRec(selectedRc);
+			/*String s = source.getText();
 			switch(s) {
 			case "검색":
 				updateTable("");
 				break;
 			case "바로 만들 수 있는 레시피":
-				updateTable(s);
+				updateTable("바로 만들 수 있는 레시피");
 				break;
 			case "레시피 추천 보기":
-				updateTable(s);
+				updateTable("레시피 추천 보기");
 				break;
 			case "레시피 상세보기":
 				if(selectedRc != null) {
 					new DetailRec(selectedRc);
 				}
 				break;
-			}
+			}*/
 		}
 		
 	}

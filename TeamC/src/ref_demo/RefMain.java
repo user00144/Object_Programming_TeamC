@@ -32,6 +32,7 @@ public class RefMain {
    Food Selectedfd;
    JTable fd_table;    
    JTable rec_table;
+private JButton btnlogout;
 
 	
    RefMain(Refrigerator rf){ 
@@ -81,7 +82,10 @@ public class RefMain {
 		lbluserinfo.setText(currentRf.getuserInfo());
 		lbluserinfo.setFont(titleFont);
 		
-		JButton btnlogout = new JButton("로그아웃");
+		btnlogout = new JButton(new ImageIcon("images/ui_img/btn_logout.png"));
+		btnlogout.setBorderPainted(false);
+		btnlogout.setBackground(Color.white);
+		btnlogout.setOpaque(false);
 		pan_upper.add(btnlogout);
 		btnlogout.addActionListener(new BtnEventListener());
 		btnlogout.setFont(titleFont);
@@ -162,12 +166,14 @@ public class RefMain {
       @Override
       public void actionPerformed(ActionEvent e) {
          JButton source = (JButton)e.getSource();
+         if(source.equals(btnlogout))
+        	 logout();
          
-         switch (source.getText()) {
+         /*switch (source.getText()) {
 
          case "로그아웃" :logout(); break;
          default : break;
-         }
+         }*/
       }
       
    }

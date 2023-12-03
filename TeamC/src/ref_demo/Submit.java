@@ -106,7 +106,10 @@ public class Submit {
 		txt_fdfile.setColumns(10);
 		panel.add(txt_fdfile);
 		
-		btngetfood = new JButton("파일 찾기");
+		btngetfood = new JButton(new ImageIcon("images/ui_img/btn_find.png"));
+		btngetfood.setBorderPainted(false);
+		btngetfood.setBackground(Color.white);
+		btngetfood.setOpaque(false);
 		btngetfood.setFont(lblFont);
 		panel.add(btngetfood);
 		pane.add(btngetfood_1);
