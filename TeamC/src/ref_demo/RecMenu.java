@@ -233,7 +233,9 @@ public class RecMenu {
 			if(source.equals(btn_recommand))
 				updateTable("레시피 추천 보기");
 			if(source.equals(btn_deatilrecipe))
-				new DetailRec(selectedRc);
+				if(selectedRc != null) {
+					new DetailRec(selectedRc);
+				}
 			/*String s = source.getText();
 			switch(s) {
 			case "검색":

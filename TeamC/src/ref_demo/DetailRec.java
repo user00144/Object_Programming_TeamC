@@ -30,6 +30,9 @@ import java.awt.Container;
 public class DetailRec {
 	JFrame frame;
 	Recipe curRec;
+	
+	Font lblFont = new Font("나눔스퀘어라운드 Light", Font.PLAIN, 15);
+	Font titleFont = new Font("나눔스퀘어라운드 ExtraBold", Font.PLAIN, 17);
 
 	public DetailRec(Recipe r) {
 		this.curRec = r;
@@ -46,11 +49,13 @@ public class DetailRec {
 
 	}
 	private void addComponentsToPane(Container pane) {
+		pane.setBackground(Color.white);
 		Object[] obj = curRec.getImgContent();
 		String[] str = curRec.getUiTexts();
 		
 		pane.setLayout(new GridLayout(1, 3, 0, 0));
 		JPanel panel = new JPanel();
+		panel.setBackground(Color.white);
 		pane.add(panel);
 		GridBagLayout gbl_panel = new GridBagLayout();
 		gbl_panel.columnWidths = new int[]{287, 0};
@@ -60,6 +65,7 @@ public class DetailRec {
 		panel.setLayout(gbl_panel);
 		
 		JLabel lblNewLabel = new JLabel();
+		lblNewLabel.setFont(lblFont);
 		lblNewLabel.setBackground(new Color(255, 255, 255));
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
 		gbc_lblNewLabel.fill = GridBagConstraints.BOTH;
@@ -76,7 +82,7 @@ public class DetailRec {
 		gbc_lblNewLabel_3.gridx = 0;
 		gbc_lblNewLabel_3.gridy = 1;
 		panel.add(lblNewLabel_3, gbc_lblNewLabel_3);
-		lblNewLabel_3.setFont(new Font("맑은 고딕",Font.BOLD,25));
+		lblNewLabel_3.setFont(new Font("나눔스퀘어라운드 ExtraBold",Font.BOLD,25));
 		lblNewLabel_3.setText(obj[1].toString());
 		
 		JLabel lblNewLabel_4 = new JLabel("제작자");
@@ -86,50 +92,32 @@ public class DetailRec {
 		gbc_lblNewLabel_4.gridx = 0;
 		gbc_lblNewLabel_4.gridy = 2;
 		panel.add(lblNewLabel_4, gbc_lblNewLabel_4);
-		lblNewLabel_4.setFont(new Font("맑은 고딕",Font.BOLD,15));
+		lblNewLabel_4.setFont(titleFont);
 		lblNewLabel_4.setText(obj[2].toString());
 
-		
-		JButton btnNewButton = new JButton("리뷰보기");
-		btnNewButton.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e) {
-				
-				showReview();
-			}
-
-			public void showReview() {
-				// TODO Auto-generated method stub
-				JDialog dialog = new JDialog(frame, "리뷰보기", true);
-				dialog.setSize(300, 200);
-				dialog.setLocationRelativeTo(frame);
-				
-				JLabel reviewLabel = new JLabel("리뷰 내용");
-				dialog.add(reviewLabel);
-				
-				dialog.setVisible(true);
-			}
-		});
 	
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		pane.add(panel_1);
 		panel_1.setLayout(new GridLayout(1, 0, 0, 0));
-		
+		panel_1.setBackground(Color.white);
+
 		JLabel lblNewLabel_1 = new JLabel("New label");
 		lblNewLabel_1.setBackground(new Color(255, 255, 255));
 		panel_1.add(lblNewLabel_1);
-		lblNewLabel_1.setFont(new Font("맑은 고딕",Font.PLAIN,20));
+		lblNewLabel_1.setFont(lblFont);
 		lblNewLabel_1.setText(str[0]);
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		pane.add(panel_2);
 		panel_2.setLayout(new GridLayout(0, 1, 0, 0));
-		
+		panel_2.setBackground(Color.white);
+
 		JLabel lblNewLabel_2 = new JLabel("New label");
 		lblNewLabel_2.setBackground(new Color(255, 255, 255));
 		panel_2.add(lblNewLabel_2);
-		lblNewLabel_2.setFont(new Font("맑은 고딕",Font.PLAIN,15));
+		lblNewLabel_2.setFont(lblFont);
 		lblNewLabel_2.setText(str[1]);
 	}
 	

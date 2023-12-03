@@ -3,6 +3,7 @@ package ref_demo;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.EventQueue;
+import java.awt.Font;
 
 import javax.swing.JFrame;
 import java.awt.GridLayout;
@@ -46,7 +47,10 @@ public class reviewmenu {
 	JButton btnNewButton;
 	Recipe curRc;
     String[] rvheader = {"리뷰", "평점"};
-
+	Font lblFont = new Font("나눔스퀘어라운드 Light", Font.PLAIN, 15);
+	Font titleFont = new Font("나눔스퀘어라운드 ExtraBold", Font.PLAIN, 17);
+	
+	
 	public reviewmenu(Recipe rc) {
 		this.curRc = rc;
 		createAndShowGUI();

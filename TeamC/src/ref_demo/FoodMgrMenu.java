@@ -104,6 +104,7 @@ public class FoodMgrMenu {
         JPanel panel_1 = new JPanel();
         pane.add(panel_1);
         panel_1.setPreferredSize(new Dimension(Toolkit.getDefaultToolkit().getScreenSize().width, 200));
+        panel_1.setBackground(Color.white);
         JPanel panel_3 = new JPanel();
         panel_3.setBackground(Color.white);
         panel_1.add(panel_3);

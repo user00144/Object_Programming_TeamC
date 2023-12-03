@@ -24,6 +24,9 @@ public class GUIMain {
 	private JTextField textField;
 	private GUIMain() {}
 	private final String Passwd = new String("!!");
+	
+	Font titleFont = new Font("나눔스퀘어라운드 ExtraBold", Font.PLAIN, 17);
+
 	private JButton btn_login;
 	private JButton btn_admin;
 	private JButton btn_submit;
@@ -67,7 +70,7 @@ public class GUIMain {
 		loginpanel.setBackground(Color.white);
 		
 		JLabel lblrefcode = new JLabel("냉장고 번호 : ");
-		lblrefcode.setFont(new Font("굴림", Font.PLAIN, 14));
+		lblrefcode.setFont(titleFont);
 		loginpanel.add(lblrefcode);
 		
 		textField = new JTextField();
