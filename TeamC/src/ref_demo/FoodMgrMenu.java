@@ -432,7 +432,12 @@ public class FoodMgrMenu {
             for (Food f : curRf.foodMgr.mList) {
                 df.addRow(f.getUiTexts());
             }
-        } else {
+        }else if(s.equals("유통기한")){
+		for(Food f:curRf.foodMgr.mList){
+			if(!f.caneat())
+				df.addRow(f.getUiTexts());
+		}
+	}else {
             for (Food f : curRf.foodMgr.mList) {
                 if (f.matches(s))
                     df.addRow(f.getUiTexts());
