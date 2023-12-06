@@ -46,7 +46,7 @@ public class Food implements Manageable,UIData{
 	}
 
 	public boolean checkRecFd(RecFd r) {
-		if(fdname.equals(r.type)&&
+		if(type.equals(r.type)&&
 				(num>=r.num)&& caneat()) {
 					return true;
 		}
